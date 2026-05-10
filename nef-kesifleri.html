@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nef Keşifleri - NEF</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .discoveries-page {
+            padding-top: 80px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 0;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://via.placeholder.com/1920x600/2c3e50/ffffff?text=Nef+Keşifleri') center/cover;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .discoveries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .discovery-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .discovery-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .discovery-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .discovery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .discovery-card:hover .discovery-image img {
+            transform: scale(1.1);
+        }
+
+        .discovery-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(44, 62, 80, 0.9);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .discovery-content {
+            padding: 2rem;
+        }
+
+        .discovery-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .discovery-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .discovery-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .discovery-date {
+            color: #999;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .discovery-date i {
+            color: #3498db;
+        }
+
+        .read-more {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        .featured-discovery {
+            background: #fff;
+            margin: 4rem 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 500px;
+        }
+
+        .featured-image {
+            background: url('https://via.placeholder.com/800x500/34495e/ffffff?text=Öne+Çıkan+Keşif') center/cover;
+        }
+
+        .featured-text {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            background: #e74c3c;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .featured-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .featured-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .featured-btn {
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: fit-content;
+        }
+
+        .featured-btn:hover {
+            background: #34495e;
+            transform: translateX(5px);
+        }
+
+        .categories-section {
+            padding: 4rem 0;
+            background: #fff;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            background: #2c3e50;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+            transition: color 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            color: #fff;
+        }
+
+        .category-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .newsletter-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 4rem 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .newsletter-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-text {
+                padding: 2rem;
+            }
+
+            .featured-title {
+                font-size: 1.8rem;
+            }
+
+            .discoveries-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">NEF</a></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="biz-kimiz.html" class="nav-link">Biz Kimiz <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="biz-kimiz.html">BİZ KİMİZ</a>
+                            <a href="biz-kimiz.html#manifesto">Manifesto</a>
+                            <a href="biz-kimiz.html#tarihce">Tarihçe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="nef-kesifleri.html" class="nav-link">Nef Keşifleri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="iletisim.html" class="nav-link">İletişim</a>
+                    </li>
+                </ul>
+                <div class="nav-contact">
+                    <button class="contact-btn">Sizi Arayalım</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Discoveries Page -->
+    <main class="discoveries-page">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Nef Keşifleri</h1>
+                    <p>Yaşam alanlarındaki yenilikçi yaklaşımımız, sürdürülebilirlik vizyonumuz ve sektöre yön veren projelerimiz hakkında her şey.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Discovery -->
+        <section class="featured-discovery">
+            <div class="featured-content">
+                <div class="featured-image"></div>
+                <div class="featured-text">
+                    <span class="featured-badge">Öne Çıkan</span>
+                    <h2 class="featured-title">FoldHome: 24 Odalı 1+1 Ev Konsepti</h2>
+                    <p class="featured-description">
+                        Dünyada bir ilk olan FoldHome konsepti ile 1+1 dairenizde 24 farklı odaya sahip olabilirsiniz. 
+                        Akıllı tasarım ve modüler mimari ile yaşam alanlarınızı ihtiyaçlarınıza göre şekillendirin.
+                    </p>
+                    <a href="#" class="featured-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories-section">
+            <div class="container">
+                <h2 class="section-title">Keşif Kategorileri</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="category-name">Yaşam Alanları</h3>
+                        <p class="category-count">15 Keşif</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 class="category-name">Sürdürülebilirlik</h3>
+                        <p class="category-count">8 Keşif</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="category-name">İnovasyon</h3>
+                        <p class="category-count">12 Keşif</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="category-name">Nef'li Yaşam</h3>
+                        <p class="category-count">20 Keşif</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discoveries Grid -->
+        <section class="discoveries-section">
+            <div class="container">
+                <h2 class="section-title">Tüm Keşifler</h2>
+                <div class="discoveries-grid">
+                    <!-- Discovery Card 1 -->
+                    <div class="discovery-card">
+                        <div class="discovery-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Santimetrekare+Felsefesi" alt="Santimetrekare Felsefesi">
+                            <span class="discovery-category">Yaşam Alanları</span>
+                        </div>
+                        <div class="discovery-content">
+                            <h3 class="discovery-title">Santimetrekare Felsefesi</h3>
+                            <p class="discovery-excerpt">
+                                Metrekarelerle değil, santimetrekarelerle çalışarak yaşam alanlarındaki her detayı önemsiyoruz. 
+                                Mükemmeli ararken standardı yükseltiyoruz.
+                            </p>
+                            <div class="discovery-meta">
+                                <span class="discovery-date">
+                                    <i class="fas fa-calendar"></i>
+                                    15 Mayıs 2024
+                                </span>
+                                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discovery Card 2 -->
+                    <div class="discovery-card">
+                        <div class="discovery-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Yeşil+Binalar" alt="Yeşil Binalar">
+                            <span class="discovery-category">Sürdürülebilirlik</span>
+                        </div>
+                        <div class="discovery-content">
+                            <h3 class="discovery-title">Yeşil Binalar ve Gelecek</h3>
+                            <p class="discovery-excerpt">
+                                Çevre dostu malzemeler ve enerji verimli sistemlerle geleceğin şehirlerini inşa ediyoruz. 
+                                Doğaya saygı, bizim işimiz.
+                            </p>
+                            <div class="discovery-meta">
+                                <span class="discovery-date">
+                                    <i class="fas fa-calendar"></i>
+                                    10 Mayıs 2024
+                                </span>
+                                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discovery Card 3 -->
+                    <div class="discovery-card">
+                        <div class="discovery-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Akıllı+Teknolojiler" alt="Akıllı Teknolojiler">
+                            <span class="discovery-category">İnovasyon</span>
+                        </div>
+                        <div class="discovery-content">
+                            <h3 class="discovery-title">Akıllı Ev Teknolojileri</h3>
+                            <p class="discovery-excerpt">
+                                Nesnelerin interneti ve yapay zeka destekli sistemlerle konforu ve güvenliği bir araya getiriyoruz. 
+                                Geleceğin evleri bugünden.
+                            </p>
+                            <div class="discovery-meta">
+                                <span class="discovery-date">
+                                    <i class="fas fa-calendar"></i>
+                                    5 Mayıs 2024
+                                </span>
+                                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discovery Card 4 -->
+                    <div class="discovery-card">
+                        <div class="discovery-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef'li+Yaşam" alt="Nef'li Yaşam">
+                            <span class="discovery-category">Nef'li Yaşam</span>
+                        </div>
+                        <div class="discovery-content">
+                            <h3 class="discovery-title">Nef'li Olmak Nedir?</h3>
+                            <p class="discovery-excerpt">
+                                Nef'li olmak sadece bir ev sahibi olmak değil, bir yaşam tarzını benimsemektir. 
+                                Kaliteyi, estetiği ve konforu hayatınızın her anında hissedin.
+                            </p>
+                            <div class="discovery-meta">
+                                <span class="discovery-date">
+                                    <i class="fas fa-calendar"></i>
+                                    1 Mayıs 2024
+                                </span>
+                                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discovery Card 5 -->
+                    <div class="discovery-card">
+                        <div class="discovery-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Mimari+Tasarım" alt="Mimari Tasarım">
+                            <span class="discovery-category">Yaşam Alanları</span>
+                        </div>
+                        <div class="discovery-content">
+                            <h3 class="discovery-title">Mimari Tasarımda Devrim</h3>
+                            <p class="discovery-excerpt">
+                                Fonksiyonellik ve estetiği birleştiren mimari anlayışımızla sektörde fark yaratıyoruz. 
+                                Her proje bir sanat eseridir.
+                            </p>
+                            <div class="discovery-meta">
+                                <span class="discovery-date">
+                                    <i class="fas fa-calendar"></i>
+                                    25 Nisan 2024
+                                </span>
+                                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discovery Card 6 -->
+                    <div class="discovery-card">
+                        <div class="discovery-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Toplumsal+Sorumluluk" alt="Toplumsal Sorumluluk">
+                            <span class="discovery-category">Sürdürülebilirlik</span>
+                        </div>
+                        <div class="discovery-content">
+                            <h3 class="discovery-title">Toplumsal Sorumluluk Projeleri</h3>
+                            <p class="discovery-excerpt">
+                                Eğitimden sağlığa, çevreden kültüre birçok alanda toplumsal kalkınmaya destek oluyoruz. 
+                                Gelecek için birlikte çalışıyoruz.
+                            </p>
+                            <div class="discovery-meta">
+                                <span class="discovery-date">
+                                    <i class="fas fa-calendar"></i>
+                                    20 Nisan 2024
+                                </span>
+                                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Keşiflerden Haberdar Olun</h2>
+                    <p>En yeni keşifler, projeler ve NEF dünyasından haberler için bültenimize abone olun.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="E-posta adresiniz" required>
+                        <button type="submit" class="newsletter-btn">Abone Ol</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Newsletter form handling
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            
+            if (email) {
+                showNotification('Bültenimize başarıyla abone oldunuz!', 'success');
+                this.reset();
+            }
+        });
+
+        // Category card interactions
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const categoryName = this.querySelector('.category-name').textContent;
+                showNotification(`${categoryName} kategorisine yönlendiriliyorsunuz...`, 'info');
+            });
+        });
+    </script>
+</body>
+</html>

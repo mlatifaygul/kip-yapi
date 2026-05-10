@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeler - NEF</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Projects Page Specific Styles */
+        .projects-page {
+            padding-top: 80px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .projects-header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 2rem 0;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .projects-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-dropdowns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-dropdown select {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.8rem 2rem 0.8rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            appearance: none;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-dropdown select:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .filter-dropdown::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #fff;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem;
+            border-radius: 25px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .filter-btn.active {
+            background: #fff;
+            color: #2c3e50;
+        }
+
+        .projects-main {
+            display: flex;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .projects-content {
+            flex: 1;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-status {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(44, 62, 80, 0.9);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-status.yasam-basladi {
+            background: rgba(39, 174, 96, 0.9);
+        }
+
+        .project-status.global {
+            background: rgba(52, 152, 219, 0.9);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-location i {
+            color: #3498db;
+        }
+
+        .project-features {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+        }
+
+        .project-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .discover-btn {
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .discover-btn:hover {
+            background: #34495e;
+            transform: translateX(5px);
+        }
+
+        .sidebar {
+            width: 300px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-sticky {
+            background: #fff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-btn:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        .sidebar-btn.secondary {
+            background: transparent;
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+        }
+
+        .sidebar-btn.secondary:hover {
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .load-more-btn:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .projects-main {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .sidebar-sticky {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .sidebar-btn {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-dropdowns {
+                justify-content: center;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-sticky {
+                flex-direction: column;
+            }
+
+            .sidebar-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">NEF</a></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="biz-kimiz.html" class="nav-link">Biz Kimiz <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="biz-kimiz.html">BİZ KİMİZ</a>
+                            <a href="biz-kimiz.html#manifesto">Manifesto</a>
+                            <a href="biz-kimiz.html#tarihce">Tarihçe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="projeler.html" class="nav-link">Projeler <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="projeler.html">Nef Reserve</a>
+                            <a href="projeler.html">Nef Projeler</a>
+                            <a href="projeler.html">Nef Arsa</a>
+                            <a href="projeler.html">Nef Global</a>
+                            <a href="projeler.html">NOVU</a>
+                            <a href="projeler.html" class="view-all">Tümünü Gör</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="nef-kesifleri.html" class="nav-link">Nef Keşifleri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="iletisim.html" class="nav-link">İletişim</a>
+                    </li>
+                </ul>
+                <div class="nav-contact">
+                    <button class="contact-btn">Sizi Arayalım</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Projects Page -->
+    <main class="projects-page">
+        <!-- Projects Header -->
+        <section class="projects-header">
+            <div class="container">
+                <div class="projects-header-content">
+                    <div class="filter-dropdowns">
+                        <div class="filter-dropdown">
+                            <select id="categoryFilter">
+                                <option value="">Kategori Seçin</option>
+                                <option value="konut">Konut</option>
+                                <option value="arsa">Arsa</option>
+                                <option value="ticari">Ticari</option>
+                                <option value="ofis">Ofis</option>
+                            </select>
+                        </div>
+                        <div class="filter-dropdown">
+                            <select id="locationFilter">
+                                <option value="">Lokasyon Seçin</option>
+                                <option value="istanbul">İstanbul</option>
+                                <option value="ankara">Ankara</option>
+                                <option value="izmir">İzmir</option>
+                                <option value="bursa">Bursa</option>
+                                <option value="antalya">Antalya</option>
+                                <option value="global">Global</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Tümü</button>
+                        <button class="filter-btn" data-filter="insaat">İnşaat Devam Ediyor</button>
+                        <button class="filter-btn" data-filter="yasam">Yaşam Başladı</button>
+                        <button class="filter-btn" data-filter="global">Global</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Main Content -->
+        <div class="projects-main">
+            <div class="projects-content">
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Project Card 1 -->
+                    <div class="project-card" data-category="yasam" data-location="istanbul">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Sapanca" alt="Nef Sapanca">
+                            <span class="project-status yasam-basladi">Yaşam Başladı</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Nef Sapanca</h3>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sapanca, Kocaeli</span>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag">1+1</span>
+                                <span class="feature-tag">2+1</span>
+                                <span class="feature-tag">Villa</span>
+                                <span class="feature-tag">Göl Manzaralı</span>
+                            </div>
+                            <div class="project-action">
+                                <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="project-card" data-category="insaat" data-location="konya">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Meram" alt="Nef Meram">
+                            <span class="project-status">İnşaat Devam Ediyor</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Nef Meram</h3>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Meram, Konya</span>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag">1+1</span>
+                                <span class="feature-tag">2+1</span>
+                                <span class="feature-tag">3+1</span>
+                                <span class="feature-tag">Site İçi</span>
+                            </div>
+                            <div class="project-action">
+                                <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3 -->
+                    <div class="project-card" data-category="global" data-location="global">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Reserve" alt="Nef Reserve">
+                            <span class="project-status yasam-basladi">Yaşam Başladı</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Nef Reserve</h3>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Bodrum, Muğla</span>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag">2+1</span>
+                                <span class="feature-tag">3+1</span>
+                                <span class="feature-tag">4+1</span>
+                                <span class="feature-tag">Deniz Manzaralı</span>
+                            </div>
+                            <div class="project-action">
+                                <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 4 -->
+                    <div class="project-card" data-category="insaat" data-location="istanbul">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Kozyatağı" alt="Nef Kozyatağı">
+                            <span class="project-status">İnşaat Devam Ediyor</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Nef Kozyatağı</h3>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kadıköy, İstanbul</span>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag">1+0</span>
+                                <span class="feature-tag">1+1</span>
+                                <span class="feature-tag">Ofis</span>
+                                <span class="feature-tag">Metroya Yakın</span>
+                            </div>
+                            <div class="project-action">
+                                <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 5 -->
+                    <div class="project-card" data-category="arsa" data-location="canakkale">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Kaz+Dağları" alt="Nef Arsa Kaz Dağları">
+                            <span class="project-status yasam-basladi">Satışta</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Nef Arsa Kaz Dağları</h3>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kaz Dağları, Çanakkale</span>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag">Arsa</span>
+                                <span class="feature-tag">Modüler Ev</span>
+                                <span class="feature-tag">Doğa İçi</span>
+                                <span class="feature-tag">Yatırımlık</span>
+                            </div>
+                            <div class="project-action">
+                                <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 6 -->
+                    <div class="project-card" data-category="global" data-location="global">
+                        <div class="project-image">
+                            <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Global" alt="Nef Global">
+                            <span class="project-status global">Global</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-name">Nef Global</h3>
+                            <div class="project-location">
+                                <i class="fas fa-globe"></i>
+                                <span>Uluslararası Projeler</span>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag">Luxury</span>
+                                <span class="feature-tag">Premium</span>
+                                <span class="feature-tag">Global</span>
+                                <span class="feature-tag">Yatırım</span>
+                            </div>
+                            <div class="project-action">
+                                <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more">
+                    <button class="load-more-btn" id="loadMoreBtn">Daha Fazla Yükle</button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-sticky">
+                    <button class="sidebar-btn">
+                        <i class="fas fa-phone"></i>
+                        Sizi Arayalım
+                    </button>
+                    <button class="sidebar-btn secondary">
+                        <i class="fas fa-laptop"></i>
+                        Nef Online
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const locationFilter = document.getElementById('locationFilter');
+            const projectCards = document.querySelectorAll('.project-card');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+            // Filter button functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    filterProjects(filter);
+                });
+            });
+
+            // Category filter functionality
+            categoryFilter.addEventListener('change', function() {
+                filterBySelects();
+            });
+
+            // Location filter functionality
+            locationFilter.addEventListener('change', function() {
+                filterBySelects();
+            });
+
+            function filterProjects(filter) {
+                projectCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const category = card.dataset.category;
+                        if (category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            function filterBySelects() {
+                const selectedCategory = categoryFilter.value;
+                const selectedLocation = locationFilter.value;
+
+                projectCards.forEach(card => {
+                    const cardCategory = card.dataset.category;
+                    const cardLocation = card.dataset.location;
+
+                    const categoryMatch = !selectedCategory || cardCategory === selectedCategory;
+                    const locationMatch = !selectedLocation || cardLocation === selectedLocation;
+
+                    if (categoryMatch && locationMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Load more functionality
+            let currentProjects = 6;
+            const totalProjects = 12; // Simulated total
+
+            loadMoreBtn.addEventListener('click', function() {
+                // Simulate loading more projects
+                const projectsGrid = document.getElementById('projectsGrid');
+                
+                // Add loading state
+                this.textContent = 'Yükleniyor...';
+                this.disabled = true;
+
+                setTimeout(() => {
+                    // Simulate adding new projects (in real app, this would fetch from server)
+                    for (let i = 0; i < 3; i++) {
+                        const newCard = createProjectCard(currentProjects + i + 1);
+                        projectsGrid.appendChild(newCard);
+                    }
+                    
+                    currentProjects += 3;
+                    
+                    if (currentProjects >= totalProjects) {
+                        this.textContent = 'Tüm Projeler Yüklendi';
+                        this.disabled = true;
+                    } else {
+                        this.textContent = 'Daha Fazla Yükle';
+                        this.disabled = false;
+                    }
+                }, 1000);
+            });
+
+            function createProjectCard(index) {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.dataset.category = 'insaat';
+                card.dataset.location = 'istanbul';
+                
+                card.innerHTML = `
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/34495e/ffffff?text=Projet+${index}" alt="Proje ${index}">
+                        <span class="project-status">İnşaat Devam Ediyor</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name">Nef Proje ${index}</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>İstanbul, Türkiye</span>
+                        </div>
+                        <div class="project-features">
+                            <span class="feature-tag">1+1</span>
+                            <span class="feature-tag">2+1</span>
+                            <span class="feature-tag">Site İçi</span>
+                        </div>
+                        <div class="project-action">
+                            <a href="#" class="discover-btn">Keşfet <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+        });
+    </script>
+</body>
+</html>

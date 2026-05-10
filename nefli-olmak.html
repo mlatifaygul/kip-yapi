@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nef'li Olmak - NEF</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .careers-page {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 0;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .why-nef-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .benefit-card:hover {
+            border-color: #3498db;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .open-positions {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .positions-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .position-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .position-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .position-info h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .position-meta {
+            display: flex;
+            gap: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .position-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .position-meta i {
+            color: #3498db;
+        }
+
+        .apply-btn {
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .apply-btn:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        .culture-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .culture-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .culture-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .culture-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .culture-values {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .culture-value {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .culture-value i {
+            font-size: 1.5rem;
+            color: #3498db;
+        }
+
+        .culture-value h4 {
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .culture-value p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .culture-image {
+            background: url('https://via.placeholder.com/600x400/34495e/ffffff?text=Nef+Kültürü') center/cover;
+            height: 500px;
+            border-radius: 15px;
+        }
+
+        .application-process {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #3498db;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .testimonials {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 4rem;
+            color: #3498db;
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            color: #2c3e50;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 80px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn.primary {
+            background: #fff;
+            color: #2c3e50;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .culture-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .culture-image {
+                height: 300px;
+            }
+
+            .position-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .position-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">NEF</a></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="biz-kimiz.html" class="nav-link">Biz Kimiz <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="biz-kimiz.html">BİZ KİMİZ</a>
+                            <a href="biz-kimiz.html#manifesto">Manifesto</a>
+                            <a href="biz-kimiz.html#tarihce">Tarihçe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="nef-kesifleri.html" class="nav-link">Nef Keşifleri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="iletisim.html" class="nav-link">İletişim</a>
+                    </li>
+                </ul>
+                <div class="nav-contact">
+                    <button class="contact-btn">Sizi Arayalım</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Careers Page -->
+    <main class="careers-page">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Nef'li Olmak</h1>
+                    <p>Kariyerinize yön verecek, sizi geleceğe taşıyacak bir iş ortamında yer alın. NEF ailesinin bir parçası olun.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why NEF Section -->
+        <section class="why-nef-section">
+            <div class="container">
+                <h2 class="section-title">Neden NEF?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Kariyer Fırsatları</h3>
+                        <p>Hızla büyüyen şirketimizde kendinizi geliştirebileceğiniz birçok fırsat sizi bekliyor.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Harika Ekip</h3>
+                        <p>Talented ve motive ekibimizle birlikte çalışarak harika işler başarın.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Eğitim ve Gelişim</h3>
+                        <p>Sürekli öğrenme ve gelişim kültürüyle kariyerinizde ilerleyin.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>İş Yaşam Dengesi</h3>
+                        <p>Esnek çalışma saatleri ve sosyal aktivitelerle iş yaşam dengesi sağlayın.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Performans Ödülleri</h3>
+                        <p>Başarınızı takdir ediyor, motivasyonunuzu artıracak ödüller veriyoruz.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Global Deneyim</h3>
+                        <p>Uluslararası projelerimizle global bir kariyer deneyimi yaşayın.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Open Positions -->
+        <section class="open-positions">
+            <div class="container">
+                <h2 class="section-title">Açık Pozisyonlar</h2>
+                <div class="positions-grid">
+                    <div class="position-card">
+                        <div class="position-info">
+                            <h3>Proje Müdürü</h3>
+                            <p>Konut projelerimizin yönetiminden sorumlu olacak deneyimli proje müdürü arıyoruz.</p>
+                            <div class="position-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> İstanbul</span>
+                                <span><i class="fas fa-briefcase"></i> Tam Zamanlı</span>
+                                <span><i class="fas fa-clock"></i> 5+ Yıl</span>
+                            </div>
+                        </div>
+                        <a href="#" class="apply-btn">Başvur</a>
+                    </div>
+
+                    <div class="position-card">
+                        <div class="position-info">
+                            <h3>Mimar</h3>
+                            <p>Yenilikçi tasarım anlayışımıza katkı sağlayacak yaratıcı mimarlar arıyoruz.</p>
+                            <div class="position-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> İstanbul</span>
+                                <span><i class="fas fa-briefcase"></i> Tam Zamanlı</span>
+                                <span><i class="fas fa-clock"></i> 3+ Yıl</span>
+                            </div>
+                        </div>
+                        <a href="#" class="apply-btn">Başvur</a>
+                    </div>
+
+                    <div class="position-card">
+                        <div class="position-info">
+                            <h3>Satış Danışmanı</h3>
+                            <p>Projelerimizin satış süreçlerinde yer alacak dinamik satış danışmanları arıyoruz.</p>
+                            <div class="position-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> İstanbul</span>
+                                <span><i class="fas fa-briefcase"></i> Tam Zamanlı</span>
+                                <span><i class="fas fa-clock"></i> 2+ Yıl</span>
+                            </div>
+                        </div>
+                        <a href="#" class="apply-btn">Başvur</a>
+                    </div>
+
+                    <div class="position-card">
+                        <div class="position-info">
+                            <h3>İnşaat Mühendisi</h3>
+                            <p>Şantiyelerimizde kalite kontrol ve proje takibinden sorumlu mühendisler arıyoruz.</p>
+                            <div class="position-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Ankara</span>
+                                <span><i class="fas fa-briefcase"></i> Tam Zamanlı</span>
+                                <span><i class="fas fa-clock"></i> 4+ Yıl</span>
+                            </div>
+                        </div>
+                        <a href="#" class="apply-btn">Başvur</a>
+                    </div>
+
+                    <div class="position-card">
+                        <div class="position-info">
+                            <h3>Finans Uzmanı</h3>
+                            <p>Finansal analiz ve raporlama süreçlerimize katkı sağlayacak uzmanlar arıyoruz.</p>
+                            <div class="position-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> İstanbul</span>
+                                <span><i class="fas fa-briefcase"></i> Tam Zamanlı</span>
+                                <span><i class="fas fa-clock"></i> 3+ Yıl</span>
+                            </div>
+                        </div>
+                        <a href="#" class="apply-btn">Başvur</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Culture Section -->
+        <section class="culture-section">
+            <div class="container">
+                <h2 class="section-title">NEF Kültürü</h2>
+                <div class="culture-content">
+                    <div class="culture-text">
+                        <h2>Birlikte Daha İyisi</h2>
+                        <p>NEF olarak çalışma kültürümüzü; inovasyon, iş birliği ve mükemmeliyet üzerine kurduk. Her gün daha iyisi için çalışıyor, birbirimize destek oluyoruz.</p>
+                        <p>Ekibimizin her üyesi, şirketimizin başarısında önemli bir rol oynar. Farklı bakış açılarına değer verir, çeşitliliği güç olarak görürüz.</p>
+                        
+                        <div class="culture-values">
+                            <div class="culture-value">
+                                <i class="fas fa-lightbulb"></i>
+                                <div>
+                                    <h4>İnovasyon</h4>
+                                    <p>Her zaman yeni fikirlere açığız</p>
+                                </div>
+                            </div>
+                            <div class="culture-value">
+                                <i class="fas fa-handshake"></i>
+                                <div>
+                                    <h4>İş Birliği</h4>
+                                    <p>Birlikte başarırız</p>
+                                </div>
+                            </div>
+                            <div class="culture-value">
+                                <i class="fas fa-star"></i>
+                                <div>
+                                    <h4>Mükemmeliyet</h4>
+                                    <p>En iyisini hedefleriz</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="culture-image"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Process -->
+        <section class="application-process">
+            <div class="container">
+                <h2 class="section-title">Başvuru Süreci</h2>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Başvuru</h3>
+                        <p class="step-description">İlgilendiğiniz pozisyon için online başvurunuzu yapın</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Değerlendirme</h3>
+                        <p class="step-description">Başvurunuz İK ekibimiz tarafından değerlendirilir</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Mülakat</h3>
+                        <p class="step-description">İlgili departman yöneticisi ile mülakat süreci</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Teklif</h3>
+                        <p class="step-description">Başarılı adaylara iş teklifi sunulur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">NEF'liler Ne Diyor?</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            NEF'te çalışmak sadece bir iş değil, bir kariyer yolculuğu. Burada kendimi sürekli geliştirme fırsatı buluyorum.
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AY</div>
+                            <div class="author-info">
+                                <h4>Ayşe Yılmaz</h4>
+                                <p>Proje Müdürü</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            İnovatif projeler ve harika ekip arkadaşlarıyla her gün yeni bir challenge yaşıyorum. NEF ailesinin bir parçası olmak harika.
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MD</div>
+                            <div class="author-info">
+                                <h4>Mehmet Demir</h4>
+                                <p>Mimar</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">
+                            Kariyerime NEF'te başladım ve 3 yılda 2 pozisyon atladım. Burada potansiyelinizin farkında oluyorlar.
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ZK</div>
+                            <div class="author-info">
+                                <h4>Zeynep Kaya</h4>
+                                <p>Satış Danışmanı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Kariyerinize NEF'te Başlayın</h2>
+                    <p>Türkiye'nin lider inşaat şirketinde yerinizi alın ve geleceği birlikte inşa edin.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-btn primary">
+                            <i class="fas fa-search"></i>
+                            Tüm Pozisyonlar
+                        </a>
+                        <a href="#" class="cta-btn secondary">
+                            <i class="fas fa-envelope"></i>
+                            Spontan Başvuru
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Apply button functionality
+        document.querySelectorAll('.apply-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const position = this.closest('.position-card').querySelector('h3').textContent;
+                showNotification(`${position} pozisyonu için başvurunuz alındı!`, 'success');
+            });
+        });
+
+        // Position card hover effect
+        document.querySelectorAll('.position-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f8f9fa';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '#fff';
+            });
+        });
+    </script>
+</body>
+</html>

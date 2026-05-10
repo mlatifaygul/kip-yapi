@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biz Kimiz - NEF</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .about-page {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .content-section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .section-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-date {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #3498db;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .stats-section {
+            padding: 80px 0;
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-date {
+                left: 30px;
+                transform: translateY(-50%);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">NEF</a></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="biz-kimiz.html" class="nav-link">Biz Kimiz <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="biz-kimiz.html">BİZ KİMİZ</a>
+                            <a href="biz-kimiz.html#manifesto">Manifesto</a>
+                            <a href="biz-kimiz.html#tarihce">Tarihçe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="projeler.html" class="nav-link">Projeler <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="projeler.html">Nef Reserve</a>
+                            <a href="projeler.html">Nef Projeler</a>
+                            <a href="projeler.html">Nef Arsa</a>
+                            <a href="projeler.html">Nef Global</a>
+                            <a href="projeler.html">NOVU</a>
+                            <a href="projeler.html" class="view-all">Tümünü Gör</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="nef-kesifleri.html" class="nav-link">Nef Keşifleri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="iletisim.html" class="nav-link">İletişim</a>
+                    </li>
+                </ul>
+                <div class="nav-contact">
+                    <button class="contact-btn">Sizi Arayalım</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- About Page -->
+    <main class="about-page">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>2010 Yılından Beri İnce Düşünülmüş Yaşam Alanları</h1>
+                    <p>Metrekarelerle değil, santimetrekarelerle çalışarak hayata geçirdiğimiz projelerimizle Türkiye'nin lider inşaat şirketlerinden biri olmayı sürdürüyoruz.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Vizyonumuz</h2>
+                    <p>Müşterilerimize sadece binalar değil, aynı zamanda yaşam kalitesini artıran, estetik ve fonksiyonelliği bir araya getiren yaşam alanları sunmak. Her projemizde yenilikçi çözümlerle sektörde fark yaratmak ve Türkiye'yi global marka haline getirmek.</p>
+                    
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Vizyoner Yaklaşım</h3>
+                            <p>Geleceği öngörerek bugünden projelerimizi şekillendiriyoruz.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>Müşteri Odaklılık</h3>
+                            <p>Müşteri memnuniyetini her şeyin üzerinde tutuyoruz.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Sürdürülebilirlik</h3>
+                            <p>Doğaya saygılı, çevre dostu projeler geliştiriyoruz.</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>İnovasyon</h3>
+                            <p>Yenilikçi teknolojileri projelerimize entegre ediyoruz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manifesto Section -->
+        <section id="manifesto" class="content-section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Manifesto</h2>
+                    <p>Biz NEF olarak, inşaatı sadece bir sektör değil, bir sanat ve bir sorumluluk olarak görüyoruz. Her çivinin, her duvarın arkasında bir hayat olduğunun bilinciyle hareket ediyoruz.</p>
+                    <p>Santimetrekareleri önemsiyoruz çünkü detaylar bütünü oluşturur. Mükemmeli ararken standardı yükseltiyoruz. Sadece evler değil, yaşam alanları inşa ediyoruz.</p>
+                    <p>Müşterilerimizi yatırımcı olarak değil, hayat arkadaşları olarak görüyoruz. Onların hayallerini kendi hayallerimiz gibi sahipleniyor ve bu hayallere ulaşmak için var gücümüzle çalışıyoruz.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="tarihce" class="content-section">
+            <div class="container">
+                <div class="section-content">
+                    <h2>Tarihçe</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>NEF Kuruldu</h3>
+                                <p>İnşaat sektörüne yeni bir bakış açısı getirmek için yola çıktık.</p>
+                            </div>
+                            <div class="timeline-date">2010</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>İlk Proje</h3>
+                                <p>İlk büyük projemizi tamamlayarak sektörde yerimizi aldık.</p>
+                            </div>
+                            <div class="timeline-date">2012</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>İnovasyon Ödülü</h3>
+                                <p>Sektördeki inovatif yaklaşımımızla ödül aldık.</p>
+                            </div>
+                            <div class="timeline-date">2015</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Global Genişleme</h3>
+                                <p>Uluslararası pazarda projeler geliştirmeye başladık.</p>
+                            </div>
+                            <div class="timeline-date">2018</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>100+ Proje</h3>
+                                <p>Türkiye genelinde 100'den fazla projeyi başarıyla tamamladık.</p>
+                            </div>
+                            <div class="timeline-date">2024</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="100">0</h3>
+                        <p>Tamamlanan Proje</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="15000">0</h3>
+                        <p>Mutlu Müşteri</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="14">0</h3>
+                        <p>Yıllık Deneyim</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="25">0</h3>
+                        <p>Ödül</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Counter animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString('tr-TR');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString('tr-TR');
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for counters
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target);
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => counterObserver.observe(counter));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+# NEF Website Clone
+
+Modern bir Türk emlak geliştirme şirketi olan NEF'in web sitesinin responsive bir klonu.
+
+## Özellikler
+
+- ✅ Modern ve şık tasarım
+- ✅ Responsive mobil uyumlu arayüz
+- ✅ Smooth scroll animasyonları
+- ✅ Interaktif dropdown menüler
+- ✅ Proje galerisi
+- ✅ İletişim formu
+- ✅ Haberler bölümü
+- ✅ SEO dostu yapı
+- ✅ Performans optimizasyonu
+
+## Kullanılan Teknolojiler
+
+- **HTML5** - Semantik yapı
+- **CSS3** - Modern stiller ve animasyonlar
+- **JavaScript** - Interaktif fonksiyonlar
+- **Font Awesome** - İkonlar
+- **Google Fonts** - Montserrat fontu
+
+## Proje Yapısı
+
+```
+yapi-proje/
+├── index.html          # Ana HTML dosyası
+├── style.css           # Stiller
+├── script.js           # JavaScript fonksiyonları
+└── README.md           # Proje dokümantasyonu
+```
+
+## Bölümler
+
+1. **Header** - Navigasyon menüsü ve logo
+2. **Hero** - Ana banner ve tanıtım
+3. **Öne Çıkan Projeler** - Proje kartları
+4. **NEF Arsa** - Arsa projeleri listesi
+5. **CTA** - Eylem çağrısı bölümü
+6. **Haberler** - Haberler ve duyurular
+7. **İletişim** - İletişim formu
+8. **Footer** - Alt bilgi ve linkler
+
+## Kurulum ve Çalıştırma
+
+1. Projeyi bilgisayarınıza klonlayın
+2. Yerel bir sunucu başlatın:
+   ```bash
+   # Node.js ile
+   npx serve -s . -p 8000
+   
+   # Python ile
+   python -m http.server 8000
+   
+   # PHP ile
+   php -S localhost:8000
+   ```
+3. Tarayıcıda `http://localhost:8000` adresini açın
+
+## Özellik Detayları
+
+### Responsive Tasarım
+- Mobil, tablet ve masaüstü cihazlarda mükemmel görünüm
+- Hamburger menü (mobil için)
+- Esnek grid sistemleri
+
+### Animasyonlar
+- Scroll ile birlikte fade-in efektleri
+- Hover animasyonları
+- Parallax scrolling
+- Smooth page transitions
+
+### Form Validasyonu
+- Real-time validasyon
+- Türkçe telefon formatı kontrolü
+- E-posta formatı kontrolü
+- Başarı/hata mesajları
+
+### Performans
+- Lazy loading for images
+- Debounced scroll events
+- Optimized animations
+- Minimal JavaScript
+
+## Tarayıcı Desteği
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## Lisans
+
+Bu proje eğitim amaçlıdır. NEF'in orijinal web sitesine ait değildir.
+
+## Geliştirici
+
+Modern web development best practices ile geliştirilmiştir.
