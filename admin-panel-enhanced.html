@@ -1,0 +1,2774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - NEF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #2c3e50;
+            color: #fff;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 2rem 1rem;
+            border-bottom: 1px solid #34495e;
+            text-align: center;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-section {
+            margin-bottom: 2rem;
+        }
+
+        .menu-section-title {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            color: #95a5a6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-weight: 400;
+        }
+
+        .menu-item:hover {
+            background: #34495e;
+            color: #3498db;
+            border-left-color: #3498db;
+        }
+
+        .menu-item.active {
+            background: #34495e;
+            color: #3498db;
+            border-left-color: #3498db;
+        }
+
+        .menu-item i {
+            width: 20px;
+            margin-right: 0.8rem;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            background: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        /* Enhanced Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group.required label::after {
+            content: '*';
+            color: #e74c3c;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group textarea.large {
+            min-height: 200px;
+        }
+
+        .form-group.half {
+            grid-column: span 1;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Enhanced Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .edit-btn {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .view-btn {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .view-btn:hover {
+            background: #229954;
+            transform: scale(1.05);
+        }
+
+        /* Content Editor */
+        .content-editor {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .editor-toolbar {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .editor-btn {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .editor-btn:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .editor-btn.active {
+            background: #3498db;
+            color: #fff;
+            border-color: #3498db;
+        }
+
+        .editor-content {
+            min-height: 300px;
+            padding: 1rem;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Image Management */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .image-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .image-preview {
+            height: 150px;
+            background: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-info {
+            padding: 1rem;
+        }
+
+        .image-name {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .image-size {
+            color: #7f8c8d;
+            font-size: 0.8rem;
+        }
+
+        .image-actions {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .image-action-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .image-action-btn:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+
+        .image-action-btn.delete {
+            color: #e74c3c;
+        }
+
+        .image-action-btn.copy {
+            color: #3498db;
+        }
+
+        /* Section Management */
+        .section-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .section-item {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-item:hover {
+            border-color: #3498db;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
+        }
+
+        .section-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .section-title-info {
+            flex: 1;
+        }
+
+        .section-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .section-type {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .section-preview {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, #f8f9fa);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 0;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: #fff;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: #3498db;
+        }
+
+        .tab.active {
+            color: #3498db;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: #fff;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 300px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .toast.info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .toast.warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .toast-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.half,
+            .form-group.full {
+                grid-column: span 1;
+            }
+
+            .data-table {
+                font-size: 0.8rem;
+            }
+
+            .table-actions {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status-badge.active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Search and Filter */
+        .search-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+
+        .filter-select {
+            min-width: 150px;
+        }
+
+        .filter-select select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cube"></i> NEF ADMIN</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-section-title">Genel</div>
+                    <a href="#" class="menu-item active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">İçerik Yönetimi</div>
+                    <a href="#" class="menu-item" data-section="navigation">
+                        <i class="fas fa-bars"></i> Navigasyon
+                    </a>
+                    <a href="#" class="menu-item" data-section="pages">
+                        <i class="fas fa-file"></i> Sayfalar
+                    </a>
+                    <a href="#" class="menu-item" data-section="sections">
+                        <i class="fas fa-th-large"></i> Sayfa Bölümleri
+                    </a>
+                    <a href="#" class="menu-item" data-section="cards">
+                        <i class="fas fa-th"></i> Kart Yönetimi
+                    </a>
+                    <a href="#" class="menu-item" data-section="projects">
+                        <i class="fas fa-building"></i> Projeler
+                    </a>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">Medya</div>
+                    <a href="#" class="menu-item" data-section="images">
+                        <i class="fas fa-images"></i> Resim Yönetimi
+                    </a>
+                    <a href="#" class="menu-item" data-section="content">
+                        <i class="fas fa-edit"></i> İçerik Editörü
+                    </a>
+                </div>
+                
+                <div class="menu-section">
+                    <div class="menu-section-title">Ayarlar</div>
+                    <a href="#" class="menu-item" data-section="settings">
+                        <i class="fas fa-cog"></i> Site Ayarları
+                    </a>
+                    <a href="#" class="menu-item" data-section="users">
+                        <i class="fas fa-users"></i> Kullanıcılar
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div>
+                    <h1 class="page-title" id="pageTitle">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </h1>
+                    <div class="breadcrumb">
+                        <span>Admin</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span id="breadcrumbItem">Dashboard</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <span id="username">Admin</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Çıkış
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Dashboard</h2>
+                        <p class="section-description">Site genel durumu ve hızlı işlemler</p>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);">
+                        <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;" id="pagesCount">5</h3>
+                        <p>Sayfalar</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #27ae60, #229954); color: #fff; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);">
+                        <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;" id="projectsCount">6</h3>
+                        <p>Projeler</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);">
+                        <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;" id="imagesCount">4</h3>
+                        <p>Resimler</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(243, 156, 18, 0.3);">
+                        <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;" id="sectionsCount">0</h3>
+                        <p>Bölümler</p>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <div style="background: #fff; padding: 2rem; border-radius: 15px; border: 2px solid #e9ecef;">
+                        <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">Son Aktiviteler</h3>
+                        <div id="recentActivities" style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #3498db;">
+                                <div style="font-weight: 500; color: #2c3e50;">Admin panel oluşturuldu</div>
+                                <div style="font-size: 0.8rem; color: #7f8c8d;">2 dakika önce</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: #fff; padding: 2rem; border-radius: 15px; border: 2px solid #e9ecef;">
+                        <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">Hızlı İşlemler</h3>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <button class="btn btn-primary" onclick="showSection('navigation')">
+                                <i class="fas fa-bars"></i> Navigasyon Düzenle
+                            </button>
+                            <button class="btn btn-primary" onclick="showSection('sections')">
+                                <i class="fas fa-th-large"></i> Bölüm Ekle
+                            </button>
+                            <button class="btn btn-primary" onclick="showSection('projects')">
+                                <i class="fas fa-building"></i> Proje Ekle
+                            </button>
+                            <button class="btn btn-primary" onclick="showSection('images')">
+                                <i class="fas fa-upload"></i> Resim Yükle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Section -->
+            <section class="content-section" id="navigation">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-bars"></i> Navigasyon Yönetimi
+                        </h2>
+                        <p class="section-description">Ana menü ve alt menüleri yönetin</p>
+                    </div>
+                    <button class="add-btn" onclick="openNavModal()">
+                        <i class="fas fa-plus"></i> Menü Öğesi Ekle
+                    </button>
+                </div>
+                <div id="navItems"></div>
+            </section>
+
+            <!-- Pages Section -->
+            <section class="content-section" id="pages">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-file"></i> Sayfa Yönetimi
+                        </h2>
+                        <p class="section-description">Tüm sayfaları yönetin ve düzenleyin</p>
+                    </div>
+                    <button class="add-btn" onclick="openPageModal()">
+                        <i class="fas fa-plus"></i> Yeni Sayfa
+                    </button>
+                </div>
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Sayfa ara..." id="pageSearch">
+                    </div>
+                    <div class="filter-select">
+                        <select id="pageFilter">
+                            <option value="">Tümü</option>
+                            <option value="active">Aktif</option>
+                            <option value="inactive">Pasif</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Sayfa Adı</th>
+                            <th>Dosya Adı</th>
+                            <th>Durum</th>
+                            <th>Güncelleme</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pagesTableBody"></tbody>
+                </table>
+            </section>
+
+            <!-- Sections Section -->
+            <section class="content-section" id="sections">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-th-large"></i> Sayfa Bölümleri
+                        </h2>
+                        <p class="section-description">Sayfa içerik bölümlerini yönetin</p>
+                    </div>
+                    <button class="add-btn" onclick="openSectionModal()">
+                        <i class="fas fa-plus"></i> Yeni Bölüm
+                    </button>
+                </div>
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Bölüm ara..." id="sectionSearch">
+                    </div>
+                    <div class="filter-select">
+                        <select id="sectionFilter">
+                            <option value="">Tüm Sayfalar</option>
+                            <option value="index.html">Ana Sayfa</option>
+                            <option value="biz-kimiz.html">Biz Kimiz</option>
+                            <option value="projeler.html">Projeler</option>
+                            <option value="nef-kesifleri.html">Nef Keşifleri</option>
+                            <option value="iletisim.html">İletişim</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="section-list" id="sectionsList"></div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="content-section" id="projects">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-building"></i> Proje Yönetimi
+                        </h2>
+                        <p class="section-description">Tüm projeleri yönetin</p>
+                    </div>
+                    <button class="add-btn" onclick="openProjectModal()">
+                        <i class="fas fa-plus"></i> Yeni Proje
+                    </button>
+                </div>
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Proje ara..." id="projectSearch">
+                    </div>
+                    <div class="filter-select">
+                        <select id="projectFilter">
+                            <option value="">Tüm Kategoriler</option>
+                            <option value="konut">Konut</option>
+                            <option value="arsa">Arsa</option>
+                            <option value="ticari">Ticari</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Proje Adı</th>
+                            <th>Kategori</th>
+                            <th>Lokasyon</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTableBody"></tbody>
+                </table>
+            </section>
+
+            <!-- Cards Section -->
+            <section class="content-section" id="cards">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-th-large"></i> Kart Yönetimi
+                        </h2>
+                        <p class="section-description">Ana sayfa kartlarını yönetin</p>
+                    </div>
+                    <button class="add-btn" onclick="openCardModal()">
+                        <i class="fas fa-plus"></i> Yeni Kart
+                    </button>
+                </div>
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Kart ara..." id="cardSearch">
+                    </div>
+                    <div class="filter-select">
+                        <select id="cardFilter">
+                            <option value="">Tüm Sayfalar</option>
+                            <option value="index.html">Ana Sayfa</option>
+                            <option value="biz-kimiz.html">Biz Kimiz</option>
+                            <option value="projeler.html">Projeler</option>
+                            <option value="nef-kesifleri.html">Nef Keşifleri</option>
+                            <option value="iletisim.html">İletişim</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="cards-list" id="cardsList"></div>
+            </section>
+
+            <!-- Images Section -->
+            <section class="content-section" id="images">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-images"></i> Resim Yönetimi
+                        </h2>
+                        <p class="section-description">Resimleri yükleyin ve yönetin</p>
+                    </div>
+                    <button class="add-btn" onclick="document.getElementById('imageUpload').click()">
+                        <i class="fas fa-upload"></i> Resim Yükle
+                    </button>
+                    <input type="file" id="imageUpload" style="display: none;" accept="image/*" multiple onchange="handleImageUpload(event)">
+                </div>
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Resim ara..." id="imageSearch">
+                    </div>
+                    <button class="btn btn-secondary" onclick="openImageUrlModal()">
+                        <i class="fas fa-link"></i> URL'den Ekle
+                    </button>
+                </div>
+                <div class="image-grid" id="imagesGrid"></div>
+            </section>
+
+            <!-- Content Editor Section -->
+            <section class="content-section" id="content">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-edit"></i> İçerik Editörü
+                        </h2>
+                        <p class="section-description">Zengin metin editörü ile içerik oluşturun</p>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('editor')">Editör</button>
+                    <button class="tab" onclick="switchTab('preview')">Önizleme</button>
+                    <button class="tab" onclick="switchTab('html')">HTML</button>
+                </div>
+                <div class="tab-content active" id="editorTab">
+                    <div class="content-editor">
+                        <div class="editor-toolbar">
+                            <button class="editor-btn" onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
+                            <button class="editor-btn" onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
+                            <button class="editor-btn" onclick="formatText('underline')"><i class="fas fa-underline"></i></button>
+                            <div style="width: 1px; height: 20px; background: #dee2e6; margin: 0 0.5rem;"></div>
+                            <button class="editor-btn" onclick="formatText('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
+                            <button class="editor-btn" onclick="formatText('insertOrderedList')"><i class="fas fa-list-ol"></i></button>
+                            <div style="width: 1px; height: 20px; background: #dee2e6; margin: 0 0.5rem;"></div>
+                            <button class="editor-btn" onclick="insertLink()"><i class="fas fa-link"></i></button>
+                            <button class="editor-btn" onclick="insertImage()"><i class="fas fa-image"></i></button>
+                            <div style="width: 1px; height: 20px; background: #dee2e6; margin: 0 0.5rem;"></div>
+                            <button class="editor-btn" onclick="formatText('justifyLeft')"><i class="fas fa-align-left"></i></button>
+                            <button class="editor-btn" onclick="formatText('justifyCenter')"><i class="fas fa-align-center"></i></button>
+                            <button class="editor-btn" onclick="formatText('justifyRight')"><i class="fas fa-align-right"></i></button>
+                        </div>
+                        <div class="editor-content" contenteditable="true" id="editorContent"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveContent()">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearEditor()">
+                            <i class="fas fa-trash"></i> Temizle
+                        </button>
+                    </div>
+                </div>
+                <div class="tab-content" id="previewTab">
+                    <div style="padding: 2rem; background: #f8f9fa; border-radius: 10px; min-height: 400px;" id="previewContent"></div>
+                </div>
+                <div class="tab-content" id="htmlTab">
+                    <textarea style="width: 100%; min-height: 400px; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-family: 'Courier New', monospace;" id="htmlContent"></textarea>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="content-section" id="settings">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-cog"></i> Site Ayarları
+                        </h2>
+                        <p class="section-description">Genel site ayarlarını yönetin</p>
+                    </div>
+                </div>
+                <form id="settingsForm">
+                    <div class="form-grid">
+                        <div class="form-group required">
+                            <label>Site Başlığı</label>
+                            <input type="text" id="siteTitle" required>
+                        </div>
+                        <div class="form-group required">
+                            <label>Site Açıklaması</label>
+                            <input type="text" id="siteDescription" required>
+                        </div>
+                        <div class="form-group required">
+                            <label>İletişim E-posta</label>
+                            <input type="email" id="contactEmail" required>
+                        </div>
+                        <div class="form-group required">
+                            <label>İletişim Telefon</label>
+                            <input type="tel" id="contactPhone" required>
+                        </div>
+                        <div class="form-group required">
+                            <label>İletişim Adres</label>
+                            <input type="text" id="contactAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Google Analytics ID</label>
+                            <input type="text" id="googleAnalytics" placeholder="UA-XXXXXXX-X">
+                        </div>
+                        <div class="form-group full">
+                            <label>Meta Keywords</label>
+                            <input type="text" id="metaKeywords" placeholder="nef, inşaat, konut, arsa, proje">
+                        </div>
+                        <div class="form-group full">
+                            <label>Favicon URL</label>
+                            <input type="url" id="faviconUrl" placeholder="https://example.com/favicon.ico">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Users Section -->
+            <section class="content-section" id="users">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">
+                            <i class="fas fa-users"></i> Kullanıcı Yönetimi
+                        </h2>
+                        <p class="section-description">Admin kullanıcılarını yönetin</p>
+                    </div>
+                    <button class="add-btn" onclick="openUserModal()">
+                        <i class="fas fa-user-plus"></i> Kullanıcı Ekle
+                    </button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Kullanıcı Adı</th>
+                            <th>E-posta</th>
+                            <th>Rol</th>
+                            <th>Son Giriş</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr>
+                            <td>admin</td>
+                            <td>admin@nef.com</td>
+                            <td><span class="status-badge active">Super Admin</span></td>
+                            <td>Şimdi</td>
+                            <td><span class="status-badge active">Aktif</span></td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Navigation Modal -->
+    <div class="modal" id="navModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Menü Öğesi Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('navModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="navForm">
+                    <div class="form-grid">
+                        <div class="form-group required half">
+                            <label>Menü Adı</label>
+                            <input type="text" id="navName" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>URL</label>
+                            <input type="text" id="navUrl" required>
+                        </div>
+                        <div class="form-group half">
+                            <label>Sıra</label>
+                            <input type="number" id="navOrder" min="1">
+                        </div>
+                        <div class="form-group half">
+                            <label>Aktif</label>
+                            <select id="navActive">
+                                <option value="true">Evet</option>
+                                <option value="false">Hayır</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label>İkon</label>
+                            <input type="text" id="navIcon" placeholder="fas fa-home">
+                        </div>
+                        <div class="form-group half">
+                            <label>Hedef</label>
+                            <select id="navTarget">
+                                <option value="_self">Aynı Pencere</option>
+                                <option value="_blank">Yeni Pencere</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('navModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Modal -->
+    <div class="modal" id="sectionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Sayfa Bölümü Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('sectionModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="sectionForm">
+                    <div class="form-grid">
+                        <div class="form-group required half">
+                            <label>Bölüm Adı</label>
+                            <input type="text" id="sectionName" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Sayfa</label>
+                            <select id="sectionPage" required>
+                                <option value="">Sayfa Seçin</option>
+                                <option value="index.html">index.html</option>
+                                <option value="biz-kimiz.html">biz-kimiz.html</option>
+                                <option value="biz-kimiz-new.html">biz-kimiz-new.html</option>
+                                <option value="projeler.html">projeler.html</option>
+                                <option value="nef-kesifleri.html">nef-kesifleri.html</option>
+                                <option value="nef-kesifleri-new.html">nef-kesifleri-new.html</option>
+                                <option value="iletisim.html">iletisim.html</option>
+                                <option value="iletisim-new.html">iletisim-new.html</option>
+                            </select>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Bölüm Tipi</label>
+                            <select id="sectionType" required>
+                                <option value="hero">Hero Section</option>
+                                <option value="text">Text Section</option>
+                                <option value="image">Image Section</option>
+                                <option value="card">Card Grid</option>
+                                <option value="feature">Feature Section</option>
+                                <option value="cta">CTA Section</option>
+                                <option value="contact">Contact Section</option>
+                                <option value="custom">Custom HTML</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label>Sıra</label>
+                            <input type="number" id="sectionOrder" min="1">
+                        </div>
+                        <div class="form-group full">
+                            <label>Başlık</label>
+                            <input type="text" id="sectionTitle">
+                        </div>
+                        <div class="form-group full">
+                            <label>Alt Başlık</label>
+                            <input type="text" id="sectionSubtitle">
+                        </div>
+                        <div class="form-group full">
+                            <label>İçerik</label>
+                            <textarea id="sectionContent" class="large"></textarea>
+                        </div>
+                        <div class="form-group half">
+                            <label>Arka Plan Resmi</label>
+                            <input type="text" id="sectionBgImage" placeholder="URL veya resim seçin">
+                        </div>
+                        <div class="form-group half">
+                            <label>Arka Plan Rengi</label>
+                            <input type="color" id="sectionBgColor" value="#ffffff">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('sectionModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Modal -->
+    <div class="modal" id="pageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Sayfa Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('pageModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="pageForm">
+                    <div class="form-grid">
+                        <div class="form-group required half">
+                            <label>Sayfa Başlığı</label>
+                            <input type="text" id="pageTitle" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Dosya Adı</label>
+                            <input type="text" id="pageFile" required>
+                        </div>
+                        <div class="form-group full">
+                            <label>Meta Açıklaması</label>
+                            <textarea id="pageDescription"></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <label>Meta Keywords</label>
+                            <input type="text" id="pageKeywords">
+                        </div>
+                        <div class="form-group half">
+                            <label>Şablon</label>
+                            <select id="pageTemplate">
+                                <option value="default">Varsayılan</option>
+                                <option value="full-width">Tam Genişlik</option>
+                                <option value="sidebar">Sidebar</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label>Durum</label>
+                            <select id="pageStatus">
+                                <option value="active">Aktif</option>
+                                <option value="inactive">Pasif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('pageModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Proje Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('projectModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="projectForm">
+                    <div class="form-grid">
+                        <div class="form-group required half">
+                            <label>Proje Adı</label>
+                            <input type="text" id="projectName" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Kategori</label>
+                            <select id="projectCategory" required>
+                                <option value="konut">Konut</option>
+                                <option value="arsa">Arsa</option>
+                                <option value="ticari">Ticari</option>
+                            </select>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Lokasyon</label>
+                            <input type="text" id="projectLocation" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Durum</label>
+                            <select id="projectStatus" required>
+                                <option value="insaat">İnşaat Devam Ediyor</option>
+                                <option value="tamamlandi">Tamamlandı</option>
+                                <option value="yasam-basladi">Yaşam Başladı</option>
+                                <option value="satis-ta">Satışta</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Açıklama</label>
+                            <textarea id="projectDescription" class="large"></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <label>Özellikler</label>
+                            <input type="text" id="projectFeatures" placeholder="Özellik1, Özellik2, Özellik3">
+                        </div>
+                        <div class="form-group half">
+                            <label>Kapak Resmi</label>
+                            <input type="text" id="projectImage" placeholder="Resim URL">
+                        </div>
+                        <div class="form-group half">
+                            <label>Galeri Resimleri</label>
+                            <input type="text" id="projectGallery" placeholder="URL1, URL2, URL3">
+                        </div>
+                        <div class="form-group half">
+                            <label>Fiyat Aralığı</label>
+                            <input type="text" id="projectPrice" placeholder="₺500.000 - ₺1.000.000">
+                        </div>
+                        <div class="form-group half">
+                            <label>Teslim Tarihi</label>
+                            <input type="date" id="projectDelivery">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image URL Modal -->
+    <div class="modal" id="imageUrlModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">URL'den Resim Ekle</h3>
+                <button class="close-modal" onclick="closeModal('imageUrlModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="imageUrlForm">
+                    <div class="form-group required">
+                        <label>Resim URL</label>
+                        <input type="url" id="imageUrl" required placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>Resim Adı</label>
+                        <input type="text" id="imageName" placeholder="Resim için açıklama">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Ekle
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('imageUrlModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Kullanıcı Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('userModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm">
+                    <div class="form-grid">
+                        <div class="form-group required half">
+                            <label>Kullanıcı Adı</label>
+                            <input type="text" id="userName" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>E-posta</label>
+                            <input type="email" id="userEmail" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Şifre</label>
+                            <input type="password" id="userPassword">
+                        </div>
+                        <div class="form-group required half">
+                            <label>Rol</label>
+                            <select id="userRole" required>
+                                <option value="admin">Admin</option>
+                                <option value="editor">Editor</option>
+                                <option value="viewer">Viewer</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label>Durum</label>
+                            <select id="userStatus">
+                                <option value="active">Aktif</option>
+                                <option value="inactive">Pasif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Image Modal -->
+    <div class="modal" id="editImageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Resim Bilgilerini Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('editImageModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editImageForm">
+                    <input type="hidden" id="editImageId">
+                    <div class="form-group required">
+                        <label>Resim Adı</label>
+                        <input type="text" id="editImageName" required>
+                    </div>
+                    <div class="form-group required">
+                        <label>Resim URL</label>
+                        <input type="url" id="editImageUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Resim Önizleme</label>
+                        <img id="editImagePreview" src="" alt="Preview" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e9ecef;">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('editImageModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Replace Image Modal -->
+    <div class="modal" id="replaceImageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Resmi Değiştir</h3>
+                <button class="close-modal" onclick="closeModal('replaceImageModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="replaceImageId">
+                <div class="form-group">
+                    <label>Mevcut Resim</label>
+                    <img id="replaceImageCurrent" src="" alt="Current" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e9ecef;">
+                </div>
+                <div class="form-group required">
+                    <label>Yeni Resim Seç</label>
+                    <input type="file" id="replaceImageFile" accept="image/*" required onchange="handleImageReplace(event)">
+                </div>
+                <div class="form-group">
+                    <label>Yeni Resim Önizleme</label>
+                    <img id="replaceImagePreview" src="" alt="Preview" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #e9ecef; display: none;">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" onclick="confirmImageReplace()">
+                        <i class="fas fa-sync-alt"></i> Değiştir
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('replaceImageModal')">
+                        <i class="fas fa-times"></i> İptal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Modal -->
+    <div class="modal" id="cardModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Kart Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('cardModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="cardForm">
+                    <input type="hidden" id="cardId">
+                    <div class="form-grid">
+                        <div class="form-group required half">
+                            <label>Kart Başlığı</label>
+                            <input type="text" id="cardTitle" required>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Sayfa</label>
+                            <select id="cardPage" required>
+                                <option value="">Sayfa Seçin</option>
+                                <option value="index.html">index.html</option>
+                                <option value="biz-kimiz.html">biz-kimiz.html</option>
+                                <option value="biz-kimiz-new.html">biz-kimiz-new.html</option>
+                                <option value="projeler.html">projeler.html</option>
+                                <option value="nef-kesifleri.html">nef-kesifleri.html</option>
+                                <option value="nef-kesifleri-new.html">nef-kesifleri-new.html</option>
+                                <option value="iletisim.html">iletisim.html</option>
+                                <option value="iletisim-new.html">iletisim-new.html</option>
+                            </select>
+                        </div>
+                        <div class="form-group required half">
+                            <label>Sıra</label>
+                            <input type="number" id="cardOrder" min="1">
+                        </div>
+                        <div class="form-group half">
+                            <label>Durum</label>
+                            <select id="cardStatus">
+                                <option value="">Yok</option>
+                                <option value="Yaşam Başladı">Yaşam Başladı</option>
+                                <option value="Satışta">Satışta</option>
+                                <option value="İnşaat Devam Ediyor">İnşaat Devam Ediyor</option>
+                                <option value="Tamamlandı">Tamamlandı</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Açıklama</label>
+                            <textarea id="cardDescription"></textarea>
+                        </div>
+                        <div class="form-group full">
+                            <label>Resim URL</label>
+                            <input type="url" id="cardImage" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <div class="form-group full">
+                            <label>Özellikler</label>
+                            <input type="text" id="cardFeatures" placeholder="Özellik1, Özellik2, Özellik3">
+                        </div>
+                        <div class="form-group half">
+                            <label>Fiyat</label>
+                            <input type="text" id="cardPrice" placeholder="₺500.000 - ₺1.000.000">
+                        </div>
+                        <div class="form-group half">
+                            <label>Link</label>
+                            <input type="url" id="cardLink" placeholder="#">
+                        </div>
+                        <div class="form-group half">
+                            <label>Buton Metni</label>
+                            <input type="text" id="cardButtonText" value="Keşfet">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Kaydet
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('cardModal')">
+                            <i class="fas fa-times"></i> İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-data-enhanced.js"></script>
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'admin-login.html';
+        }
+
+        // Set username and avatar
+        const username = localStorage.getItem('adminUsername') || 'Admin';
+        document.getElementById('username').textContent = username;
+        document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
+
+        // Navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.dataset.section;
+                showSection(section);
+                
+                // Update active menu
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function showSection(sectionName) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Update page title and breadcrumb
+            const titles = {
+                dashboard: 'Dashboard',
+                navigation: 'Navigasyon Yönetimi',
+                pages: 'Sayfa Yönetimi',
+                sections: 'Sayfa Bölümleri',
+                projects: 'Proje Yönetimi',
+                images: 'Resim Yönetimi',
+                content: 'İçerik Editörü',
+                settings: 'Site Ayarları',
+                users: 'Kullanıcı Yönetimi'
+            };
+            
+            document.getElementById('pageTitle').innerHTML = `<i class="fas fa-${getIconForSection(sectionName)}"></i> ${titles[sectionName]}`;
+            document.getElementById('breadcrumbItem').textContent = titles[sectionName];
+            
+            // Load section data
+            loadSectionData(sectionName);
+        }
+
+        function getIconForSection(section) {
+            const icons = {
+                dashboard: 'tachometer-alt',
+                navigation: 'bars',
+                pages: 'file',
+                sections: 'th-large',
+                projects: 'building',
+                images: 'images',
+                content: 'edit',
+                settings: 'cog',
+                users: 'users'
+            };
+            return icons[section] || 'file';
+        }
+
+        function loadSectionData(sectionName) {
+            switch(sectionName) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'navigation':
+                    loadNavigationItems();
+                    break;
+                case 'pages':
+                    loadPages();
+                    break;
+                case 'sections':
+                    loadSections();
+                    break;
+                case 'cards':
+                    loadCards();
+                    break;
+                case 'projects':
+                    loadProjects();
+                    break;
+                case 'images':
+                    loadImages();
+                    break;
+            }
+        }
+
+        function loadDashboard() {
+            const data = window.NEFAdminEnhanced.getDashboardStats();
+            document.getElementById('pagesCount').textContent = data.pages;
+            document.getElementById('projectsCount').textContent = data.projects;
+            document.getElementById('imagesCount').textContent = data.images;
+            document.getElementById('sectionsCount').textContent = data.sections;
+        }
+
+        function loadNavigationItems() {
+            const navItems = window.NEFAdminEnhanced.getNavigationItems();
+            const container = document.getElementById('navItems');
+            container.innerHTML = '';
+            
+            navItems.forEach(item => {
+                const navDiv = document.createElement('div');
+                navDiv.className = 'section-item';
+                navDiv.innerHTML = `
+                    <div class="section-header-info">
+                        <div class="section-title-info">
+                            <div class="section-name">${item.name}</div>
+                            <div class="section-type">${item.url} • Sıra: ${item.order}</div>
+                        </div>
+                        <div class="table-actions">
+                            <button class="action-btn edit-btn" onclick="editNav(${item.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteNav(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    ${item.subItems && item.subItems.length > 0 ? `
+                        <div style="margin-left: 2rem; margin-top: 1rem;">
+                            ${item.subItems.map(sub => `
+                                <div style="padding: 0.5rem; background: #f8f9fa; border-radius: 5px; margin-bottom: 0.3rem;">
+                                    ${sub.name} - ${sub.url}
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                `;
+                container.appendChild(navDiv);
+            });
+        }
+
+        function loadPages() {
+            const pages = window.NEFAdminEnhanced.getPages();
+            const tbody = document.getElementById('pagesTableBody');
+            tbody.innerHTML = '';
+            
+            pages.forEach(page => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${page.title}</td>
+                    <td>${page.file}</td>
+                    <td><span class="status-badge ${page.active ? 'active' : 'inactive'}">${page.active ? 'Aktif' : 'Pasif'}</span></td>
+                    <td>${page.updated}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="action-btn view-btn" onclick="viewPage('${page.file}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" onclick="editPage('${page.file}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deletePage('${page.file}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function loadSections() {
+            const sections = window.NEFAdminEnhanced.getSections();
+            const container = document.getElementById('sectionsList');
+            container.innerHTML = '';
+            
+            sections.forEach(section => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section-item';
+                sectionDiv.innerHTML = `
+                    <div class="section-header-info">
+                        <div class="section-title-info">
+                            <div class="section-name">${section.name}</div>
+                            <div class="section-type">${section.page} • ${section.type} • Sıra: ${section.order}</div>
+                        </div>
+                        <div class="table-actions">
+                            <button class="action-btn view-btn" onclick="viewSection(${section.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" onclick="editSection(${section.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteSection(${section.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    ${section.title ? `<div style="font-weight: 500; margin: 0.5rem 0;">${section.title}</div>` : ''}
+                    ${section.subtitle ? `<div style="color: #7f8c8d; margin-bottom: 0.5rem;">${section.subtitle}</div>` : ''}
+                    <div class="section-preview">${section.content || 'İçerik yok'}</div>
+                `;
+                container.appendChild(sectionDiv);
+            });
+        }
+
+        function loadProjects() {
+            const projects = window.NEFAdminEnhanced.getProjects();
+            const tbody = document.getElementById('projectsTableBody');
+            tbody.innerHTML = '';
+            
+            projects.forEach(project => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${project.name}</td>
+                    <td>${project.category}</td>
+                    <td>${project.location}</td>
+                    <td><span class="status-badge active">${project.status}</span></td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="action-btn view-btn" onclick="viewProject(${project.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" onclick="editProject(${project.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteProject(${project.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function loadCards() {
+            const cards = window.NEFAdminEnhanced.getCardContents();
+            const container = document.getElementById('cardsList');
+            container.innerHTML = '';
+            
+            cards.forEach(card => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'section-item';
+                cardDiv.innerHTML = `
+                    <div class="section-header-info">
+                        <div class="section-title-info">
+                            <div class="section-name">${card.title}</div>
+                            <div class="section-type">${card.page} • Sıra: ${card.order} ${card.status ? '• ' + card.status : ''}</div>
+                        </div>
+                        <div class="table-actions">
+                            <button class="action-btn view-btn" onclick="viewCard(${card.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" onclick="editCard(${card.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteCard(${card.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div style="background: #f8f9fa; border-radius: 8px; overflow: hidden; height: 120px;">
+                            <img src="${card.image}" alt="${card.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/200x120/34495e/ffffff?text=No+Image'">
+                        </div>
+                        <div>
+                            <div style="font-weight: 500; margin-bottom: 0.5rem;">${card.description}</div>
+                            ${card.features ? `<div style="font-size: 0.8rem; color: #7f8c8d; margin-bottom: 0.5rem;">Özellikler: ${card.features}</div>` : ''}
+                            ${card.price ? `<div style="font-weight: 600; color: #27ae60; margin-bottom: 0.5rem;">${card.price}</div>` : ''}
+                            ${card.link ? `<div style="font-size: 0.8rem; color: #3498db;">Link: ${card.link}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardDiv);
+            });
+        }
+
+        function loadImages() {
+            const images = window.NEFAdminEnhanced.getImages();
+            const grid = document.getElementById('imagesGrid');
+            grid.innerHTML = '';
+            
+            images.forEach(image => {
+                const div = document.createElement('div');
+                div.className = 'image-card';
+                div.innerHTML = `
+                    <div class="image-preview">
+                        <img src="${image.url}" alt="${image.name}" onerror="this.src='https://via.placeholder.com/200x150/34495e/ffffff?text=Error'">
+                        <div class="image-actions">
+                            <button class="image-action-btn copy" onclick="copyImageUrl('${image.url}')" title="URL Kopyala">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="image-action-btn edit" onclick="editImage(${image.id})" title="Düzenle">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="image-action-btn replace" onclick="replaceImage(${image.id})" title="Değiştir">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="image-action-btn delete" onclick="deleteImage(${image.id})" title="Sil">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="image-info">
+                        <div class="image-name">${image.name}</div>
+                        <div class="image-size">${image.size || 'Bilinmiyor'}</div>
+                    </div>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Modal functions
+        function openNavModal() {
+            document.getElementById('navModal').classList.add('active');
+            document.getElementById('navForm').reset();
+        }
+
+        function openSectionModal() {
+            document.getElementById('sectionModal').classList.add('active');
+            document.getElementById('sectionForm').reset();
+        }
+
+        function openPageModal() {
+            document.getElementById('pageModal').classList.add('active');
+            document.getElementById('pageForm').reset();
+        }
+
+        function openProjectModal() {
+            document.getElementById('projectModal').classList.add('active');
+            document.getElementById('projectForm').reset();
+        }
+
+        function openImageUrlModal() {
+            document.getElementById('imageUrlModal').classList.add('active');
+            document.getElementById('imageUrlForm').reset();
+        }
+
+        function openUserModal() {
+            document.getElementById('userModal').classList.add('active');
+            document.getElementById('userForm').reset();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Form submissions
+        document.getElementById('navForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('navName').value,
+                url: document.getElementById('navUrl').value,
+                order: document.getElementById('navOrder').value,
+                active: document.getElementById('navActive').value === 'true',
+                icon: document.getElementById('navIcon').value,
+                target: document.getElementById('navTarget').value
+            };
+            
+            window.NEFAdminEnhanced.saveNavigationItem(formData);
+            closeModal('navModal');
+            loadNavigationItems();
+            showToast('Menü öğesi kaydedildi', 'success');
+        });
+
+        document.getElementById('sectionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('sectionName').value,
+                page: document.getElementById('sectionPage').value,
+                type: document.getElementById('sectionType').value,
+                order: document.getElementById('sectionOrder').value,
+                title: document.getElementById('sectionTitle').value,
+                subtitle: document.getElementById('sectionSubtitle').value,
+                content: document.getElementById('sectionContent').value,
+                bgImage: document.getElementById('sectionBgImage').value,
+                bgColor: document.getElementById('sectionBgColor').value
+            };
+            
+            window.NEFAdminEnhanced.saveSection(formData);
+            closeModal('sectionModal');
+            loadSections();
+            showToast('Bölüm kaydedildi', 'success');
+        });
+
+        document.getElementById('pageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                title: document.getElementById('pageTitle').value,
+                file: document.getElementById('pageFile').value,
+                description: document.getElementById('pageDescription').value,
+                keywords: document.getElementById('pageKeywords').value,
+                template: document.getElementById('pageTemplate').value,
+                status: document.getElementById('pageStatus').value
+            };
+            
+            window.NEFAdminEnhanced.savePage(formData);
+            closeModal('pageModal');
+            loadPages();
+            showToast('Sayfa kaydedildi', 'success');
+        });
+
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('projectName').value,
+                category: document.getElementById('projectCategory').value,
+                location: document.getElementById('projectLocation').value,
+                status: document.getElementById('projectStatus').value,
+                description: document.getElementById('projectDescription').value,
+                features: document.getElementById('projectFeatures').value,
+                image: document.getElementById('projectImage').value,
+                gallery: document.getElementById('projectGallery').value,
+                price: document.getElementById('projectPrice').value,
+                delivery: document.getElementById('projectDelivery').value
+            };
+            
+            window.NEFAdminEnhanced.saveProject(formData);
+            closeModal('projectModal');
+            loadProjects();
+            showToast('Proje kaydedildi', 'success');
+        });
+
+        document.getElementById('imageUrlForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('imageUrl').value;
+            const name = document.getElementById('imageName').value || 'URL Image';
+            
+            window.NEFAdminEnhanced.saveImage({ name, url });
+            closeModal('imageUrlModal');
+            loadImages();
+            showToast('Resim eklendi', 'success');
+        });
+
+        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const settings = {
+                siteTitle: document.getElementById('siteTitle').value,
+                siteDescription: document.getElementById('siteDescription').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                contactAddress: document.getElementById('contactAddress').value,
+                googleAnalytics: document.getElementById('googleAnalytics').value,
+                metaKeywords: document.getElementById('metaKeywords').value,
+                faviconUrl: document.getElementById('faviconUrl').value
+            };
+            
+            window.NEFAdminEnhanced.saveSettings(settings);
+            showToast('Ayarlar kaydedildi', 'success');
+        });
+
+        // Image upload
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            let uploadedCount = 0;
+            let errorCount = 0;
+            
+            for (let file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageData = {
+                            name: file.name,
+                            url: e.target.result,
+                            size: formatFileSize(file.size),
+                            type: file.type,
+                            uploadDate: new Date().toISOString()
+                        };
+                        window.NEFAdminEnhanced.saveImage(imageData);
+                        uploadedCount++;
+                        
+                        if (uploadedCount + errorCount === files.length) {
+                            loadImages();
+                            if (uploadedCount > 0) {
+                                showToast(`${uploadedCount} resim başarıyla yüklendi`, 'success');
+                            }
+                            if (errorCount > 0) {
+                                showToast(`${errorCount} resim yüklenemedi`, 'error');
+                            }
+                        }
+                    };
+                    reader.onerror = function() {
+                        errorCount++;
+                        if (uploadedCount + errorCount === files.length) {
+                            showToast(`${errorCount} resim yüklenemedi`, 'error');
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    errorCount++;
+                    if (uploadedCount + errorCount === files.length) {
+                        showToast(`${errorCount} dosya resim formatında değil`, 'error');
+                    }
+                }
+            }
+            
+            // Clear file input
+            event.target.value = '';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function copyImageUrl(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('URL kopyalandı', 'success');
+            });
+        }
+
+        // Content Editor
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab + 'Tab').classList.add('active');
+            
+            if (tab === 'preview') {
+                document.getElementById('previewContent').innerHTML = document.getElementById('editorContent').innerHTML;
+            } else if (tab === 'html') {
+                document.getElementById('htmlContent').value = document.getElementById('editorContent').innerHTML;
+            }
+        }
+
+        function formatText(command) {
+            document.execCommand(command, false, null);
+            document.getElementById('editorContent').focus();
+        }
+
+        function insertLink() {
+            const url = prompt('Link URL:');
+            if (url) {
+                document.execCommand('createLink', false, url);
+            }
+        }
+
+        function insertImage() {
+            const url = prompt('Resim URL:');
+            if (url) {
+                document.execCommand('insertImage', false, url);
+            }
+        }
+
+        function saveContent() {
+            const content = document.getElementById('editorContent').innerHTML;
+            // Save content logic here
+            showToast('İçerik kaydedildi', 'success');
+        }
+
+        function clearEditor() {
+            if (confirm('İçeriği temizlemek istediğinizden emin misiniz?')) {
+                document.getElementById('editorContent').innerHTML = '';
+            }
+        }
+
+        // Delete functions
+        function deleteNav(id) {
+            if (confirm('Bu menü öğesini silmek istediğinizden emin misiniz?')) {
+                window.NEFAdminEnhanced.deleteNavigationItem(id);
+                loadNavigationItems();
+                showToast('Menü öğesi silindi', 'info');
+            }
+        }
+
+        function deletePage(file) {
+            if (confirm('Bu sayfayı silmek istediğinizden emin misiniz?')) {
+                window.NEFAdminEnhanced.deletePageItem(file);
+                loadPages();
+                showToast('Sayfa silindi', 'info');
+            }
+        }
+
+        function deleteSection(id) {
+            if (confirm('Bu bölümü silmek istediğinizden emin misiniz?')) {
+                window.NEFAdminEnhanced.deleteSection(id);
+                loadSections();
+                showToast('Bölüm silindi', 'info');
+            }
+        }
+
+        function deleteProject(id) {
+            if (confirm('Bu projeyi silmek istediğinizden emin misiniz?')) {
+                window.NEFAdminEnhanced.deleteProjectItem(id);
+                loadProjects();
+                showToast('Proje silindi', 'info');
+            }
+        }
+
+        function deleteImage(id) {
+            if (confirm('Bu resmi silmek istediğinizden emin misiniz?')) {
+                window.NEFAdminEnhanced.deleteImageItem(id);
+                loadImages();
+                showToast('Resim silindi', 'info');
+            }
+        }
+
+        function editImage(id) {
+            const image = window.NEFAdminEnhanced.getImageById(id);
+            if (image) {
+                document.getElementById('editImageId').value = id;
+                document.getElementById('editImageName').value = image.name;
+                document.getElementById('editImageUrl').value = image.url;
+                document.getElementById('editImageModal').classList.add('active');
+            }
+        }
+
+        function replaceImage(id) {
+            const image = window.NEFAdminEnhanced.getImageById(id);
+            if (image) {
+                document.getElementById('replaceImageId').value = id;
+                document.getElementById('replaceImageCurrent').src = image.url;
+                document.getElementById('replaceImageModal').classList.add('active');
+            }
+        }
+
+        function handleImageReplace(event) {
+            const file = event.target.files[0];
+            const imageId = document.getElementById('replaceImageId').value;
+            
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = {
+                        id: parseInt(imageId),
+                        url: e.target.result,
+                        name: file.name,
+                        size: formatFileSize(file.size),
+                        type: file.type,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    window.NEFAdminEnhanced.updateImage(imageData);
+                    closeModal('replaceImageModal');
+                    loadImages();
+                    showToast('Resim başarıyla güncellendi', 'success');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showToast('Lütfen geçerli bir resim dosyası seçin', 'error');
+            }
+        }
+
+        // View functions
+        function viewPage(file) {
+            window.open(file, '_blank');
+        }
+
+        function viewSection(id) {
+            const section = window.NEFAdminEnhanced.getSectionById(id);
+            if (section) {
+                alert(`Bölüm: ${section.name}\nSayfa: ${section.page}\nTip: ${section.type}\n\n${section.content}`);
+            }
+        }
+
+        function viewProject(id) {
+            const project = window.NEFAdminEnhanced.getProjectById(id);
+            if (project) {
+                alert(`Proje: ${project.name}\nKategori: ${project.category}\nLokasyon: ${project.location}\nDurum: ${project.status}\n\n${project.description}`);
+            }
+        }
+
+        // Edit functions
+        function editNav(id) {
+            const item = window.NEFAdminEnhanced.getNavigationItemById(id);
+            if (item) {
+                document.getElementById('navName').value = item.name;
+                document.getElementById('navUrl').value = item.url;
+                document.getElementById('navOrder').value = item.order;
+                document.getElementById('navActive').value = item.active.toString();
+                document.getElementById('navIcon').value = item.icon || '';
+                document.getElementById('navTarget').value = item.target || '_self';
+                document.getElementById('navModal').classList.add('active');
+            }
+        }
+
+        function editSection(id) {
+            const section = window.NEFAdminEnhanced.getSectionById(id);
+            if (section) {
+                document.getElementById('sectionName').value = section.name;
+                document.getElementById('sectionPage').value = section.page;
+                document.getElementById('sectionType').value = section.type;
+                document.getElementById('sectionOrder').value = section.order;
+                document.getElementById('sectionTitle').value = section.title || '';
+                document.getElementById('sectionSubtitle').value = section.subtitle || '';
+                document.getElementById('sectionContent').value = section.content || '';
+                document.getElementById('sectionBgImage').value = section.bgImage || '';
+                document.getElementById('sectionBgColor').value = section.bgColor || '#ffffff';
+                document.getElementById('sectionModal').classList.add('active');
+            }
+        }
+
+        function editPage(file) {
+            const page = window.NEFAdminEnhanced.getPageByFile(file);
+            if (page) {
+                document.getElementById('pageTitle').value = page.title;
+                document.getElementById('pageFile').value = page.file;
+                document.getElementById('pageDescription').value = page.description || '';
+                document.getElementById('pageKeywords').value = page.keywords || '';
+                document.getElementById('pageTemplate').value = page.template || 'default';
+                document.getElementById('pageStatus').value = page.status || 'active';
+                document.getElementById('pageModal').classList.add('active');
+            }
+        }
+
+        function editProject(id) {
+            const project = window.NEFAdminEnhanced.getProjectById(id);
+            if (project) {
+                document.getElementById('projectName').value = project.name;
+                document.getElementById('projectCategory').value = project.category;
+                document.getElementById('projectLocation').value = project.location;
+                document.getElementById('projectStatus').value = project.status;
+                document.getElementById('projectDescription').value = project.description || '';
+                document.getElementById('projectFeatures').value = project.features || '';
+                document.getElementById('projectImage').value = project.image || '';
+                document.getElementById('projectGallery').value = project.gallery || '';
+                document.getElementById('projectPrice').value = project.price || '';
+                document.getElementById('projectDelivery').value = project.delivery || '';
+                document.getElementById('projectModal').classList.add('active');
+            }
+        }
+
+        // Search and Filter
+        document.getElementById('pageSearch')?.addEventListener('input', function(e) {
+            filterTable('pagesTableBody', e.target.value);
+        });
+
+        document.getElementById('sectionSearch')?.addEventListener('input', function(e) {
+            filterSections(e.target.value);
+        });
+
+        document.getElementById('projectSearch')?.addEventListener('input', function(e) {
+            filterTable('projectsTableBody', e.target.value);
+        });
+
+        document.getElementById('imageSearch')?.addEventListener('input', function(e) {
+            filterImages(e.target.value);
+        });
+
+        function filterTable(tbodyId, searchTerm) {
+            const tbody = document.getElementById(tbodyId);
+            const rows = tbody.getElementsByTagName('tr');
+            
+            Array.from(rows).forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        function filterSections(searchTerm) {
+            const sections = document.querySelectorAll('#sectionsList .section-item');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                section.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        function filterImages(searchTerm) {
+            const images = document.querySelectorAll('#imagesGrid .image-card');
+            
+            images.forEach(image => {
+                const text = image.textContent.toLowerCase();
+                image.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} toast-icon"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Card form submission
+        document.getElementById('cardForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                title: document.getElementById('cardTitle').value,
+                page: document.getElementById('cardPage').value,
+                order: document.getElementById('cardOrder').value || 1,
+                status: document.getElementById('cardStatus').value,
+                description: document.getElementById('cardDescription').value,
+                image: document.getElementById('cardImage').value,
+                features: document.getElementById('cardFeatures').value,
+                price: document.getElementById('cardPrice').value,
+                link: document.getElementById('cardLink').value,
+                buttonText: document.getElementById('cardButtonText').value
+            };
+            
+            window.NEFAdminEnhanced.saveCard(formData);
+            closeModal('cardModal');
+            loadCards();
+            showToast('Kart kaydedildi', 'success');
+        });
+
+        // Card management functions
+        function openCardModal() {
+            document.getElementById('cardModal').classList.add('active');
+            document.getElementById('cardForm').reset();
+        }
+
+        function viewCard(id) {
+            const card = window.NEFAdminEnhanced.getCardById(id);
+            if (card) {
+                alert(`Kart: ${card.title}\nSayfa: ${card.page}\nAçıklama: ${card.description}\nÖzellikler: ${card.features || 'Yok'}\nFiyat: ${card.price || 'Belirtilmemiş'}\nLink: ${card.link || '#'}`);
+            }
+        }
+
+        function editCard(id) {
+            const card = window.NEFAdminEnhanced.getCardById(id);
+            if (card) {
+                document.getElementById('cardId').value = card.id;
+                document.getElementById('cardTitle').value = card.title;
+                document.getElementById('cardPage').value = card.page;
+                document.getElementById('cardOrder').value = card.order;
+                document.getElementById('cardStatus').value = card.status || '';
+                document.getElementById('cardDescription').value = card.description || '';
+                document.getElementById('cardImage').value = card.image || '';
+                document.getElementById('cardFeatures').value = card.features || '';
+                document.getElementById('cardPrice').value = card.price || '';
+                document.getElementById('cardLink').value = card.link || '';
+                document.getElementById('cardButtonText').value = card.buttonText || 'Keşfet';
+                document.getElementById('cardModal').classList.add('active');
+            }
+        }
+
+        function deleteCard(id) {
+            if (confirm('Bu kartı silmek istediğinizden emin misiniz?')) {
+                window.NEFAdminEnhanced.deleteCard(id);
+                loadCards();
+                showToast('Kart silindi', 'info');
+            }
+        }
+
+        // Edit image form submission
+        document.getElementById('editImageForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const imageData = {
+                id: parseInt(document.getElementById('editImageId').value),
+                name: document.getElementById('editImageName').value,
+                url: document.getElementById('editImageUrl').value
+            };
+            
+            window.NEFAdminEnhanced.updateImage(imageData);
+            closeModal('editImageModal');
+            loadImages();
+            showToast('Resim bilgileri güncellendi', 'success');
+        });
+
+        // Update edit image preview
+        document.getElementById('editImageUrl')?.addEventListener('input', function(e) {
+            document.getElementById('editImagePreview').src = e.target.value;
+        });
+
+        // Logout
+        function logout() {
+            if (confirm('Çıkış yapmak istediğinizden emin misiniz?')) {
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminUsername');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Initialize
+        loadSectionData('dashboard');
+    </script>
+</body>
+</html>

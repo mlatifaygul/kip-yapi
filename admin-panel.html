@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - NEF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: #fff;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1rem;
+            border-bottom: 1px solid #34495e;
+            text-align: center;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: #34495e;
+            color: #3498db;
+            border-left-color: #3498db;
+        }
+
+        .menu-item.active {
+            background: #34495e;
+            color: #3498db;
+            border-left-color: #3498db;
+        }
+
+        .menu-item i {
+            width: 20px;
+            margin-right: 0.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .top-bar {
+            background: #fff;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .add-btn {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.3rem 0.6rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background: #2980b9;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Navigation Items */
+        .nav-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .nav-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .nav-item-url {
+            color: #3498db;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .sub-nav-items {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .sub-nav-item {
+            padding: 0.5rem;
+            background: #fff;
+            border-radius: 3px;
+            margin-bottom: 0.3rem;
+            border: 1px solid #e9ecef;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #95a5a6;
+        }
+
+        .close-modal:hover {
+            color: #2c3e50;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 5px;
+            color: #fff;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: #27ae60;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+
+        .toast.info {
+            background: #3498db;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-table {
+                font-size: 0.8rem;
+            }
+
+            .table-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>NEF ADMIN</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#" class="menu-item" data-section="navigation">
+                    <i class="fas fa-bars"></i> Navigasyon
+                </a>
+                <a href="#" class="menu-item" data-section="pages">
+                    <i class="fas fa-file"></i> Sayfalar
+                </a>
+                <a href="#" class="menu-item" data-section="projects">
+                    <i class="fas fa-building"></i> Projeler
+                </a>
+                <a href="#" class="menu-item" data-section="images">
+                    <i class="fas fa-images"></i> Resim Yönetimi
+                </a>
+                <a href="#" class="menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Ayarlar
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <span id="username">Admin</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Çıkış
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard">
+                <div class="section-header">
+                    <h2 class="section-title">Dashboard</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: #3498db; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">5</h3>
+                        <p>Sayfalar</p>
+                    </div>
+                    <div style="background: #27ae60; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">12</h3>
+                        <p>Projeler</p>
+                    </div>
+                    <div style="background: #e74c3c; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">8</h3>
+                        <p>Resimler</p>
+                    </div>
+                    <div style="background: #f39c12; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">4</h3>
+                        <p>Menü Öğeleri</p>
+                    </div>
+                </div>
+                <div style="background: #fff; padding: 1.5rem; border-radius: 10px; border: 2px solid #e9ecef;">
+                    <h3 style="margin-bottom: 1rem; color: #2c3e50;">Hızlı İşlemler</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="showSection('navigation')">
+                            <i class="fas fa-bars"></i> Navigasyon Düzenle
+                        </button>
+                        <button class="btn btn-primary" onclick="showSection('pages')">
+                            <i class="fas fa-file"></i> Sayfa Ekle
+                        </button>
+                        <button class="btn btn-primary" onclick="showSection('projects')">
+                            <i class="fas fa-building"></i> Proje Ekle
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Section -->
+            <section class="content-section" id="navigation">
+                <div class="section-header">
+                    <h2 class="section-title">Navigasyon Yönetimi</h2>
+                    <button class="add-btn" onclick="openNavModal()">
+                        <i class="fas fa-plus"></i> Menü Öğesi Ekle
+                    </button>
+                </div>
+                <div id="navItems"></div>
+            </section>
+
+            <!-- Pages Section -->
+            <section class="content-section" id="pages">
+                <div class="section-header">
+                    <h2 class="section-title">Sayfa Yönetimi</h2>
+                    <button class="add-btn" onclick="openPageModal()">
+                        <i class="fas fa-plus"></i> Yeni Sayfa
+                    </button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Sayfa Adı</th>
+                            <th>Dosya Adı</th>
+                            <th>Durum</th>
+                            <th>Güncelleme</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pagesTableBody">
+                        <tr>
+                            <td>Ana Sayfa</td>
+                            <td>index.html</td>
+                            <td><span style="color: #27ae60;">Aktif</span></td>
+                            <td>2024-05-10</td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="action-btn edit-btn" onclick="editPage('index.html')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" onclick="deletePage('index.html')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="content-section" id="projects">
+                <div class="section-header">
+                    <h2 class="section-title">Proje Yönetimi</h2>
+                    <button class="add-btn" onclick="openProjectModal()">
+                        <i class="fas fa-plus"></i> Yeni Proje
+                    </button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Proje Adı</th>
+                            <th>Kategori</th>
+                            <th>Lokasyon</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTableBody">
+                        <tr>
+                            <td>Nef Sapanca</td>
+                            <td>Konut</td>
+                            <td>Sapanca</td>
+                            <td><span style="color: #27ae60;">Yaşam Başladı</span></td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="action-btn edit-btn" onclick="editProject(1)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" onclick="deleteProject(1)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Images Section -->
+            <section class="content-section" id="images">
+                <div class="section-header">
+                    <h2 class="section-title">Resim Yönetimi</h2>
+                    <button class="add-btn" onclick="document.getElementById('imageUpload').click()">
+                        <i class="fas fa-upload"></i> Resim Yükle
+                    </button>
+                    <input type="file" id="imageUpload" style="display: none;" accept="image/*" multiple onchange="handleImageUpload(event)">
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;" id="imagesGrid">
+                    <!-- Images will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="content-section" id="settings">
+                <div class="section-header">
+                    <h2 class="section-title">Site Ayarları</h2>
+                </div>
+                <form id="settingsForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Site Başlığı</label>
+                            <input type="text" id="siteTitle" value="NEF - İnce Düşünülmüş Yaşam Alanları">
+                        </div>
+                        <div class="form-group">
+                            <label>Site Açıklaması</label>
+                            <input type="text" id="siteDescription" value="2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.">
+                        </div>
+                        <div class="form-group">
+                            <label>İletişim E-posta</label>
+                            <input type="email" id="contactEmail" value="info@nef.com.tr">
+                        </div>
+                        <div class="form-group">
+                            <label>İletişim Telefon</label>
+                            <input type="tel" id="contactPhone" value="+90 212 555 00 00">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Navigation Modal -->
+    <div class="modal" id="navModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Menü Öğesi Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('navModal')">&times;</button>
+            </div>
+            <form id="navForm">
+                <div class="form-group">
+                    <label>Menü Adı</label>
+                    <input type="text" id="navName" required>
+                </div>
+                <div class="form-group">
+                    <label>URL</label>
+                    <input type="text" id="navUrl" required>
+                </div>
+                <div class="form-group">
+                    <label>Sıra</label>
+                    <input type="number" id="navOrder" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Aktif</label>
+                    <select id="navActive">
+                        <option value="true">Evet</option>
+                        <option value="false">Hayır</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('navModal')">İptal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page Modal -->
+    <div class="modal" id="pageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Sayfa Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('pageModal')">&times;</button>
+            </div>
+            <form id="pageForm">
+                <div class="form-group">
+                    <label>Sayfa Başlığı</label>
+                    <input type="text" id="pageTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Dosya Adı</label>
+                    <input type="text" id="pageFile" required>
+                </div>
+                <div class="form-group">
+                    <label>Meta Açıklaması</label>
+                    <textarea id="pageDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>İçerik</label>
+                    <textarea id="pageContent" rows="10"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('pageModal')">İptal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Proje Ekle/Düzenle</h3>
+                <button class="close-modal" onclick="closeModal('projectModal')">&times;</button>
+            </div>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label>Proje Adı</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="projectCategory">
+                        <option value="konut">Konut</option>
+                        <option value="arsa">Arsa</option>
+                        <option value="ticari">Ticari</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lokasyon</label>
+                    <input type="text" id="projectLocation" required>
+                </div>
+                <div class="form-group">
+                    <label>Durum</label>
+                    <select id="projectStatus">
+                        <option value="insaat">İnşaat Devam Ediyor</option>
+                        <option value="tamamlandi">Tamamlandı</option>
+                        <option value="yasam-basladi">Yaşam Başladı</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <textarea id="projectDescription"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">İptal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-data.js"></script>
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'admin-login.html';
+        }
+
+        // Set username
+        document.getElementById('username').textContent = localStorage.getItem('adminUsername') || 'Admin';
+
+        // Navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.dataset.section;
+                showSection(section);
+                
+                // Update active menu
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function showSection(sectionName) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+            document.getElementById('pageTitle').textContent = sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
+            
+            // Load section data
+            loadSectionData(sectionName);
+        }
+
+        function loadSectionData(sectionName) {
+            switch(sectionName) {
+                case 'navigation':
+                    loadNavigationItems();
+                    break;
+                case 'pages':
+                    loadPages();
+                    break;
+                case 'projects':
+                    loadProjects();
+                    break;
+                case 'images':
+                    loadImages();
+                    break;
+            }
+        }
+
+        function loadNavigationItems() {
+            const navItems = getNavigationItems();
+            const container = document.getElementById('navItems');
+            container.innerHTML = '';
+            
+            navItems.forEach(item => {
+                const navDiv = document.createElement('div');
+                navDiv.className = 'nav-item';
+                navDiv.innerHTML = `
+                    <div class="nav-item-header">
+                        <span class="nav-item-title">${item.name}</span>
+                        <div class="table-actions">
+                            <button class="action-btn edit-btn" onclick="editNav(${item.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteNav(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="nav-item-url">${item.url}</div>
+                    ${item.subItems && item.subItems.length > 0 ? `
+                        <div class="sub-nav-items">
+                            ${item.subItems.map(sub => `
+                                <div class="sub-nav-item">
+                                    ${sub.name} - ${sub.url}
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                `;
+                container.appendChild(navDiv);
+            });
+        }
+
+        function loadPages() {
+            const pages = getPages();
+            const tbody = document.getElementById('pagesTableBody');
+            tbody.innerHTML = '';
+            
+            pages.forEach(page => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${page.title}</td>
+                    <td>${page.file}</td>
+                    <td><span style="color: ${page.active ? '#27ae60' : '#e74c3c'};">${page.active ? 'Aktif' : 'Pasif'}</span></td>
+                    <td>${page.updated}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="action-btn edit-btn" onclick="editPage('${page.file}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deletePage('${page.file}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function loadProjects() {
+            const projects = getProjects();
+            const tbody = document.getElementById('projectsTableBody');
+            tbody.innerHTML = '';
+            
+            projects.forEach(project => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${project.name}</td>
+                    <td>${project.category}</td>
+                    <td>${project.location}</td>
+                    <td><span style="color: #27ae60;">${project.status}</span></td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="action-btn edit-btn" onclick="editProject(${project.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteProject(${project.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function loadImages() {
+            const images = getImages();
+            const grid = document.getElementById('imagesGrid');
+            grid.innerHTML = '';
+            
+            images.forEach(image => {
+                const div = document.createElement('div');
+                div.style.cssText = 'position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);';
+                div.innerHTML = `
+                    <img src="${image.url}" alt="${image.name}" style="width: 100%; height: 150px; object-fit: cover;">
+                    <div style="padding: 0.5rem; background: #fff;">
+                        <small>${image.name}</small>
+                    </div>
+                    <button class="action-btn delete-btn" style="position: absolute; top: 5px; right: 5px;" onclick="deleteImage(${image.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Modal functions
+        function openNavModal() {
+            document.getElementById('navModal').classList.add('active');
+            document.getElementById('navForm').reset();
+        }
+
+        function openPageModal() {
+            document.getElementById('pageModal').classList.add('active');
+            document.getElementById('pageForm').reset();
+        }
+
+        function openProjectModal() {
+            document.getElementById('projectModal').classList.add('active');
+            document.getElementById('projectForm').reset();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Form submissions
+        document.getElementById('navForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('navName').value,
+                url: document.getElementById('navUrl').value,
+                order: document.getElementById('navOrder').value,
+                active: document.getElementById('navActive').value === 'true'
+            };
+            
+            saveNavigationItem(formData);
+            closeModal('navModal');
+            loadNavigationItems();
+            showToast('Menü öğesi kaydedildi', 'success');
+        });
+
+        document.getElementById('pageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                title: document.getElementById('pageTitle').value,
+                file: document.getElementById('pageFile').value,
+                description: document.getElementById('pageDescription').value,
+                content: document.getElementById('pageContent').value
+            };
+            
+            savePage(formData);
+            closeModal('pageModal');
+            loadPages();
+            showToast('Sayfa kaydedildi', 'success');
+        });
+
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('projectName').value,
+                category: document.getElementById('projectCategory').value,
+                location: document.getElementById('projectLocation').value,
+                status: document.getElementById('projectStatus').value,
+                description: document.getElementById('projectDescription').value
+            };
+            
+            saveProject(formData);
+            closeModal('projectModal');
+            loadProjects();
+            showToast('Proje kaydedildi', 'success');
+        });
+
+        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const settings = {
+                siteTitle: document.getElementById('siteTitle').value,
+                siteDescription: document.getElementById('siteDescription').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                contactPhone: document.getElementById('contactPhone').value
+            };
+            
+            saveSettings(settings);
+            showToast('Ayarlar kaydedildi', 'success');
+        });
+
+        // Image upload
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            for (let file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imageData = {
+                            name: file.name,
+                            url: e.target.result
+                        };
+                        saveImage(imageData);
+                        loadImages();
+                        showToast('Resim yüklendi', 'success');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        // Delete functions
+        function deleteNav(id) {
+            if (confirm('Bu menü öğesini silmek istediğinizden emin misiniz?')) {
+                deleteNavigationItem(id);
+                loadNavigationItems();
+                showToast('Menü öğesi silindi', 'info');
+            }
+        }
+
+        function deletePage(file) {
+            if (confirm('Bu sayfayı silmek istediğinizden emin misiniz?')) {
+                deletePageItem(file);
+                loadPages();
+                showToast('Sayfa silindi', 'info');
+            }
+        }
+
+        function deleteProject(id) {
+            if (confirm('Bu projeyi silmek istediğinizden emin misiniz?')) {
+                deleteProjectItem(id);
+                loadProjects();
+                showToast('Proje silindi', 'info');
+            }
+        }
+
+        function deleteImage(id) {
+            if (confirm('Bu resmi silmek istediğinizden emin misiniz?')) {
+                deleteImageItem(id);
+                loadImages();
+                showToast('Resim silindi', 'info');
+            }
+        }
+
+        // Edit functions
+        function editNav(id) {
+            const item = getNavigationItemById(id);
+            if (item) {
+                document.getElementById('navName').value = item.name;
+                document.getElementById('navUrl').value = item.url;
+                document.getElementById('navOrder').value = item.order;
+                document.getElementById('navActive').value = item.active.toString();
+                document.getElementById('navModal').classList.add('active');
+            }
+        }
+
+        function editPage(file) {
+            const page = getPageByFile(file);
+            if (page) {
+                document.getElementById('pageTitle').value = page.title;
+                document.getElementById('pageFile').value = page.file;
+                document.getElementById('pageDescription').value = page.description;
+                document.getElementById('pageContent').value = page.content;
+                document.getElementById('pageModal').classList.add('active');
+            }
+        }
+
+        function editProject(id) {
+            const project = getProjectById(id);
+            if (project) {
+                document.getElementById('projectName').value = project.name;
+                document.getElementById('projectCategory').value = project.category;
+                document.getElementById('projectLocation').value = project.location;
+                document.getElementById('projectStatus').value = project.status;
+                document.getElementById('projectDescription').value = project.description;
+                document.getElementById('projectModal').classList.add('active');
+            }
+        }
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Çıkış yapmak istediğinizden emin misiniz?')) {
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminUsername');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Initialize
+        loadSectionData('dashboard');
+    </script>
+</body>
+</html>
