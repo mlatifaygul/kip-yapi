@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEF Admin Panel</title>
+    <title>İPEK Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -1317,7 +1317,7 @@
         <div class="sidebar-logo">
             <div class="logo-mark">N</div>
             <div>
-                <div class="logo-text">NEF Admin</div>
+                <div class="logo-text">İPEK Admin</div>
                 <div class="logo-sub">İçerik Yönetim Sistemi</div>
             </div>
         </div>
@@ -1469,7 +1469,7 @@
                                 <option value="index.html">Ana Sayfa</option>
                                 <option value="biz-kimiz.html">Biz Kimiz</option>
                                 <option value="projeler.html">Projeler</option>
-                                <option value="nef-kesifleri.html">Nef Keşifleri</option>
+                                <option value="ipek-kesifleri.html">İpek Keşifleri</option>
                                 <option value="iletisim.html">İletişim</option>
                             </select>
                             <button class="btn btn-primary btn-sm" onclick="openCardModal()"><i class="fas fa-plus"></i>
@@ -1593,7 +1593,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Meta Keywords</label>
                                     <input class="form-control" type="text" id="metaKeywords"
-                                        placeholder="nef, inşaat, konut">
+                                        placeholder="ipek, inşaat, konut">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Favicon URL</label>
@@ -1758,7 +1758,7 @@
                             <option value="index.html">Ana Sayfa</option>
                             <option value="biz-kimiz.html">Biz Kimiz</option>
                             <option value="projeler.html">Projeler</option>
-                            <option value="nef-kesifleri.html">Nef Keşifleri</option>
+                            <option value="ipek-kesifleri.html">İpek Keşifleri</option>
                             <option value="iletisim.html">İletişim</option>
                         </select>
                     </div>
@@ -2013,13 +2013,13 @@
         // DATA LAYER (localStorage)
         // ===========================
         const KEYS = {
-            nav: 'nef_navigation',
-            pages: 'nef_pages',
-            projects: 'nef_projects',
-            images: 'nef_images',
-            settings: 'nef_settings',
-            cards: 'nef_cards',
-            activities: 'nef_activities'
+            nav: 'ipek_navigation',
+            pages: 'ipek_pages',
+            projects: 'ipek_projects',
+            images: 'ipek_images',
+            settings: 'ipek_settings',
+            cards: 'ipek_cards',
+            activities: 'ipek_activities'
         };
 
         function getData(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
@@ -2037,49 +2037,49 @@
                 },
                 {
                     id: 3, name: 'Projeler', url: 'projeler.html', order: 3, active: true, subItems: [
-                        { id: 31, name: 'Nef Reserve', url: 'projeler.html' },
-                        { id: 32, name: 'Nef Projeler', url: 'projeler.html' },
-                        { id: 33, name: 'Nef Arsa', url: 'projeler.html' },
-                        { id: 34, name: 'Nef Global', url: 'projeler.html' },
+                        { id: 31, name: 'İpek Reserve', url: 'projeler.html' },
+                        { id: 32, name: 'İpek Projeler', url: 'projeler.html' },
+                        { id: 33, name: 'İpek Arsa', url: 'projeler.html' },
+                        { id: 34, name: 'İpek Global', url: 'projeler.html' },
                         { id: 35, name: 'NOVU', url: 'projeler.html' },
                         { id: 36, name: 'Tümünü Gör', url: 'projeler.html' }
                     ]
                 },
-                { id: 4, name: 'Nef Keşifleri', url: 'nef-kesifleri.html', order: 4, active: true, subItems: [] },
+                { id: 4, name: 'İpek Keşifleri', url: 'ipek-kesifleri.html', order: 4, active: true, subItems: [] },
                 { id: 5, name: 'İletişim', url: 'iletisim.html', order: 5, active: true, subItems: [] }
             ]);
             if (!getData(KEYS.pages)) setData(KEYS.pages, [
-                { file: 'index.html', title: 'Ana Sayfa', description: 'NEF - İnce Düşünülmüş Yaşam Alanları', keywords: 'nef,inşaat,konut', active: true, updated: today() },
-                { file: 'biz-kimiz.html', title: 'Biz Kimiz', description: 'NEF Hakkımızda', keywords: 'nef,hakkımızda', active: true, updated: today() },
-                { file: 'projeler.html', title: 'Projeler', description: 'NEF Projeleri', keywords: 'nef,projeler', active: true, updated: today() },
-                { file: 'nef-kesifleri.html', title: 'Nef Keşifleri', description: 'NEF Keşifleri', keywords: 'nef,keşifler', active: true, updated: today() },
-                { file: 'iletisim.html', title: 'İletişim', description: 'NEF İletişim', keywords: 'nef,iletişim', active: true, updated: today() }
+                { file: 'index.html', title: 'Ana Sayfa', description: 'İPEK - İnce Düşünülmüş Yaşam Alanları', keywords: 'ipek,inşaat,konut', active: true, updated: today() },
+                { file: 'biz-kimiz.html', title: 'Biz Kimiz', description: 'İPEK Hakkımızda', keywords: 'ipek,hakkımızda', active: true, updated: today() },
+                { file: 'projeler.html', title: 'Projeler', description: 'İPEK Projeleri', keywords: 'ipek,projeler', active: true, updated: today() },
+                { file: 'ipek-kesifleri.html', title: 'İpek Keşifleri', description: 'İPEK Keşifleri', keywords: 'ipek,keşifler', active: true, updated: today() },
+                { file: 'iletisim.html', title: 'İletişim', description: 'İPEK İletişim', keywords: 'ipek,iletişim', active: true, updated: today() }
             ]);
             if (!getData(KEYS.projects)) setData(KEYS.projects, [
-                { id: 1, name: 'Nef Sapanca', category: 'konut', location: 'Sapanca, Kocaeli', status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi Nef'den Bakın", features: 'Doğa Manzarası, Göl Yakınlığı', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Sapanca', price: '₺2.500.000 - ₺5.000.000', delivery: '2024-06-01' },
-                { id: 2, name: 'Nef Meram', category: 'konut', location: 'Meram, Konya', status: 'İnşaat Devam Ediyor', description: 'Trakya\'nın yıldızı parlıyor', features: 'Merkezi Konum, Yeşil Alanlar', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Meram', price: '₺1.800.000 - ₺3.200.000', delivery: '2025-03-01' },
-                { id: 3, name: 'Nef Reserve', category: 'konut', location: 'Bodrum, Muğla', status: 'Yaşam Başladı', description: 'Premium yaşam alanları', features: 'Deniz Manzarası, Lüks Tasarım', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Reserve', price: '₺8.000.000 - ₺15.000.000', delivery: '2023-12-01' },
-                { id: 4, name: 'Nef Arsa Kaz Dağları', category: 'arsa', location: 'Kaz Dağları, Çanakkale', status: 'Satışta', description: "Kaz Dağları'nın Havası", features: 'Doğa İç İçe, Modüler Ev', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Kaz', price: '₺500.000 - ₺1.500.000', delivery: '' },
-                { id: 5, name: 'Nef Arsa Dikili', category: 'arsa', location: 'Dikili, İzmir', status: 'Satışta', description: "Ege'nin incisi", features: 'Deniz Yakınlığı, Turistik', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Dikili', price: '₺600.000 - ₺2.000.000', delivery: '' },
-                { id: 6, name: 'Nef Arsa Lüleburgaz', category: 'arsa', location: 'Lüleburgaz, Kırklareli', status: 'Satışta', description: 'Trakya\'nın yıldızı', features: 'Stratejik Konum, Yatırımlık', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Luleburgaz', price: '₺400.000 - ₺1.200.000', delivery: '' }
+                { id: 1, name: 'İpek Sapanca', category: 'konut', location: 'Sapanca, Kocaeli', status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi İpek'den Bakın", features: 'Doğa Manzarası, Göl Yakınlığı', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Sapanca', price: '₺2.500.000 - ₺5.000.000', delivery: '2024-06-01' },
+                { id: 2, name: 'İpek Meram', category: 'konut', location: 'Meram, Konya', status: 'İnşaat Devam Ediyor', description: 'Trakya\'nın yıldızı parlıyor', features: 'Merkezi Konum, Yeşil Alanlar', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Meram', price: '₺1.800.000 - ₺3.200.000', delivery: '2025-03-01' },
+                { id: 3, name: 'İpek Reserve', category: 'konut', location: 'Bodrum, Muğla', status: 'Yaşam Başladı', description: 'Premium yaşam alanları', features: 'Deniz Manzarası, Lüks Tasarım', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Reserve', price: '₺8.000.000 - ₺15.000.000', delivery: '2023-12-01' },
+                { id: 4, name: 'İpek Arsa Kaz Dağları', category: 'arsa', location: 'Kaz Dağları, Çanakkale', status: 'Satışta', description: "Kaz Dağları'nın Havası", features: 'Doğa İç İçe, Modüler Ev', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Kaz', price: '₺500.000 - ₺1.500.000', delivery: '' },
+                { id: 5, name: 'İpek Arsa Dikili', category: 'arsa', location: 'Dikili, İzmir', status: 'Satışta', description: "Ege'nin incisi", features: 'Deniz Yakınlığı, Turistik', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Dikili', price: '₺600.000 - ₺2.000.000', delivery: '' },
+                { id: 6, name: 'İpek Arsa Lüleburgaz', category: 'arsa', location: 'Lüleburgaz, Kırklareli', status: 'Satışta', description: 'Trakya\'nın yıldızı', features: 'Stratejik Konum, Yatırımlık', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Luleburgaz', price: '₺400.000 - ₺1.200.000', delivery: '' }
             ]);
             if (!getData(KEYS.images)) setData(KEYS.images, [
                 { id: 1, name: 'hero-image.jpg', url: 'https://via.placeholder.com/800x400/34495e/ffffff?text=Hero+Image', size: '125 KB', date: today() },
-                { id: 2, name: 'logo.png', url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=NEF+Logo', size: '45 KB', date: today() },
+                { id: 2, name: 'logo.png', url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=İPEK+Logo', size: '45 KB', date: today() },
                 { id: 3, name: 'project-1.jpg', url: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Project+1', size: '89 KB', date: today() },
                 { id: 4, name: 'about-image.jpg', url: 'https://via.placeholder.com/600x400/34495e/ffffff?text=About+Image', size: '156 KB', date: today() }
             ]);
             if (!getData(KEYS.settings)) setData(KEYS.settings, {
-                siteTitle: 'NEF - İnce Düşünülmüş Yaşam Alanları',
+                siteTitle: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
                 siteDescription: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.',
-                contactEmail: 'info@nef.com.tr', contactPhone: '+90 212 555 00 00',
+                contactEmail: 'info@ipek.com.tr', contactPhone: '+90 212 555 00 00',
                 contactAddress: 'Maslak, Büyükdere Cad. No:123, Sarıyer/İstanbul',
-                metaKeywords: 'nef,inşaat,konut,arsa', faviconUrl: '', googleAnalytics: ''
+                metaKeywords: 'ipek,inşaat,konut,arsa', faviconUrl: '', googleAnalytics: ''
             });
             if (!getData(KEYS.cards)) setData(KEYS.cards, [
-                { id: 1, title: 'Nef Reserve', page: 'index.html', order: 1, status: 'Yaşam Başladı', description: 'Premium yaşam alanları', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Nef+Reserve', features: 'Deniz Manzarası, Lüks Tasarım', price: '₺8.000.000 - ₺15.000.000', link: '#', buttonText: 'Keşfet' },
-                { id: 2, title: 'Nef Sapanca', page: 'index.html', order: 2, status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi Nef'den Bakın", image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Nef+Sapanca', features: 'Doğa Manzarası, Göl Yakınlığı', price: '₺2.500.000 - ₺5.000.000', link: '#', buttonText: 'Keşfet' },
-                { id: 3, title: 'Nef Arsa', page: 'index.html', order: 3, status: 'Satışta', description: 'Birikiminizle Birlikte Hayallerinizi Büyütün', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Nef+Arsa', features: 'Yatırımlık, Modüler Ev', price: '₺500.000 - ₺1.500.000', link: '#', buttonText: 'Keşfet' }
+                { id: 1, title: 'İpek Reserve', page: 'index.html', order: 1, status: 'Yaşam Başladı', description: 'Premium yaşam alanları', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Reserve', features: 'Deniz Manzarası, Lüks Tasarım', price: '₺8.000.000 - ₺15.000.000', link: '#', buttonText: 'Keşfet' },
+                { id: 2, title: 'İpek Sapanca', page: 'index.html', order: 2, status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi İpek'den Bakın", image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Sapanca', features: 'Doğa Manzarası, Göl Yakınlığı', price: '₺2.500.000 - ₺5.000.000', link: '#', buttonText: 'Keşfet' },
+                { id: 3, title: 'İpek Arsa', page: 'index.html', order: 3, status: 'Satışta', description: 'Birikiminizle Birlikte Hayallerinizi Büyütün', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Arsa', features: 'Yatırımlık, Modüler Ev', price: '₺500.000 - ₺1.500.000', link: '#', buttonText: 'Keşfet' }
             ]);
             if (!getData(KEYS.activities)) setData(KEYS.activities, [{ id: 1, text: 'Admin paneli oluşturuldu', time: new Date().toISOString(), type: 'info' }]);
         }

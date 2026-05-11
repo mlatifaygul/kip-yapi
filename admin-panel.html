@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - NEF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Admin Panel - İPEK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -88,7 +90,7 @@
             background: #fff;
             padding: 1rem 2rem;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -139,7 +141,7 @@
             background: #fff;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .content-section.active {
@@ -366,7 +368,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -469,12 +471,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="admin-layout">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h2>NEF ADMIN</h2>
+                <h2>İPEK ADMIN</h2>
             </div>
             <nav class="sidebar-menu">
                 <a href="#" class="menu-item active" data-section="dashboard">
@@ -517,20 +520,25 @@
                 <div class="section-header">
                     <h2 class="section-title">Dashboard</h2>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-                    <div style="background: #3498db; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div
+                        style="background: #3498db; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
                         <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">5</h3>
                         <p>Sayfalar</p>
                     </div>
-                    <div style="background: #27ae60; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                    <div
+                        style="background: #27ae60; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
                         <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">12</h3>
                         <p>Projeler</p>
                     </div>
-                    <div style="background: #e74c3c; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                    <div
+                        style="background: #e74c3c; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
                         <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">8</h3>
                         <p>Resimler</p>
                     </div>
-                    <div style="background: #f39c12; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                    <div
+                        style="background: #f39c12; color: #fff; padding: 1.5rem; border-radius: 10px; text-align: center;">
                         <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">4</h3>
                         <p>Menü Öğeleri</p>
                     </div>
@@ -621,7 +629,7 @@
                     </thead>
                     <tbody id="projectsTableBody">
                         <tr>
-                            <td>Nef Sapanca</td>
+                            <td>İpek Sapanca</td>
                             <td>Konut</td>
                             <td>Sapanca</td>
                             <td><span style="color: #27ae60;">Yaşam Başladı</span></td>
@@ -647,9 +655,11 @@
                     <button class="add-btn" onclick="document.getElementById('imageUpload').click()">
                         <i class="fas fa-upload"></i> Resim Yükle
                     </button>
-                    <input type="file" id="imageUpload" style="display: none;" accept="image/*" multiple onchange="handleImageUpload(event)">
+                    <input type="file" id="imageUpload" style="display: none;" accept="image/*" multiple
+                        onchange="handleImageUpload(event)">
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;" id="imagesGrid">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;"
+                    id="imagesGrid">
                     <!-- Images will be loaded here -->
                 </div>
             </section>
@@ -663,15 +673,16 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Site Başlığı</label>
-                            <input type="text" id="siteTitle" value="NEF - İnce Düşünülmüş Yaşam Alanları">
+                            <input type="text" id="siteTitle" value="İPEK - İnce Düşünülmüş Yaşam Alanları">
                         </div>
                         <div class="form-group">
                             <label>Site Açıklaması</label>
-                            <input type="text" id="siteDescription" value="2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.">
+                            <input type="text" id="siteDescription"
+                                value="2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.">
                         </div>
                         <div class="form-group">
                             <label>İletişim E-posta</label>
-                            <input type="email" id="contactEmail" value="info@nef.com.tr">
+                            <input type="email" id="contactEmail" value="info@ipek.com.tr">
                         </div>
                         <div class="form-group">
                             <label>İletişim Telefon</label>
@@ -809,11 +820,11 @@
 
         // Navigation
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 e.preventDefault();
                 const section = this.dataset.section;
                 showSection(section);
-                
+
                 // Update active menu
                 document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
@@ -826,13 +837,13 @@
             });
             document.getElementById(sectionName).classList.add('active');
             document.getElementById('pageTitle').textContent = sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
-            
+
             // Load section data
             loadSectionData(sectionName);
         }
 
         function loadSectionData(sectionName) {
-            switch(sectionName) {
+            switch (sectionName) {
                 case 'navigation':
                     loadNavigationItems();
                     break;
@@ -852,7 +863,7 @@
             const navItems = getNavigationItems();
             const container = document.getElementById('navItems');
             container.innerHTML = '';
-            
+
             navItems.forEach(item => {
                 const navDiv = document.createElement('div');
                 navDiv.className = 'nav-item';
@@ -887,7 +898,7 @@
             const pages = getPages();
             const tbody = document.getElementById('pagesTableBody');
             tbody.innerHTML = '';
-            
+
             pages.forEach(page => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -914,7 +925,7 @@
             const projects = getProjects();
             const tbody = document.getElementById('projectsTableBody');
             tbody.innerHTML = '';
-            
+
             projects.forEach(project => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -941,7 +952,7 @@
             const images = getImages();
             const grid = document.getElementById('imagesGrid');
             grid.innerHTML = '';
-            
+
             images.forEach(image => {
                 const div = document.createElement('div');
                 div.style.cssText = 'position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);';
@@ -979,7 +990,7 @@
         }
 
         // Form submissions
-        document.getElementById('navForm').addEventListener('submit', function(e) {
+        document.getElementById('navForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = {
                 name: document.getElementById('navName').value,
@@ -987,14 +998,14 @@
                 order: document.getElementById('navOrder').value,
                 active: document.getElementById('navActive').value === 'true'
             };
-            
+
             saveNavigationItem(formData);
             closeModal('navModal');
             loadNavigationItems();
             showToast('Menü öğesi kaydedildi', 'success');
         });
 
-        document.getElementById('pageForm').addEventListener('submit', function(e) {
+        document.getElementById('pageForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = {
                 title: document.getElementById('pageTitle').value,
@@ -1002,14 +1013,14 @@
                 description: document.getElementById('pageDescription').value,
                 content: document.getElementById('pageContent').value
             };
-            
+
             savePage(formData);
             closeModal('pageModal');
             loadPages();
             showToast('Sayfa kaydedildi', 'success');
         });
 
-        document.getElementById('projectForm').addEventListener('submit', function(e) {
+        document.getElementById('projectForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = {
                 name: document.getElementById('projectName').value,
@@ -1018,14 +1029,14 @@
                 status: document.getElementById('projectStatus').value,
                 description: document.getElementById('projectDescription').value
             };
-            
+
             saveProject(formData);
             closeModal('projectModal');
             loadProjects();
             showToast('Proje kaydedildi', 'success');
         });
 
-        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+        document.getElementById('settingsForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const settings = {
                 siteTitle: document.getElementById('siteTitle').value,
@@ -1033,7 +1044,7 @@
                 contactEmail: document.getElementById('contactEmail').value,
                 contactPhone: document.getElementById('contactPhone').value
             };
-            
+
             saveSettings(settings);
             showToast('Ayarlar kaydedildi', 'success');
         });
@@ -1044,7 +1055,7 @@
             for (let file of files) {
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         const imageData = {
                             name: file.name,
                             url: e.target.result
@@ -1132,11 +1143,11 @@
             toast.className = `toast ${type}`;
             toast.textContent = message;
             document.body.appendChild(toast);
-            
+
             setTimeout(() => {
                 toast.classList.add('show');
             }, 100);
-            
+
             setTimeout(() => {
                 toast.classList.remove('show');
                 setTimeout(() => {
@@ -1158,4 +1169,5 @@
         loadSectionData('dashboard');
     </script>
 </body>
+
 </html>

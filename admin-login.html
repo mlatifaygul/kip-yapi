@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Giriş - NEF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Admin Giriş - İPEK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -23,10 +25,10 @@
         }
 
         .login-container {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             backdrop-filter: blur(10px);
@@ -144,10 +146,11 @@
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <div class="login-header">
-            <h1>NEF Admin</h1>
+            <h1>İPEK Admin</h1>
             <p>Yönetim paneli giriş</p>
         </div>
 
@@ -174,33 +177,33 @@
         // Simple authentication (in real app, this would be server-side)
         const ADMIN_CREDENTIALS = {
             username: 'admin',
-            password: 'nef123'
+            password: 'ipek123'
         };
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const submitBtn = this.querySelector('.login-btn');
             const messageContainer = document.getElementById('messageContainer');
-            
+
             // Disable button during login attempt
             submitBtn.disabled = true;
             submitBtn.textContent = 'Giriş Yapılıyor...';
-            
+
             // Clear previous messages
             messageContainer.innerHTML = '';
-            
+
             setTimeout(() => {
                 if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
                     // Store login status
                     localStorage.setItem('adminLoggedIn', 'true');
                     localStorage.setItem('adminUsername', username);
-                    
+
                     // Show success message
                     messageContainer.innerHTML = '<div class="success-message">Giriş başarılı! Yönlendiriliyorsunuz...</div>';
-                    
+
                     // Redirect to admin panel
                     setTimeout(() => {
                         window.location.href = 'admin-panel.html';
@@ -208,11 +211,11 @@
                 } else {
                     // Show error message
                     messageContainer.innerHTML = '<div class="error-message">Kullanıcı adı veya şifre hatalı!</div>';
-                    
+
                     // Re-enable button
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Giriş Yap';
-                    
+
                     // Clear password field
                     document.getElementById('password').value = '';
                 }
@@ -220,11 +223,12 @@
         });
 
         // Check if already logged in
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             if (localStorage.getItem('adminLoggedIn') === 'true') {
                 window.location.href = 'admin-panel.html';
             }
         });
     </script>
 </body>
+
 </html>

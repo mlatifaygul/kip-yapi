@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">NEF - İnce Düşünülmüş Yaşam Alanları</title>
+    <title id="pageTitle">İPEK - İnce Düşünülmüş Yaşam Alanları</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="description" id="pageDescription" content="2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.">
-    <meta name="keywords" id="pageKeywords" content="nef, inşaat, konut, arsa, proje, yaşam alanları">
+    <meta name="description" id="pageDescription"
+        content="2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.">
+    <meta name="keywords" id="pageKeywords" content="ipek, inşaat, konut, arsa, proje, yaşam alanları">
     <link rel="icon" id="favicon" href="https://via.placeholder.com/32x32/2c3e50/ffffff?text=N">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">NEF</a></h1>
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">İPEK</a></h1>
                 </div>
                 <ul class="nav-menu" id="dynamicNavMenu">
                     <!-- Navigation will be loaded dynamically -->
@@ -44,7 +48,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>NEF</h3>
+                    <h3>İPEK</h3>
                     <p id="footerDescription">2010 yılından beri ince düşünülmüş yaşam alanları tasarlıyoruz.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
@@ -69,13 +73,13 @@
                     <h4>İletişim</h4>
                     <ul>
                         <li><i class="fas fa-phone"></i> <span id="footerPhone">+90 212 555 00 00</span></li>
-                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@nef.com.tr</span></li>
+                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@ipek.com.tr</span></li>
                         <li><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">İstanbul, Türkiye</span></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 NEF. Tüm hakları saklıdır.</p>
+                <p>&copy; 2024 İPEK. Tüm hakları saklıdır.</p>
                 <div class="legal-links">
                     <a href="#">KVKK</a>
                     <a href="#">Aydınlatma Metni</a>
@@ -87,7 +91,8 @@
 
     <!-- Admin Panel Link (only visible when logged in) -->
     <div id="adminLink" style="position: fixed; bottom: 20px; left: 20px; display: none;">
-        <a href="admin-panel-enhanced.html" style="background: linear-gradient(135deg, #2c3e50, #34495e); color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-size: 12px; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
+        <a href="admin-panel-enhanced.html"
+            style="background: linear-gradient(135deg, #2c3e50, #34495e); color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-size: 12px; box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3); transition: all 0.3s ease;">
             <i class="fas fa-cog"></i> Admin Panel
         </a>
     </div>
@@ -99,7 +104,7 @@
         const pageConfigs = {
             'index.html': {
                 title: 'Ana Sayfa',
-                sections: ['hero', 'featured-projects', 'nef-arsa', 'cta', 'contact']
+                sections: ['hero', 'featured-projects', 'ipek-arsa', 'cta', 'contact']
             },
             'biz-kimiz.html': {
                 title: 'Biz Kimiz',
@@ -113,12 +118,12 @@
                 title: 'Projeler',
                 sections: ['hero', 'projects-grid', 'filters']
             },
-            'nef-kesifleri.html': {
-                title: 'Nef Keşifleri',
+            'ipek-kesifleri.html': {
+                title: 'İpek Keşifleri',
                 sections: ['hero', 'featured', 'innovation', 'categories', 'discoveries', 'newsletter']
             },
-            'nef-kesifleri-new.html': {
-                title: 'Nef Keşifleri - Gelişmiş',
+            'ipek-kesifleri-new.html': {
+                title: 'İpek Keşifleri - Gelişmiş',
                 sections: ['hero', 'featured', 'innovation', 'categories', 'discoveries', 'newsletter']
             },
             'iletisim.html': {
@@ -142,7 +147,7 @@
         function loadDynamicContent() {
             const currentPage = getCurrentPage();
             const config = pageConfigs[currentPage];
-            
+
             if (!config) {
                 console.error('Page configuration not found:', currentPage);
                 return;
@@ -150,25 +155,25 @@
 
             // Load page metadata
             loadPageMetadata(currentPage);
-            
+
             // Load navigation
             loadNavigation();
-            
+
             // Load page sections
             loadPageSections(currentPage);
-            
+
             // Load footer
             loadFooter();
-            
+
             // Check admin status
             checkAdminStatus();
         }
 
         function loadPageMetadata(page) {
-            const pages = window.NEFAdminEnhanced.getPages();
+            const pages = window.İPEKAdminEnhanced.getPages();
             const pageData = pages.find(p => p.file === page);
-            const settings = window.NEFAdminEnhanced.getSettings();
-            
+            const settings = window.İPEKAdminEnhanced.getSettings();
+
             if (pageData) {
                 document.getElementById('pageTitle').textContent = pageData.title;
                 document.getElementById('pageDescription').content = pageData.description || settings.siteDescription;
@@ -178,7 +183,7 @@
                 document.getElementById('pageDescription').content = settings.siteDescription;
                 document.getElementById('pageKeywords').content = settings.metaKeywords;
             }
-            
+
             if (settings.faviconUrl) {
                 document.getElementById('favicon').href = settings.faviconUrl;
             }
@@ -186,29 +191,29 @@
 
         function loadNavigation() {
             const navMenu = document.getElementById('dynamicNavMenu');
-            navMenu.innerHTML = window.NEFAdminEnhanced.generateNavigationHTML();
+            navMenu.innerHTML = window.İPEKAdminEnhanced.generateNavigationHTML();
         }
 
         function loadPageSections(page) {
             const container = document.getElementById('dynamicContent');
-            const sections = window.NEFAdminEnhanced.getSections().filter(s => s.page === page).sort((a, b) => a.order - b.order);
-            
+            const sections = window.İPEKAdminEnhanced.getSections().filter(s => s.page === page).sort((a, b) => a.order - b.order);
+
             if (sections.length === 0) {
                 // Load default content if no sections found
                 loadDefaultContent(page);
                 return;
             }
-            
+
             let html = '';
             sections.forEach(section => {
                 html += generateSectionHTML(section);
             });
-            
+
             container.innerHTML = html;
         }
 
         function generateSectionHTML(section) {
-            switch(section.type) {
+            switch (section.type) {
                 case 'hero':
                     return generateHeroHTML(section);
                 case 'text':
@@ -229,10 +234,10 @@
         }
 
         function generateHeroHTML(section) {
-            const bgStyle = section.bgImage ? 
+            const bgStyle = section.bgImage ?
                 `background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('${section.bgImage}') center/cover;` :
                 `background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);`;
-            
+
             return `
                 <section class="hero-section" style="${bgStyle}">
                     <div class="container">
@@ -333,8 +338,8 @@
         function loadDefaultContent(page) {
             const container = document.getElementById('dynamicContent');
             let html = '';
-            
-            switch(page) {
+
+            switch (page) {
                 case 'index.html':
                     html = `
                         <section class="hero" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%); color: #fff; padding: 120px 0;">
@@ -352,7 +357,7 @@
                             <div class="container">
                                 <h2 style="font-size: 2.5rem; font-weight: 300; color: #2c3e50; margin-bottom: 2rem;">Öne Çıkan Projeler</h2>
                                 <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-                                    ${window.NEFAdminEnhanced.generateCardsHTML('index.html')}
+                                    ${window.İPEKAdminEnhanced.generateCardsHTML('index.html')}
                                 </div>
                             </div>
                         </section>
@@ -368,34 +373,34 @@
                         </section>
                     `;
             }
-            
+
             container.innerHTML = html;
         }
 
         function loadFooter() {
-            const settings = window.NEFAdminEnhanced.getSettings();
-            const navigation = window.NEFAdminEnhanced.getNavigationItems();
-            
+            const settings = window.İPEKAdminEnhanced.getSettings();
+            const navigation = window.İPEKAdminEnhanced.getNavigationItems();
+
             // Update footer info
             document.getElementById('footerDescription').textContent = settings.siteDescription;
             document.getElementById('footerPhone').textContent = settings.contactPhone;
             document.getElementById('footerEmail').textContent = settings.contactEmail;
             document.getElementById('footerAddress').textContent = settings.contactAddress;
-            
+
             // Update footer corporate links
             const corporateLinks = document.getElementById('footerCorporate');
             const corporateNav = navigation.find(item => item.name === 'Biz Kimiz');
             if (corporateNav && corporateNav.subItems) {
-                corporateLinks.innerHTML = corporateNav.subItems.map(sub => 
+                corporateLinks.innerHTML = corporateNav.subItems.map(sub =>
                     `<li><a href="${sub.url}">${sub.name}</a></li>`
                 ).join('');
             }
-            
+
             // Update footer project links
             const projectLinks = document.getElementById('footerProjects');
             const projectNav = navigation.find(item => item.name === 'Projeler');
             if (projectNav && projectNav.subItems) {
-                projectLinks.innerHTML = projectNav.subItems.map(sub => 
+                projectLinks.innerHTML = projectNav.subItems.map(sub =>
                     `<li><a href="${sub.url}">${sub.name}</a></li>`
                 ).join('');
             }
@@ -409,9 +414,9 @@
         }
 
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadDynamicContent();
-            
+
             // Reinitialize mobile menu after dynamic content load
             setTimeout(() => {
                 const hamburger = document.querySelector('.hamburger');
@@ -441,4 +446,5 @@
         window.refreshContent = refreshContent;
     </script>
 </body>
+
 </html>

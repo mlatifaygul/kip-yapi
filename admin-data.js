@@ -3,7 +3,7 @@
 
 // Initialize localStorage with default data if empty
 function initializeData() {
-    if (!localStorage.getItem('nef_navigation')) {
+    if (!localStorage.getItem('ipek_navigation')) {
         const defaultNavigation = [
             {
                 id: 1,
@@ -32,18 +32,18 @@ function initializeData() {
                 order: 3,
                 active: true,
                 subItems: [
-                    { id: 31, name: 'Nef Reserve', url: 'projeler.html' },
-                    { id: 32, name: 'Nef Projeler', url: 'projeler.html' },
-                    { id: 33, name: 'Nef Arsa', url: 'projeler.html' },
-                    { id: 34, name: 'Nef Global', url: 'projeler.html' },
+                    { id: 31, name: 'İpek Reserve', url: 'projeler.html' },
+                    { id: 32, name: 'İpek Projeler', url: 'projeler.html' },
+                    { id: 33, name: 'İpek Arsa', url: 'projeler.html' },
+                    { id: 34, name: 'İpek Global', url: 'projeler.html' },
                     { id: 35, name: 'NOVU', url: 'projeler.html' },
                     { id: 36, name: 'Tümünü Gör', url: 'projeler.html' }
                 ]
             },
             {
                 id: 4,
-                name: 'Nef Keşifleri',
-                url: 'nef-kesifleri.html',
+                name: 'İpek Keşifleri',
+                url: 'ipek-kesifleri.html',
                 order: 4,
                 active: true,
                 subItems: []
@@ -57,15 +57,15 @@ function initializeData() {
                 subItems: []
             }
         ];
-        localStorage.setItem('nef_navigation', JSON.stringify(defaultNavigation));
+        localStorage.setItem('ipek_navigation', JSON.stringify(defaultNavigation));
     }
 
-    if (!localStorage.getItem('nef_pages')) {
+    if (!localStorage.getItem('ipek_pages')) {
         const defaultPages = [
             {
                 title: 'Ana Sayfa',
                 file: 'index.html',
-                description: 'NEF - İnce Düşünülmüş Yaşam Alanları',
+                description: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
                 content: '',
                 active: true,
                 updated: '2024-05-10'
@@ -73,7 +73,7 @@ function initializeData() {
             {
                 title: 'Biz Kimiz',
                 file: 'biz-kimiz.html',
-                description: 'NEF Hakkımızda Sayfası',
+                description: 'İPEK Hakkımızda Sayfası',
                 content: '',
                 active: true,
                 updated: '2024-05-10'
@@ -81,15 +81,15 @@ function initializeData() {
             {
                 title: 'Projeler',
                 file: 'projeler.html',
-                description: 'NEF Projeleri Sayfası',
+                description: 'İPEK Projeleri Sayfası',
                 content: '',
                 active: true,
                 updated: '2024-05-10'
             },
             {
-                title: 'Nef Keşifleri',
-                file: 'nef-kesifleri.html',
-                description: 'NEF Keşifleri Sayfası',
+                title: 'İpek Keşifleri',
+                file: 'ipek-kesifleri.html',
+                description: 'İPEK Keşifleri Sayfası',
                 content: '',
                 active: true,
                 updated: '2024-05-10'
@@ -97,76 +97,76 @@ function initializeData() {
             {
                 title: 'İletişim',
                 file: 'iletisim.html',
-                description: 'NEF İletişim Sayfası',
+                description: 'İPEK İletişim Sayfası',
                 content: '',
                 active: true,
                 updated: '2024-05-10'
             }
         ];
-        localStorage.setItem('nef_pages', JSON.stringify(defaultPages));
+        localStorage.setItem('ipek_pages', JSON.stringify(defaultPages));
     }
 
-    if (!localStorage.getItem('nef_projects')) {
+    if (!localStorage.getItem('ipek_projects')) {
         const defaultProjects = [
             {
                 id: 1,
-                name: 'Nef Sapanca',
+                name: 'İpek Sapanca',
                 category: 'konut',
                 location: 'Sapanca, Kocaeli',
                 status: 'Yaşam Başladı',
-                description: 'Sapanca\'ya Şimdi Nef\'den Bakın',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Sapanca'
+                description: 'Sapanca\'ya Şimdi İpek\'den Bakın',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Sapanca'
             },
             {
                 id: 2,
-                name: 'Nef Meram',
+                name: 'İpek Meram',
                 category: 'konut',
                 location: 'Meram, Konya',
                 status: 'İnşaat Devam Ediyor',
                 description: 'Trakya\'nın yıldızı parlıyor',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Meram'
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Meram'
             },
             {
                 id: 3,
-                name: 'Nef Reserve',
+                name: 'İpek Reserve',
                 category: 'konut',
                 location: 'Bodrum, Muğla',
                 status: 'Yaşam Başladı',
                 description: 'Premium yaşam alanları',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Reserve'
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Reserve'
             },
             {
                 id: 4,
-                name: 'Nef Arsa Kaz Dağları',
+                name: 'İpek Arsa Kaz Dağları',
                 category: 'arsa',
                 location: 'Kaz Dağları, Çanakkale',
                 status: 'Satışta',
                 description: 'Kaz Dağları\'nın Havası Yaşamınızın Bir Parçası Olsun',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Kaz+Dağları'
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Kaz+Dağları'
             },
             {
                 id: 5,
-                name: 'Nef Arsa Dikili',
+                name: 'İpek Arsa Dikili',
                 category: 'arsa',
                 location: 'Dikili, İzmir',
                 status: 'Satışta',
                 description: 'Ege\'nin incisinde mükemmel bir yatırım',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Dikili'
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Dikili'
             },
             {
                 id: 6,
-                name: 'Nef Arsa Lüleburgaz',
+                name: 'İpek Arsa Lüleburgaz',
                 category: 'arsa',
                 location: 'Lüleburgaz, Kırklareli',
                 status: 'Satışta',
                 description: 'Trakya\'nın yıldızı parlıyor',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Nef+Arsa+Lüleburgaz'
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Lüleburgaz'
             }
         ];
-        localStorage.setItem('nef_projects', JSON.stringify(defaultProjects));
+        localStorage.setItem('ipek_projects', JSON.stringify(defaultProjects));
     }
 
-    if (!localStorage.getItem('nef_images')) {
+    if (!localStorage.getItem('ipek_images')) {
         const defaultImages = [
             {
                 id: 1,
@@ -176,7 +176,7 @@ function initializeData() {
             {
                 id: 2,
                 name: 'logo.png',
-                url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=NEF+Logo'
+                url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=İPEK+Logo'
             },
             {
                 id: 3,
@@ -189,25 +189,25 @@ function initializeData() {
                 url: 'https://via.placeholder.com/600x400/34495e/ffffff?text=About+Image'
             }
         ];
-        localStorage.setItem('nef_images', JSON.stringify(defaultImages));
+        localStorage.setItem('ipek_images', JSON.stringify(defaultImages));
     }
 
-    if (!localStorage.getItem('nef_settings')) {
+    if (!localStorage.getItem('ipek_settings')) {
         const defaultSettings = {
-            siteTitle: 'NEF - İnce Düşünülmüş Yaşam Alanları',
+            siteTitle: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
             siteDescription: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.',
-            contactEmail: 'info@nef.com.tr',
+            contactEmail: 'info@ipek.com.tr',
             contactPhone: '+90 212 555 00 00',
             contactAddress: 'Maslak, Büyükdere Cad. No:123, Sarıyer/İstanbul'
         };
-        localStorage.setItem('nef_settings', JSON.stringify(defaultSettings));
+        localStorage.setItem('ipek_settings', JSON.stringify(defaultSettings));
     }
 }
 
 // Navigation CRUD Operations
 function getNavigationItems() {
     initializeData();
-    return JSON.parse(localStorage.getItem('nef_navigation') || '[]');
+    return JSON.parse(localStorage.getItem('ipek_navigation') || '[]');
 }
 
 function getNavigationItemById(id) {
@@ -218,29 +218,29 @@ function getNavigationItemById(id) {
 function saveNavigationItem(item) {
     const items = getNavigationItems();
     const existingIndex = items.findIndex(i => i.id === item.id);
-    
+
     if (existingIndex !== -1) {
         items[existingIndex] = { ...items[existingIndex], ...item };
     } else {
         const newId = Math.max(...items.map(i => i.id), 0) + 1;
         items.push({ id: newId, ...item });
     }
-    
-    localStorage.setItem('nef_navigation', JSON.stringify(items));
+
+    localStorage.setItem('ipek_navigation', JSON.stringify(items));
     return true;
 }
 
 function deleteNavigationItem(id) {
     const items = getNavigationItems();
     const filteredItems = items.filter(item => item.id !== id);
-    localStorage.setItem('nef_navigation', JSON.stringify(filteredItems));
+    localStorage.setItem('ipek_navigation', JSON.stringify(filteredItems));
     return true;
 }
 
 // Pages CRUD Operations
 function getPages() {
     initializeData();
-    return JSON.parse(localStorage.getItem('nef_pages') || '[]');
+    return JSON.parse(localStorage.getItem('ipek_pages') || '[]');
 }
 
 function getPageByFile(file) {
@@ -251,10 +251,10 @@ function getPageByFile(file) {
 function savePage(page) {
     const pages = getPages();
     const existingIndex = pages.findIndex(p => p.file === page.file);
-    
+
     if (existingIndex !== -1) {
-        pages[existingIndex] = { 
-            ...pages[existingIndex], 
+        pages[existingIndex] = {
+            ...pages[existingIndex],
             ...page,
             updated: new Date().toISOString().split('T')[0]
         };
@@ -265,22 +265,22 @@ function savePage(page) {
             updated: new Date().toISOString().split('T')[0]
         });
     }
-    
-    localStorage.setItem('nef_pages', JSON.stringify(pages));
+
+    localStorage.setItem('ipek_pages', JSON.stringify(pages));
     return true;
 }
 
 function deletePageItem(file) {
     const pages = getPages();
     const filteredPages = pages.filter(page => page.file !== file);
-    localStorage.setItem('nef_pages', JSON.stringify(filteredPages));
+    localStorage.setItem('ipek_pages', JSON.stringify(filteredPages));
     return true;
 }
 
 // Projects CRUD Operations
 function getProjects() {
     initializeData();
-    return JSON.parse(localStorage.getItem('nef_projects') || '[]');
+    return JSON.parse(localStorage.getItem('ipek_projects') || '[]');
 }
 
 function getProjectById(id) {
@@ -291,54 +291,54 @@ function getProjectById(id) {
 function saveProject(project) {
     const projects = getProjects();
     const existingIndex = projects.findIndex(p => p.id === project.id);
-    
+
     if (existingIndex !== -1) {
         projects[existingIndex] = { ...projects[existingIndex], ...project };
     } else {
         const newId = Math.max(...projects.map(p => p.id), 0) + 1;
         projects.push({ id: newId, ...project });
     }
-    
-    localStorage.setItem('nef_projects', JSON.stringify(projects));
+
+    localStorage.setItem('ipek_projects', JSON.stringify(projects));
     return true;
 }
 
 function deleteProjectItem(id) {
     const projects = getProjects();
     const filteredProjects = projects.filter(project => project.id !== id);
-    localStorage.setItem('nef_projects', JSON.stringify(filteredProjects));
+    localStorage.setItem('ipek_projects', JSON.stringify(filteredProjects));
     return true;
 }
 
 // Images CRUD Operations
 function getImages() {
     initializeData();
-    return JSON.parse(localStorage.getItem('nef_images') || '[]');
+    return JSON.parse(localStorage.getItem('ipek_images') || '[]');
 }
 
 function saveImage(image) {
     const images = getImages();
     const newId = Math.max(...images.map(i => i.id), 0) + 1;
     images.push({ id: newId, ...image });
-    localStorage.setItem('nef_images', JSON.stringify(images));
+    localStorage.setItem('ipek_images', JSON.stringify(images));
     return true;
 }
 
 function deleteImageItem(id) {
     const images = getImages();
     const filteredImages = images.filter(image => image.id !== id);
-    localStorage.setItem('nef_images', JSON.stringify(filteredImages));
+    localStorage.setItem('ipek_images', JSON.stringify(filteredImages));
     return true;
 }
 
 // Settings CRUD Operations
 function getSettings() {
     initializeData();
-    return JSON.parse(localStorage.getItem('nef_settings') || '{}');
+    return JSON.parse(localStorage.getItem('ipek_settings') || '{}');
 }
 
 function saveSettings(settings) {
-    localStorage.setItem('nef_settings', JSON.stringify(settings));
+    localStorage.setItem('ipek_settings', JSON.stringify(settings));
     return true;
 }
 
@@ -346,7 +346,7 @@ function saveSettings(settings) {
 function generateNavigationHTML() {
     const navigation = getNavigationItems();
     let html = '';
-    
+
     navigation.forEach(item => {
         if (item.subItems && item.subItems.length > 0) {
             html += `
@@ -365,18 +365,18 @@ function generateNavigationHTML() {
             `;
         }
     });
-    
+
     return html;
 }
 
 function generateProjectsHTML() {
     const projects = getProjects();
     let html = '';
-    
+
     projects.forEach(project => {
-        const statusClass = project.status === 'Yaşam Başladı' ? 'yasam-basladi' : 
-                           project.status === 'Satışta' ? 'satista' : 'insaat';
-        
+        const statusClass = project.status === 'Yaşam Başladı' ? 'yasam-basladi' :
+            project.status === 'Satışta' ? 'satista' : 'insaat';
+
         html += `
             <div class="project-card" data-category="${project.category}" data-location="${project.location}">
                 <div class="project-image">
@@ -399,12 +399,12 @@ function generateProjectsHTML() {
             </div>
         `;
     });
-    
+
     return html;
 }
 
 // Export functions for use in main pages
-window.NEFAdmin = {
+window.İPEKAdmin = {
     getNavigationItems,
     getPages,
     getProjects,

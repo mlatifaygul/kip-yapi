@@ -1,6 +1,6 @@
-# NEF Website Clone
+# İPEK Website Clone
 
-Modern bir Türk emlak geliştirme şirketi olan NEF'in web sitesinin responsive bir klonu.
+Modern bir Türk emlak geliştirme şirketi olan İPEK'in web sitesinin responsive bir klonu.
 
 ## Özellikler
 
@@ -37,7 +37,7 @@ yapi-proje/
 1. **Header** - Navigasyon menüsü ve logo
 2. **Hero** - Ana banner ve tanıtım
 3. **Öne Çıkan Projeler** - Proje kartları
-4. **NEF Arsa** - Arsa projeleri listesi
+4. **İPEK Arsa** - Arsa projeleri listesi
 5. **CTA** - Eylem çağrısı bölümü
 6. **Haberler** - Haberler ve duyurular
 7. **İletişim** - İletişim formu
@@ -93,7 +93,7 @@ yapi-proje/
 
 ## Lisans
 
-Bu proje eğitim amaçlıdır. NEF'in orijinal web sitesine ait değildir.
+Bu proje eğitim amaçlıdır. İPEK'in orijinal web sitesine ait değildir.
 
 ## Geliştirici
 

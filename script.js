@@ -70,40 +70,40 @@ const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         // Get form data
         const formData = new FormData(contactForm);
         const name = contactForm.querySelector('input[type="text"]').value;
         const phone = contactForm.querySelector('input[type="tel"]').value;
         const email = contactForm.querySelector('input[type="email"]').value;
         const interest = contactForm.querySelector('select').value;
-        
+
         // Simple validation
         if (!name || !phone || !email || !interest) {
             showNotification('Lütfen tüm alanları doldurun.', 'error');
             return;
         }
-        
+
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             showNotification('Lütfen geçerli bir e-posta adresi girin.', 'error');
             return;
         }
-        
+
         // Phone validation (Turkish phone format)
         const phoneRegex = /^(\+90|0)?\s*[5-9]\d{2}\s*\d{3}\s*\d{2}\s*\d{2}$/;
         if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
             showNotification('Lütfen geçerli bir telefon numarası girin.', 'error');
             return;
         }
-        
+
         // Simulate form submission
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Gönderiliyor...';
         submitBtn.disabled = true;
-        
+
         setTimeout(() => {
             showNotification('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
             contactForm.reset();
@@ -119,7 +119,7 @@ function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
-    
+
     // Style the notification
     notification.style.cssText = `
         position: fixed;
@@ -135,9 +135,9 @@ function showNotification(message, type = 'info') {
         max-width: 300px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     `;
-    
+
     // Set background color based on type
-    switch(type) {
+    switch (type) {
         case 'success':
             notification.style.background = '#27ae60';
             break;
@@ -147,15 +147,15 @@ function showNotification(message, type = 'info') {
         default:
             notification.style.background = '#3498db';
     }
-    
+
     // Add to page
     document.body.appendChild(notification);
-    
+
     // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
+
     // Remove after 5 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(400px)';
@@ -167,11 +167,11 @@ function showNotification(message, type = 'info') {
 
 // Project card hover effects
 document.querySelectorAll('.project-card, .arsa-item, .news-item').forEach(card => {
-    card.addEventListener('mouseenter', function() {
+    card.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-10px) scale(1.02)';
     });
-    
-    card.addEventListener('mouseleave', function() {
+
+    card.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
     });
 });
@@ -180,7 +180,7 @@ document.querySelectorAll('.project-card, .arsa-item, .news-item').forEach(card 
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
-    
+
     const timer = setInterval(() => {
         start += increment;
         if (start >= target) {
@@ -288,19 +288,19 @@ function initializeSearch() {
         width: 100%;
         font-size: 14px;
     `;
-    
+
     const featuredProjects = document.querySelector('.featured-projects .container');
     if (featuredProjects) {
         featuredProjects.insertBefore(searchInput, featuredProjects.firstChild);
-        
+
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             const projects = document.querySelectorAll('.project-card');
-            
+
             projects.forEach(project => {
                 const title = project.querySelector('h3').textContent.toLowerCase();
                 const description = project.querySelector('p').textContent.toLowerCase();
-                
+
                 if (title.includes(searchTerm) || description.includes(searchTerm)) {
                     project.style.display = 'block';
                 } else {
@@ -338,12 +338,12 @@ window.addEventListener('scroll', debouncedScroll);
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
-    
+
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
 });
 
 // Console Easter egg
-console.log('%c NEF Clone ', 'background: #2c3e50; color: #fff; font-size: 20px; font-weight: bold; padding: 10px;');
+console.log('%c İPEK Clone ', 'background: #2c3e50; color: #fff; font-size: 20px; font-weight: bold; padding: 10px;');
 console.log('%c Modern web development with attention to detail ', 'background: #3498db; color: #fff; padding: 5px;');
