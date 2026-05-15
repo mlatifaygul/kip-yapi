@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">İPEK - İnce Düşünülmüş Yaşam Alanları</title>
+    <title id="pageTitle">KİP - İnce Düşünülmüş Yaşam Alanları</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -19,7 +19,7 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">İPEK</a></h1>
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">KİP</a></h1>
                 </div>
                 <ul class="nav-menu" id="dynamicNavMenu">
                     <!-- Navigation will be loaded dynamically -->
@@ -47,8 +47,8 @@
             </div>
         </div>
         <div class="hero-image">
-            <img id="heroImage" src="https://via.placeholder.com/800x600/2c3e50/ffffff?text=İPEK+Yaşam+Alanları"
-                alt="İPEK Yaşam Alanları">
+            <img id="heroImage" src="https://via.placeholder.com/800x600/2c3e50/ffffff?text=KİP+Yaşam+Alanları"
+                alt="KİP Yaşam Alanları">
         </div>
     </section>
 
@@ -62,12 +62,12 @@
         </div>
     </section>
 
-    <!-- İpek Arsa Section -->
-    <section class="ipek-arsa" id="ipekArsa">
+    <!-- Kip Arsa Section -->
+    <section class="kip-arsa" id="kipArsa">
         <div class="container">
             <div class="arsa-header">
                 <h2 id="arsaTitle">Birikiminizle Birlikte Hayallerinizi Büyütün.</h2>
-                <p id="arsaDescription">Hayalinizdeki İpek Arsa'ya Şimdi Sahip Olun</p>
+                <p id="arsaDescription">Hayalinizdeki Kip Arsa'ya Şimdi Sahip Olun</p>
             </div>
             <div class="arsa-grid" id="arsaGrid">
                 <!-- Arsa projects will be loaded dynamically -->
@@ -97,7 +97,7 @@
                     </div>
                     <div class="news-content">
                         <span class="news-date">15 Mayıs 2024</span>
-                        <h3>İPEK'in Yeni Projesi Tanıtıldı</h3>
+                        <h3>KİP'in Yeni Projesi Tanıtıldı</h3>
                         <p>En son teknoloji ve sürdürülebilirlik ilkeleriyle tasarlanan yeni projemiz...</p>
                         <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
                     </div>
@@ -152,7 +152,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>İPEK</h3>
+                    <h3>KİP</h3>
                     <p id="footerDescription">2010 yılından beri ince düşünülmüş yaşam alanları tasarlıyoruz.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
@@ -167,29 +167,29 @@
                         <li><a href="biz-kimiz.html">Biz Kimiz</a></li>
                         <li><a href="biz-kimiz.html#manifesto">Manifesto</a></li>
                         <li><a href="biz-kimiz.html#tarihce">Tarihçe</a></li>
-                        <li><a href="ipekli-olmak.html">İpek'li Olmak</a></li>
+                        <li><a href="kipli-olmak.html">Kip'li Olmak</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Projeler</h4>
                     <ul>
-                        <li><a href="projeler.html">İpek Reserve</a></li>
-                        <li><a href="projeler.html">İpek Projeler</a></li>
-                        <li><a href="projeler.html">İpek Arsa</a></li>
-                        <li><a href="projeler.html">İpek Global</a></li>
+                        <li><a href="projeler.html">Kip Reserve</a></li>
+                        <li><a href="projeler.html">Kip Projeler</a></li>
+                        <li><a href="projeler.html">Kip Arsa</a></li>
+                        <li><a href="projeler.html">Kip Global</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>İletişim</h4>
                     <ul>
                         <li><i class="fas fa-phone"></i> <span id="footerPhone">+90 212 555 00 00</span></li>
-                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@ipek.com.tr</span></li>
+                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@kip.com.tr</span></li>
                         <li><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">İstanbul, Türkiye</span></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 İPEK. Tüm hakları saklıdır.</p>
+                <p>&copy; 2024 KİP. Tüm hakları saklıdır.</p>
                 <div class="legal-links">
                     <a href="#">KVKK</a>
                     <a href="#">Aydınlatma Metni</a>
@@ -219,11 +219,11 @@
         function loadDynamicContent() {
             // Load navigation
             const navMenu = document.getElementById('dynamicNavMenu');
-            navMenu.innerHTML = window.İPEKAdmin.generateNavigationHTML();
+            navMenu.innerHTML = window.KİPAdmin.generateNavigationHTML();
 
             // Load projects
             const projectsGrid = document.getElementById('projectsGrid');
-            const projects = window.İPEKAdmin.getProjects().filter(p => p.category === 'konut').slice(0, 3);
+            const projects = window.KİPAdmin.getProjects().filter(p => p.category === 'konut').slice(0, 3);
 
             projectsGrid.innerHTML = projects.map(project => `
                 <div class="project-card">
@@ -240,7 +240,7 @@
 
             // Load arsa projects
             const arsaGrid = document.getElementById('arsaGrid');
-            const arsaProjects = window.İPEKAdmin.getProjects().filter(p => p.category === 'arsa').slice(0, 4);
+            const arsaProjects = window.KİPAdmin.getProjects().filter(p => p.category === 'arsa').slice(0, 4);
 
             arsaGrid.innerHTML = arsaProjects.map(project => `
                 <div class="arsa-item">
@@ -258,7 +258,7 @@
             `).join('');
 
             // Load settings
-            const settings = window.İPEKAdmin.getSettings();
+            const settings = window.KİPAdmin.getSettings();
             document.getElementById('pageTitle').textContent = settings.siteTitle;
             document.getElementById('pageDescription').content = settings.siteDescription;
             document.getElementById('footerDescription').textContent = settings.siteDescription;

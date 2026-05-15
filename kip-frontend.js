@@ -1,22 +1,22 @@
 /**
- * IPEK Frontend Integration Module
+ * KİP Frontend Integration Module
  * Admin panel verilerini frontend sayfalarına entegre eder
- * Tüm HTML sayfalarına dahil edilmeli: <script src="ipek-frontend.js"></script>
+ * Tüm HTML sayfalarına dahil edilmeli: <script src="kip-frontend.js"></script>
  */
 
 (function () {
     'use strict';
 
     // Admin data helper - admin-data.js'den verileri çeker
-    const IPEKData = {
+    const KİPData = {
         // Navigation
         getNavigation: function () {
-            return JSON.parse(localStorage.getItem('ipek_navigation') || '[]');
+            return JSON.parse(localStorage.getItem('kip_navigation') || '[]');
         },
 
         // Pages
         getPages: function () {
-            return JSON.parse(localStorage.getItem('ipek_pages') || '[]');
+            return JSON.parse(localStorage.getItem('kip_pages') || '[]');
         },
 
         getCurrentPage: function () {
@@ -27,29 +27,29 @@
 
         // Sections
         getSections: function (page) {
-            const allSections = JSON.parse(localStorage.getItem('ipek_sections') || '[]');
+            const allSections = JSON.parse(localStorage.getItem('kip_sections') || '[]');
             return page ? allSections.filter(s => s.page === page).sort((a, b) => a.order - b.order) : allSections;
         },
 
         // Cards
         getCards: function (page) {
-            const allCards = JSON.parse(localStorage.getItem('ipek_cards') || '[]');
+            const allCards = JSON.parse(localStorage.getItem('kip_cards') || '[]');
             return page ? allCards.filter(c => c.page === page).sort((a, b) => a.order - b.order) : allCards;
         },
 
         // Projects
         getProjects: function () {
-            return JSON.parse(localStorage.getItem('ipek_projects') || '[]');
+            return JSON.parse(localStorage.getItem('kip_projects') || '[]');
         },
 
         // Images
         getImages: function () {
-            return JSON.parse(localStorage.getItem('ipek_images') || '[]');
+            return JSON.parse(localStorage.getItem('kip_images') || '[]');
         },
 
         // Settings
         getSettings: function () {
-            return JSON.parse(localStorage.getItem('ipek_settings') || '{}');
+            return JSON.parse(localStorage.getItem('kip_settings') || '{}');
         }
     };
 
@@ -59,7 +59,7 @@
             const navMenu = document.querySelector('.nav-menu');
             if (!navMenu) return;
 
-            const items = IPEKData.getNavigation().filter(item => item.active);
+            const items = KİPData.getNavigation().filter(item => item.active);
             navMenu.innerHTML = items.map(item => this.buildItem(item)).join('');
         },
 
@@ -97,8 +97,8 @@
     // Page Meta Builder
     const MetaBuilder = {
         build: function () {
-            const currentPage = IPEKData.getCurrentPage();
-            const settings = IPEKData.getSettings();
+            const currentPage = KİPData.getCurrentPage();
+            const settings = KİPData.getSettings();
 
             // Update title
             if (currentPage && currentPage.title) {
@@ -148,7 +148,7 @@
             const container = document.getElementById(containerId);
             if (!container) return;
 
-            const cards = IPEKData.getCards(page || this.getCurrentPageName());
+            const cards = KİPData.getCards(page || this.getCurrentPageName());
             container.innerHTML = cards.map(card => this.buildCard(card)).join('');
         },
 
@@ -195,7 +195,7 @@
             const container = document.getElementById(containerId);
             if (!container) return;
 
-            let projects = IPEKData.getProjects();
+            let projects = KİPData.getProjects();
 
             // Apply filters
             if (options.category) {
@@ -258,7 +258,7 @@
     // Footer Builder
     const FooterBuilder = {
         build: function () {
-            const settings = IPEKData.getSettings();
+            const settings = KİPData.getSettings();
 
             // Update footer description
             const footerDesc = document.querySelector('.footer-section p');
@@ -283,7 +283,7 @@
         },
 
         buildFooterLinks: function () {
-            const navigation = IPEKData.getNavigation();
+            const navigation = KİPData.getNavigation();
 
             // Find "Biz Kimiz" for corporate links
             const corporate = navigation.find(item => item.name === 'Biz Kimiz');
@@ -313,7 +313,7 @@
     const DynamicLoader = {
         loadHeroContent: function () {
             const hero = document.querySelector('.hero h2');
-            const settings = IPEKData.getSettings();
+            const settings = KİPData.getSettings();
 
             if (hero && settings.heroTitle) {
                 hero.textContent = settings.heroTitle;
@@ -324,7 +324,7 @@
             const container = document.getElementById(sectionId);
             if (!container) return;
 
-            const sections = IPEKData.getSections(pageFile);
+            const sections = KİPData.getSections(pageFile);
             const section = sections.find(s => s.id === parseInt(sectionId.replace('section-', '')));
 
             if (section) {
@@ -388,10 +388,10 @@
     const AdminHelper = {
         showAdminLink: function () {
             if (localStorage.getItem('adminLoggedIn') === 'true') {
-                const existingLink = document.getElementById('ipek-admin-link');
+                const existingLink = document.getElementById('kip-admin-link');
                 if (!existingLink) {
                     const adminLink = document.createElement('div');
-                    adminLink.id = 'ipek-admin-link';
+                    adminLink.id = 'kip-admin-link';
                     adminLink.style.cssText = 'position: fixed; bottom: 20px; left: 20px; z-index: 9999;';
                     adminLink.innerHTML = `
                         <a href="admin-data.html" 
@@ -417,7 +417,7 @@
     };
 
     // Main Initialization
-    const IPEKFrontend = {
+    const KİPFrontend = {
         init: function () {
             // Wait for DOM to be ready
             if (document.readyState === 'loading') {
@@ -428,7 +428,7 @@
         },
 
         load: function () {
-            console.log('🚀 IPEK Frontend Integration Loading...');
+            console.log('🚀 KİP Frontend Integration Loading...');
 
             // Initialize default data if available (e.g. from admin-data.js)
             // This is crucial for Vercel deployments where localStorage is initially empty
@@ -449,16 +449,16 @@
                 // Show admin link if logged in
                 AdminHelper.showAdminLink();
 
-                console.log('✅ IPEK Frontend Integration Loaded Successfully');
+                console.log('✅ KİP Frontend Integration Loaded Successfully');
             } catch (error) {
-                console.error('❌ IPEK Frontend Integration Error:', error);
+                console.error('❌ KİP Frontend Integration Error:', error);
             }
         },
 
         // Public API
         api: {
             // Data access
-            data: IPEKData,
+            data: KİPData,
 
             // Builders
             buildNavigation: () => NavigationBuilder.build(),
@@ -470,15 +470,15 @@
             loadSection: (sectionId, page) => DynamicLoader.loadSection(sectionId, page),
 
             // Utilities
-            getCurrentPage: () => IPEKData.getCurrentPage(),
-            getSettings: () => IPEKData.getSettings()
+            getCurrentPage: () => KİPData.getCurrentPage(),
+            getSettings: () => KİPData.getSettings()
         }
     };
 
     // Auto-initialize
-    IPEKFrontend.init();
+    KİPFrontend.init();
 
     // Export to global scope
-    window.IPEKFrontend = IPEKFrontend.api;
+    window.KİPFrontend = KİPFrontend.api;
 
 })();

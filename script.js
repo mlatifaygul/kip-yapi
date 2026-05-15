@@ -30,13 +30,13 @@ if (hamburger && navMenu) {
 // ==========================================
 
 const DATA_KEYS = {
-    nav: 'ipek_navigation',
-    pages: 'ipek_pages',
-    projects: 'ipek_projects',
-    images: 'ipek_images',
-    settings: 'ipek_settings',
-    cards: 'ipek_cards',
-    sections: 'ipek_sections'
+    nav: 'kip_navigation',
+    pages: 'kip_pages',
+    projects: 'kip_projects',
+    images: 'kip_images',
+    settings: 'kip_settings',
+    cards: 'kip_cards',
+    sections: 'kip_sections'
 };
 
 const CLOUD_STATE_ENDPOINT = '/api/state';
@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initialize defaults if localStorage is empty (important for Vercel deployment)
     checkAndInitData();
-    
+
     loadDynamicNav();
     loadDynamicSettings();
-    
+
     // Run content loading
     loadDynamicContent();
 });
@@ -131,38 +131,42 @@ function checkAndInitData() {
         // Default Nav
         const defaultNav = [
             { id: 1, name: 'Ana Sayfa', url: 'index.html', order: 1, active: true, subItems: [] },
-            { id: 2, name: 'Biz Kimiz', url: 'biz-kimiz.html', order: 2, active: true, subItems: [
-                { id: 21, name: 'BİZ KİMİZ', url: 'biz-kimiz.html' },
-                { id: 22, name: 'Manifesto', url: 'biz-kimiz.html#manifesto' },
-                { id: 23, name: 'Tarihçe', url: 'biz-kimiz.html#tarihce' }
-            ]},
-            { id: 3, name: 'Projeler', url: 'projeler.html', order: 3, active: true, subItems: [
-                { id: 31, name: 'İpek Reserve', url: 'projeler.html' },
-                { id: 32, name: 'İpek Sapanca', url: 'projeler.html' },
-                { id: 33, name: 'İpek Arsa', url: 'projeler.html' }
-            ]},
+            {
+                id: 2, name: 'Biz Kimiz', url: 'biz-kimiz.html', order: 2, active: true, subItems: [
+                    { id: 21, name: 'BİZ KİMİZ', url: 'biz-kimiz.html' },
+                    { id: 22, name: 'Manifesto', url: 'biz-kimiz.html#manifesto' },
+                    { id: 23, name: 'Tarihçe', url: 'biz-kimiz.html#tarihce' }
+                ]
+            },
+            {
+                id: 3, name: 'Projeler', url: 'projeler.html', order: 3, active: true, subItems: [
+                    { id: 31, name: 'Kip Reserve', url: 'projeler.html' },
+                    { id: 32, name: 'Kip Sapanca', url: 'projeler.html' },
+                    { id: 33, name: 'Kip Arsa', url: 'projeler.html' }
+                ]
+            },
             { id: 5, name: 'İletişim', url: 'iletisim.html', order: 5, active: true, subItems: [] }
         ];
         localStorage.setItem(DATA_KEYS.nav, JSON.stringify(defaultNav));
 
         // Default Sections
         const defaultSections = [
-            { id: 1, name: 'Ana Sayfa Hero', page: 'index.html', type: 'hero', title: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.', subtitle: '', content: '', bgImage: 'https://via.placeholder.com/800x600/2c3e50/ffffff?text=İPEK+Yaşam+Alanları', order: 1 }
+            { id: 1, name: 'Ana Sayfa Hero', page: 'index.html', type: 'hero', title: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.', subtitle: '', content: '', bgImage: 'https://via.placeholder.com/800x600/2c3e50/ffffff?text=KİP+Yaşam+Alanları', order: 1 }
         ];
         localStorage.setItem(DATA_KEYS.sections, JSON.stringify(defaultSections));
 
         // Default Cards
         const defaultCards = [
-            { id: 1, title: 'İpek Reserve', page: 'index.html', order: 1, status: 'Yaşam Başladı', description: 'Premium yaşam alanları', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Reserve', features: 'Deniz Manzarası, Lüks Tasarım', link: '#', buttonText: 'Keşfet' },
-            { id: 2, title: 'İpek Sapanca', page: 'index.html', order: 2, status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi İpek'den Bakın", image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Sapanca', features: 'Doğa Manzarası, Göl Yakınlığı', link: '#', buttonText: 'Keşfet' },
-            { id: 3, title: 'İpek Arsa', page: 'index.html', order: 3, status: 'Satışta', description: 'Birikiminizle Birlikte Hayallerinizi Büyütün', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Arsa', features: 'Yatırımlık, Modüler Ev', link: '#', buttonText: 'Keşfet' }
+            { id: 1, title: 'Kip Reserve', page: 'index.html', order: 1, status: 'Yaşam Başladı', description: 'Premium yaşam alanları', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Reserve', features: 'Deniz Manzarası, Lüks Tasarım', link: '#', buttonText: 'Keşfet' },
+            { id: 2, title: 'Kip Sapanca', page: 'index.html', order: 2, status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi Kip'den Bakın", image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Sapanca', features: 'Doğa Manzarası, Göl Yakınlığı', link: '#', buttonText: 'Keşfet' },
+            { id: 3, title: 'Kip Arsa', page: 'index.html', order: 3, status: 'Satışta', description: 'Birikiminizle Birlikte Hayallerinizi Büyütün', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Arsa', features: 'Yatırımlık, Modüler Ev', link: '#', buttonText: 'Keşfet' }
         ];
         localStorage.setItem(DATA_KEYS.cards, JSON.stringify(defaultCards));
 
         // Default Settings
         const defaultSettings = {
-            siteTitle: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
-            contactEmail: 'info@ipek.com.tr',
+            siteTitle: 'KİP - İnce Düşünülmüş Yaşam Alanları',
+            contactEmail: 'info@kip.com.tr',
             contactPhone: '+90 212 555 00 00'
         };
         localStorage.setItem(DATA_KEYS.settings, JSON.stringify(defaultSettings));
@@ -588,6 +592,6 @@ window.addEventListener('load', () => {
 });
 
 // Console Easter egg
-console.log('%c İPEK Clone ', 'background: #2c3e50; color: #fff; font-size: 20px; font-weight: bold; padding: 10px;');
+console.log('%c KİP Clone ', 'background: #2c3e50; color: #fff; font-size: 20px; font-weight: bold; padding: 10px;');
 console.log('%c Modern web development with attention to detail ', 'background: #3498db; color: #fff; padding: 5px;');
 
