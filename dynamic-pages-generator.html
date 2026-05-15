@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">İPEK - İnce Düşünülmüş Yaşam Alanları</title>
+    <title id="pageTitle">KİP - İnce Düşünülmüş Yaşam Alanları</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="description" id="pageDescription"
         content="2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.">
-    <meta name="keywords" id="pageKeywords" content="ipek, inşaat, konut, arsa, proje, yaşam alanları">
+    <meta name="keywords" id="pageKeywords" content="kip, inşaat, konut, arsa, proje, yaşam alanları">
     <link rel="icon" id="favicon" href="https://via.placeholder.com/32x32/2c3e50/ffffff?text=N">
 </head>
 
@@ -21,7 +21,7 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">İPEK</a></h1>
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">KİP</a></h1>
                 </div>
                 <ul class="nav-menu" id="dynamicNavMenu">
                     <!-- Navigation will be loaded dynamically -->
@@ -48,7 +48,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>İPEK</h3>
+                    <h3>KİP</h3>
                     <p id="footerDescription">2010 yılından beri ince düşünülmüş yaşam alanları tasarlıyoruz.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
@@ -73,13 +73,13 @@
                     <h4>İletişim</h4>
                     <ul>
                         <li><i class="fas fa-phone"></i> <span id="footerPhone">+90 212 555 00 00</span></li>
-                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@ipek.com.tr</span></li>
+                        <li><i class="fas fa-envelope"></i> <span id="footerEmail">info@kip.com.tr</span></li>
                         <li><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">İstanbul, Türkiye</span></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 İPEK. Tüm hakları saklıdır.</p>
+                <p>&copy; 2024 KİP. Tüm hakları saklıdır.</p>
                 <div class="legal-links">
                     <a href="#">KVKK</a>
                     <a href="#">Aydınlatma Metni</a>
@@ -104,7 +104,7 @@
         const pageConfigs = {
             'index.html': {
                 title: 'Ana Sayfa',
-                sections: ['hero', 'featured-projects', 'ipek-arsa', 'cta', 'contact']
+                sections: ['hero', 'featured-projects', 'kip-arsa', 'cta', 'contact']
             },
             'biz-kimiz.html': {
                 title: 'Biz Kimiz',
@@ -118,12 +118,12 @@
                 title: 'Projeler',
                 sections: ['hero', 'projects-grid', 'filters']
             },
-            'ipek-kesifleri.html': {
-                title: 'İpek Keşifleri',
+            'kip-kesifleri.html': {
+                title: 'Kip Keşifleri',
                 sections: ['hero', 'featured', 'innovation', 'categories', 'discoveries', 'newsletter']
             },
-            'ipek-kesifleri-new.html': {
-                title: 'İpek Keşifleri - Gelişmiş',
+            'kip-kesifleri-new.html': {
+                title: 'Kip Keşifleri - Gelişmiş',
                 sections: ['hero', 'featured', 'innovation', 'categories', 'discoveries', 'newsletter']
             },
             'iletisim.html': {
@@ -170,9 +170,9 @@
         }
 
         function loadPageMetadata(page) {
-            const pages = window.İPEKAdminEnhanced.getPages();
+            const pages = window.KİPAdminEnhanced.getPages();
             const pageData = pages.find(p => p.file === page);
-            const settings = window.İPEKAdminEnhanced.getSettings();
+            const settings = window.KİPAdminEnhanced.getSettings();
 
             if (pageData) {
                 document.getElementById('pageTitle').textContent = pageData.title;
@@ -191,12 +191,12 @@
 
         function loadNavigation() {
             const navMenu = document.getElementById('dynamicNavMenu');
-            navMenu.innerHTML = window.İPEKAdminEnhanced.generateNavigationHTML();
+            navMenu.innerHTML = window.KİPAdminEnhanced.generateNavigationHTML();
         }
 
         function loadPageSections(page) {
             const container = document.getElementById('dynamicContent');
-            const sections = window.İPEKAdminEnhanced.getSections().filter(s => s.page === page).sort((a, b) => a.order - b.order);
+            const sections = window.KİPAdminEnhanced.getSections().filter(s => s.page === page).sort((a, b) => a.order - b.order);
 
             if (sections.length === 0) {
                 // Load default content if no sections found
@@ -357,7 +357,7 @@
                             <div class="container">
                                 <h2 style="font-size: 2.5rem; font-weight: 300; color: #2c3e50; margin-bottom: 2rem;">Öne Çıkan Projeler</h2>
                                 <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-                                    ${window.İPEKAdminEnhanced.generateCardsHTML('index.html')}
+                                    ${window.KİPAdminEnhanced.generateCardsHTML('index.html')}
                                 </div>
                             </div>
                         </section>
@@ -378,8 +378,8 @@
         }
 
         function loadFooter() {
-            const settings = window.İPEKAdminEnhanced.getSettings();
-            const navigation = window.İPEKAdminEnhanced.getNavigationItems();
+            const settings = window.KİPAdminEnhanced.getSettings();
+            const navigation = window.KİPAdminEnhanced.getNavigationItems();
 
             // Update footer info
             document.getElementById('footerDescription').textContent = settings.siteDescription;

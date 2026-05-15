@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İPEK Admin Panel</title>
+    <title>KİP Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -1317,7 +1317,7 @@
         <div class="sidebar-logo">
             <div class="logo-mark">N</div>
             <div>
-                <div class="logo-text">İPEK Admin</div>
+                <div class="logo-text">KİP Admin</div>
                 <div class="logo-sub">İçerik Yönetim Sistemi</div>
             </div>
         </div>
@@ -1465,13 +1465,15 @@
                     <div class="card-header">
                         <div class="card-title"><i class="fas fa-layer-group"></i> Bölüm Yönetimi</div>
                         <div style="display:flex;gap:10px;align-items:center;">
-                            <select class="form-control" style="width:200px;" id="sectionPageFilter" onchange="renderSections()">
+                            <select class="form-control" style="width:200px;" id="sectionPageFilter"
+                                onchange="renderSections()">
                                 <option value="">Tüm Sayfalar</option>
                                 <option value="index.html">Ana Sayfa</option>
                                 <option value="biz-kimiz.html">Biz Kimiz</option>
                                 <option value="projeler.html">Projeler</option>
                             </select>
-                            <button class="btn btn-primary btn-sm" onclick="openSectionModal()"><i class="fas fa-plus"></i> Bölüm Ekle</button>
+                            <button class="btn btn-primary btn-sm" onclick="openSectionModal()"><i
+                                    class="fas fa-plus"></i> Bölüm Ekle</button>
                         </div>
                     </div>
                     <div id="sectionsList"></div>
@@ -1490,7 +1492,7 @@
                                 <option value="index.html">Ana Sayfa</option>
                                 <option value="biz-kimiz.html">Biz Kimiz</option>
                                 <option value="projeler.html">Projeler</option>
-                                <option value="ipek-kesifleri.html">İpek Keşifleri</option>
+                                <option value="kip-kesifleri.html">Kip Keşifleri</option>
                                 <option value="iletisim.html">İletişim</option>
                             </select>
                             <button class="btn btn-primary btn-sm" onclick="openCardModal()"><i class="fas fa-plus"></i>
@@ -1614,7 +1616,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Meta Keywords</label>
                                     <input class="form-control" type="text" id="metaKeywords"
-                                        placeholder="ipek, inşaat, konut">
+                                        placeholder="kip, inşaat, konut">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Favicon URL</label>
@@ -1660,12 +1662,19 @@
                             <p
                                 style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">
                                 Veri Yönetimi (Vercel Senkronizasyonu İçin)</p>
-                            <div style="background:var(--surface2);padding:20px;border-radius:var(--radius);border:1px solid var(--border);">
-                                <p style="font-size:13px;color:var(--text2);margin-bottom:15px;">LocalStorage verilerinizi bir JSON dosyası olarak indirebilir veya başka bir tarayıcıya/cihaza (örneğin Vercel üzerindeki sitenize) yükleyebilirsiniz.</p>
+                            <div
+                                style="background:var(--surface2);padding:20px;border-radius:var(--radius);border:1px solid var(--border);">
+                                <p style="font-size:13px;color:var(--text2);margin-bottom:15px;">LocalStorage
+                                    verilerinizi bir JSON dosyası olarak indirebilir veya başka bir tarayıcıya/cihaza
+                                    (örneğin Vercel üzerindeki sitenize) yükleyebilirsiniz.</p>
                                 <div style="display:flex;gap:12px;">
-                                    <button type="button" class="btn btn-primary" onclick="exportData()"><i class="fas fa-download"></i> Verileri İndir (Backup)</button>
-                                    <button type="button" class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i class="fas fa-upload"></i> Verileri Yükle (Restore)</button>
-                                    <input type="file" id="importFile" style="display:none;" accept=".json" onchange="importData(event)">
+                                    <button type="button" class="btn btn-primary" onclick="exportData()"><i
+                                            class="fas fa-download"></i> Verileri İndir (Backup)</button>
+                                    <button type="button" class="btn btn-ghost"
+                                        onclick="document.getElementById('importFile').click()"><i
+                                            class="fas fa-upload"></i> Verileri Yükle (Restore)</button>
+                                    <input type="file" id="importFile" style="display:none;" accept=".json"
+                                        onchange="importData(event)">
                                 </div>
                             </div>
                         </div>
@@ -1775,7 +1784,8 @@
     <div class="modal-overlay" id="sectionModal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title"><i class="fas fa-layer-group"></i> <span id="sectionModalTitle">Bölüm Ekle</span>
+                <div class="modal-title"><i class="fas fa-layer-group"></i> <span id="sectionModalTitle">Bölüm
+                        Ekle</span>
                 </div>
                 <button class="modal-close" onclick="closeModal('sectionModal')">×</button>
             </div>
@@ -1811,17 +1821,22 @@
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                             <div>
                                 <div class="img-picker-tabs">
-                                    <div class="img-picker-tab active" onclick="switchSectionImgTab('url',this)"><i class="fas fa-link"></i> URL</div>
-                                    <div class="img-picker-tab" onclick="switchSectionImgTab('upload',this)"><i class="fas fa-upload"></i> Yükle</div>
-                                    <div class="img-picker-tab" onclick="switchSectionImgTab('library',this)"><i class="fas fa-images"></i> Kütüphane</div>
+                                    <div class="img-picker-tab active" onclick="switchSectionImgTab('url',this)"><i
+                                            class="fas fa-link"></i> URL</div>
+                                    <div class="img-picker-tab" onclick="switchSectionImgTab('upload',this)"><i
+                                            class="fas fa-upload"></i> Yükle</div>
+                                    <div class="img-picker-tab" onclick="switchSectionImgTab('library',this)"><i
+                                            class="fas fa-images"></i> Kütüphane</div>
                                 </div>
                                 <div id="sectionImgTabUrl">
-                                    <input class="form-control" type="url" id="sectionBgImage" placeholder="https://..." oninput="updateSectionImgPreview()">
+                                    <input class="form-control" type="url" id="sectionBgImage" placeholder="https://..."
+                                        oninput="updateSectionImgPreview()">
                                 </div>
                                 <div id="sectionImgTabUpload" style="display:none;">
                                     <div class="upload-zone" style="padding:20px;">
                                         <input type="file" accept="image/*" onchange="handleSectionImageUpload(event)">
-                                        <div style="font-size:24px;color:var(--text3);margin-bottom:6px;"><i class="fas fa-upload"></i></div>
+                                        <div style="font-size:24px;color:var(--text3);margin-bottom:6px;"><i
+                                                class="fas fa-upload"></i></div>
                                         <div style="font-size:12px;color:var(--text2);">Resim seç veya sürükle</div>
                                     </div>
                                 </div>
@@ -1830,10 +1845,13 @@
                                 </div>
                             </div>
                             <div>
-                                <p style="font-size:11px;color:var(--text2);margin-bottom:8px;font-weight:600;">ÖNİZLEME</p>
+                                <p style="font-size:11px;color:var(--text2);margin-bottom:8px;font-weight:600;">ÖNİZLEME
+                                </p>
                                 <div id="sectionImgPreviewWrap">
-                                    <div class="img-preview-placeholder" id="sectionImgPlaceholder"><i class="fas fa-image"></i><span>Resim seçilmedi</span></div>
-                                    <img id="sectionImgPreview" class="img-preview" src="" style="display:none;" onerror="this.style.display='none';document.getElementById('sectionImgPlaceholder').style.display='flex'">
+                                    <div class="img-preview-placeholder" id="sectionImgPlaceholder"><i
+                                            class="fas fa-image"></i><span>Resim seçilmedi</span></div>
+                                    <img id="sectionImgPreview" class="img-preview" src="" style="display:none;"
+                                        onerror="this.style.display='none';document.getElementById('sectionImgPlaceholder').style.display='flex'">
                                 </div>
                             </div>
                         </div>
@@ -1879,7 +1897,7 @@
                             <option value="index.html">Ana Sayfa</option>
                             <option value="biz-kimiz.html">Biz Kimiz</option>
                             <option value="projeler.html">Projeler</option>
-                            <option value="ipek-kesifleri.html">İpek Keşifleri</option>
+                            <option value="kip-kesifleri.html">Kip Keşifleri</option>
                             <option value="iletisim.html">İletişim</option>
                         </select>
                     </div>
@@ -2134,14 +2152,14 @@
         // DATA LAYER (localStorage)
         // ===========================
         const KEYS = {
-            nav: 'ipek_navigation',
-            pages: 'ipek_pages',
-            projects: 'ipek_projects',
-            images: 'ipek_images',
-            settings: 'ipek_settings',
-            cards: 'ipek_cards',
-            sections: 'ipek_sections',
-            activities: 'ipek_activities'
+            nav: 'kip_navigation',
+            pages: 'kip_pages',
+            projects: 'kip_projects',
+            images: 'kip_images',
+            settings: 'kip_settings',
+            cards: 'kip_cards',
+            sections: 'kip_sections',
+            activities: 'kip_activities'
         };
 
         const CLOUD_STATE_ENDPOINT = '/api/state';
@@ -2151,7 +2169,7 @@
         let isCloudSyncing = false;
 
         function getData(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
-        function setData(key, val) { 
+        function setData(key, val) {
             try {
                 localStorage.setItem(key, JSON.stringify(val));
                 scheduleCloudSync();
@@ -2249,52 +2267,52 @@
                 },
                 {
                     id: 3, name: 'Projeler', url: 'projeler.html', order: 3, active: true, subItems: [
-                        { id: 31, name: 'İpek Reserve', url: 'projeler.html' },
-                        { id: 32, name: 'İpek Projeler', url: 'projeler.html' },
-                        { id: 33, name: 'İpek Arsa', url: 'projeler.html' },
-                        { id: 34, name: 'İpek Global', url: 'projeler.html' },
+                        { id: 31, name: 'Kip Reserve', url: 'projeler.html' },
+                        { id: 32, name: 'Kip Projeler', url: 'projeler.html' },
+                        { id: 33, name: 'Kip Arsa', url: 'projeler.html' },
+                        { id: 34, name: 'Kip Global', url: 'projeler.html' },
                         { id: 35, name: 'NOVU', url: 'projeler.html' },
                         { id: 36, name: 'Tümünü Gör', url: 'projeler.html' }
                     ]
                 },
-                { id: 4, name: 'İpek Keşifleri', url: 'ipek-kesifleri.html', order: 4, active: true, subItems: [] },
+                { id: 4, name: 'Kip Keşifleri', url: 'kip-kesifleri.html', order: 4, active: true, subItems: [] },
                 { id: 5, name: 'İletişim', url: 'iletisim.html', order: 5, active: true, subItems: [] }
             ]);
             if (!getData(KEYS.pages)) setData(KEYS.pages, [
-                { file: 'index.html', title: 'Ana Sayfa', description: 'İPEK - İnce Düşünülmüş Yaşam Alanları', keywords: 'ipek,inşaat,konut', active: true, updated: today() },
-                { file: 'biz-kimiz.html', title: 'Biz Kimiz', description: 'İPEK Hakkımızda', keywords: 'ipek,hakkımızda', active: true, updated: today() },
-                { file: 'projeler.html', title: 'Projeler', description: 'İPEK Projeleri', keywords: 'ipek,projeler', active: true, updated: today() },
-                { file: 'ipek-kesifleri.html', title: 'İpek Keşifleri', description: 'İPEK Keşifleri', keywords: 'ipek,keşifler', active: true, updated: today() },
-                { file: 'iletisim.html', title: 'İletişim', description: 'İPEK İletişim', keywords: 'ipek,iletişim', active: true, updated: today() }
+                { file: 'index.html', title: 'Ana Sayfa', description: 'KİP - İnce Düşünülmüş Yaşam Alanları', keywords: 'kip,inşaat,konut', active: true, updated: today() },
+                { file: 'biz-kimiz.html', title: 'Biz Kimiz', description: 'KİP Hakkımızda', keywords: 'kip,hakkımızda', active: true, updated: today() },
+                { file: 'projeler.html', title: 'Projeler', description: 'KİP Projeleri', keywords: 'kip,projeler', active: true, updated: today() },
+                { file: 'kip-kesifleri.html', title: 'Kip Keşifleri', description: 'KİP Keşifleri', keywords: 'kip,keşifler', active: true, updated: today() },
+                { file: 'iletisim.html', title: 'İletişim', description: 'KİP İletişim', keywords: 'kip,iletişim', active: true, updated: today() }
             ]);
             if (!getData(KEYS.projects)) setData(KEYS.projects, [
-                { id: 1, name: 'İpek Sapanca', category: 'konut', location: 'Sapanca, Kocaeli', status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi İpek'den Bakın", features: 'Doğa Manzarası, Göl Yakınlığı', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Sapanca', price: '₺2.500.000 - ₺5.000.000', delivery: '2024-06-01' },
-                { id: 2, name: 'İpek Meram', category: 'konut', location: 'Meram, Konya', status: 'İnşaat Devam Ediyor', description: 'Trakya\'nın yıldızı parlıyor', features: 'Merkezi Konum, Yeşil Alanlar', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Meram', price: '₺1.800.000 - ₺3.200.000', delivery: '2025-03-01' },
-                { id: 3, name: 'İpek Reserve', category: 'konut', location: 'Bodrum, Muğla', status: 'Yaşam Başladı', description: 'Premium yaşam alanları', features: 'Deniz Manzarası, Lüks Tasarım', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Reserve', price: '₺8.000.000 - ₺15.000.000', delivery: '2023-12-01' },
-                { id: 4, name: 'İpek Arsa Kaz Dağları', category: 'arsa', location: 'Kaz Dağları, Çanakkale', status: 'Satışta', description: "Kaz Dağları'nın Havası", features: 'Doğa İç İçe, Modüler Ev', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Kaz', price: '₺500.000 - ₺1.500.000', delivery: '' },
-                { id: 5, name: 'İpek Arsa Dikili', category: 'arsa', location: 'Dikili, İzmir', status: 'Satışta', description: "Ege'nin incisi", features: 'Deniz Yakınlığı, Turistik', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Dikili', price: '₺600.000 - ₺2.000.000', delivery: '' },
-                { id: 6, name: 'İpek Arsa Lüleburgaz', category: 'arsa', location: 'Lüleburgaz, Kırklareli', status: 'Satışta', description: 'Trakya\'nın yıldızı', features: 'Stratejik Konum, Yatırımlık', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Luleburgaz', price: '₺400.000 - ₺1.200.000', delivery: '' }
+                { id: 1, name: 'Kip Sapanca', category: 'konut', location: 'Sapanca, Kocaeli', status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi Kip'den Bakın", features: 'Doğa Manzarası, Göl Yakınlığı', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Sapanca', price: '₺2.500.000 - ₺5.000.000', delivery: '2024-06-01' },
+                { id: 2, name: 'Kip Meram', category: 'konut', location: 'Meram, Konya', status: 'İnşaat Devam Ediyor', description: 'Trakya\'nın yıldızı parlıyor', features: 'Merkezi Konum, Yeşil Alanlar', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Meram', price: '₺1.800.000 - ₺3.200.000', delivery: '2025-03-01' },
+                { id: 3, name: 'Kip Reserve', category: 'konut', location: 'Bodrum, Muğla', status: 'Yaşam Başladı', description: 'Premium yaşam alanları', features: 'Deniz Manzarası, Lüks Tasarım', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Reserve', price: '₺8.000.000 - ₺15.000.000', delivery: '2023-12-01' },
+                { id: 4, name: 'Kip Arsa Kaz Dağları', category: 'arsa', location: 'Kaz Dağları, Çanakkale', status: 'Satışta', description: "Kaz Dağları'nın Havası", features: 'Doğa İç İçe, Modüler Ev', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Arsa+Kaz', price: '₺500.000 - ₺1.500.000', delivery: '' },
+                { id: 5, name: 'Kip Arsa Dikili', category: 'arsa', location: 'Dikili, İzmir', status: 'Satışta', description: "Ege'nin incisi", features: 'Deniz Yakınlığı, Turistik', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Arsa+Dikili', price: '₺600.000 - ₺2.000.000', delivery: '' },
+                { id: 6, name: 'Kip Arsa Lüleburgaz', category: 'arsa', location: 'Lüleburgaz, Kırklareli', status: 'Satışta', description: 'Trakya\'nın yıldızı', features: 'Stratejik Konum, Yatırımlık', image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Arsa+Luleburgaz', price: '₺400.000 - ₺1.200.000', delivery: '' }
             ]);
             if (!getData(KEYS.images)) setData(KEYS.images, [
                 { id: 1, name: 'hero-image.jpg', url: 'https://via.placeholder.com/800x400/34495e/ffffff?text=Hero+Image', size: '125 KB', date: today() },
-                { id: 2, name: 'logo.png', url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=İPEK+Logo', size: '45 KB', date: today() },
+                { id: 2, name: 'logo.png', url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=KİP+Logo', size: '45 KB', date: today() },
                 { id: 3, name: 'project-1.jpg', url: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Project+1', size: '89 KB', date: today() },
                 { id: 4, name: 'about-image.jpg', url: 'https://via.placeholder.com/600x400/34495e/ffffff?text=About+Image', size: '156 KB', date: today() }
             ]);
             if (!getData(KEYS.settings)) setData(KEYS.settings, {
-                siteTitle: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
+                siteTitle: 'KİP - İnce Düşünülmüş Yaşam Alanları',
                 siteDescription: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.',
-                contactEmail: 'info@ipek.com.tr', contactPhone: '+90 212 555 00 00',
+                contactEmail: 'info@kip.com.tr', contactPhone: '+90 212 555 00 00',
                 contactAddress: 'Maslak, Büyükdere Cad. No:123, Sarıyer/İstanbul',
-                metaKeywords: 'ipek,inşaat,konut,arsa', faviconUrl: '', googleAnalytics: ''
+                metaKeywords: 'kip,inşaat,konut,arsa', faviconUrl: '', googleAnalytics: ''
             });
             if (!getData(KEYS.cards)) setData(KEYS.cards, [
-                { id: 1, title: 'İpek Reserve', page: 'index.html', order: 1, status: 'Yaşam Başladı', description: 'Premium yaşam alanları', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Reserve', features: 'Deniz Manzarası, Lüks Tasarım', price: '₺8.000.000 - ₺15.000.000', link: '#', buttonText: 'Keşfet' },
-                { id: 2, title: 'İpek Sapanca', page: 'index.html', order: 2, status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi İpek'den Bakın", image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Sapanca', features: 'Doğa Manzarası, Göl Yakınlığı', price: '₺2.500.000 - ₺5.000.000', link: '#', buttonText: 'Keşfet' },
-                { id: 3, title: 'İpek Arsa', page: 'index.html', order: 3, status: 'Satışta', description: 'Birikiminizle Birlikte Hayallerinizi Büyütün', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Arsa', features: 'Yatırımlık, Modüler Ev', price: '₺500.000 - ₺1.500.000', link: '#', buttonText: 'Keşfet' }
+                { id: 1, title: 'Kip Reserve', page: 'index.html', order: 1, status: 'Yaşam Başladı', description: 'Premium yaşam alanları', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Reserve', features: 'Deniz Manzarası, Lüks Tasarım', price: '₺8.000.000 - ₺15.000.000', link: '#', buttonText: 'Keşfet' },
+                { id: 2, title: 'Kip Sapanca', page: 'index.html', order: 2, status: 'Yaşam Başladı', description: "Sapanca'ya Şimdi Kip'den Bakın", image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Sapanca', features: 'Doğa Manzarası, Göl Yakınlığı', price: '₺2.500.000 - ₺5.000.000', link: '#', buttonText: 'Keşfet' },
+                { id: 3, title: 'Kip Arsa', page: 'index.html', order: 3, status: 'Satışta', description: 'Birikiminizle Birlikte Hayallerinizi Büyütün', image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Arsa', features: 'Yatırımlık, Modüler Ev', price: '₺500.000 - ₺1.500.000', link: '#', buttonText: 'Keşfet' }
             ]);
             if (!getData(KEYS.sections)) setData(KEYS.sections, [
-                { id: 1, name: 'Ana Sayfa Hero', page: 'index.html', type: 'hero', title: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.', subtitle: '', content: '', bgImage: 'https://via.placeholder.com/800x600/2c3e50/ffffff?text=İPEK+Yaşam+Alanları', order: 1 }
+                { id: 1, name: 'Ana Sayfa Hero', page: 'index.html', type: 'hero', title: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.', subtitle: '', content: '', bgImage: 'https://via.placeholder.com/800x600/2c3e50/ffffff?text=KİP+Yaşam+Alanları', order: 1 }
             ]);
             if (!getData(KEYS.activities)) setData(KEYS.activities, [{ id: 1, text: 'Admin paneli oluşturuldu', time: new Date().toISOString(), type: 'info' }]);
         }
@@ -2546,7 +2564,7 @@
         // ===========================
         function renderSections() {
             const filter = document.getElementById('sectionPageFilter').value;
-            let sections = getData(KEYS.sections) || getData('ipek_sections') || [];
+            let sections = getData(KEYS.sections) || getData('kip_sections') || [];
             if (filter) sections = sections.filter(s => s.page === filter);
             sections.sort((a, b) => a.order - b.order);
             const el = document.getElementById('sectionsList');
@@ -2577,9 +2595,9 @@
             document.getElementById('sectionPage').value = 'index.html';
             setSectionImgPreview('');
             switchSectionImgTab('url', document.querySelector('#sectionModal .img-picker-tab'));
-            
+
             if (id) {
-                const sections = getData(KEYS.sections) || getData('ipek_sections') || [];
+                const sections = getData(KEYS.sections) || getData('kip_sections') || [];
                 const s = sections.find(x => x.id === id);
                 if (s) {
                     document.getElementById('sectionName').value = s.name || '';
@@ -2603,11 +2621,11 @@
             const page = document.getElementById('sectionPage').value;
             if (!name || !page) { toast('Ad ve sayfa zorunludur.', 'error'); return; }
             const id = parseInt(document.getElementById('sectionId').value) || null;
-            const sections = getData(KEYS.sections) || getData('ipek_sections') || [];
-            const data = { 
-                name, 
-                page, 
-                order: parseInt(document.getElementById('sectionOrder').value) || 1, 
+            const sections = getData(KEYS.sections) || getData('kip_sections') || [];
+            const data = {
+                name,
+                page,
+                order: parseInt(document.getElementById('sectionOrder').value) || 1,
                 type: document.getElementById('sectionType').value,
                 title: document.getElementById('sectionTitle').value,
                 subtitle: document.getElementById('sectionSubtitle').value,
@@ -3195,7 +3213,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `ipek_yapi_backup_${today()}.json`;
+            a.download = `kip_yapi_backup_${today()}.json`;
             a.click();
             toast('Yedek dosyası indirildi.', 'success');
         }
@@ -3298,13 +3316,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-

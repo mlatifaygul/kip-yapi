@@ -488,8 +488,8 @@ body {
     gap: 1.2rem;
 }
 
-/* İpek Arsa Section */
-.ipek-arsa {
+/* Kip Arsa Section */
+.kip-arsa {
     padding: 120px 0;
     background: var(--bg);
 }
@@ -1171,7 +1171,7 @@ body {
     }
 
     .featured-projects,
-    .ipek-arsa,
+    .kip-arsa,
     .news-section,
     .contact-section {
         padding: 80px 0;

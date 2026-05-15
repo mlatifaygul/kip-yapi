@@ -3,7 +3,7 @@
 
 // Initialize localStorage with default data if empty
 function initializeEnhancedData() {
-    if (!localStorage.getItem('ipek_navigation')) {
+    if (!localStorage.getItem('kip_navigation')) {
         const defaultNavigation = [
             {
                 id: 1,
@@ -36,10 +36,10 @@ function initializeEnhancedData() {
                 order: 3,
                 active: true,
                 subItems: [
-                    { id: 31, name: 'İpek Reserve', url: 'projeler.html' },
-                    { id: 32, name: 'İpek Projeler', url: 'projeler.html' },
-                    { id: 33, name: 'İpek Arsa', url: 'projeler.html' },
-                    { id: 34, name: 'İpek Global', url: 'projeler.html' },
+                    { id: 31, name: 'Kip Reserve', url: 'projeler.html' },
+                    { id: 32, name: 'Kip Projeler', url: 'projeler.html' },
+                    { id: 33, name: 'Kip Arsa', url: 'projeler.html' },
+                    { id: 34, name: 'Kip Global', url: 'projeler.html' },
                     { id: 35, name: 'NOVU', url: 'projeler.html' },
                     { id: 36, name: 'Tümünü Gör', url: 'projeler.html' }
                 ],
@@ -48,8 +48,8 @@ function initializeEnhancedData() {
             },
             {
                 id: 4,
-                name: 'İpek Keşifleri',
-                url: 'ipek-kesifleri.html',
+                name: 'Kip Keşifleri',
+                url: 'kip-kesifleri.html',
                 order: 4,
                 active: true,
                 subItems: [],
@@ -67,16 +67,16 @@ function initializeEnhancedData() {
                 target: '_self'
             }
         ];
-        localStorage.setItem('ipek_navigation', JSON.stringify(defaultNavigation));
+        localStorage.setItem('kip_navigation', JSON.stringify(defaultNavigation));
     }
 
-    if (!localStorage.getItem('ipek_pages')) {
+    if (!localStorage.getItem('kip_pages')) {
         const defaultPages = [
             {
                 title: 'Ana Sayfa',
                 file: 'index.html',
-                description: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
-                keywords: 'ipek, inşaat, konut, arsa, proje',
+                description: 'KİP - İnce Düşünülmüş Yaşam Alanları',
+                keywords: 'kip, inşaat, konut, arsa, proje',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
@@ -84,8 +84,8 @@ function initializeEnhancedData() {
             {
                 title: 'Biz Kimiz',
                 file: 'biz-kimiz.html',
-                description: 'İPEK Hakkımızda Sayfası',
-                keywords: 'ipek, hakkımızda, şirket, tarihçe',
+                description: 'KİP Hakkımızda Sayfası',
+                keywords: 'kip, hakkımızda, şirket, tarihçe',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
@@ -93,8 +93,8 @@ function initializeEnhancedData() {
             {
                 title: 'Biz Kimiz (Gelişmiş)',
                 file: 'biz-kimiz-new.html',
-                description: 'İPEK Hakkımızda - Resimli ve Zengin İçerik',
-                keywords: 'ipek, hakkımızda, şirket, ekip, vizyon',
+                description: 'KİP Hakkımızda - Resimli ve Zengin İçerik',
+                keywords: 'kip, hakkımızda, şirket, ekip, vizyon',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
@@ -102,26 +102,26 @@ function initializeEnhancedData() {
             {
                 title: 'Projeler',
                 file: 'projeler.html',
-                description: 'İPEK Projeleri Sayfası',
-                keywords: 'ipek, projeler, konut, ticari',
+                description: 'KİP Projeleri Sayfası',
+                keywords: 'kip, projeler, konut, ticari',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
             },
             {
-                title: 'İpek Keşifleri',
-                file: 'ipek-kesifleri.html',
-                description: 'İPEK Keşifleri Sayfası',
-                keywords: 'ipek, keşifler, inovasyon, foldhome',
+                title: 'Kip Keşifleri',
+                file: 'kip-kesifleri.html',
+                description: 'KİP Keşifleri Sayfası',
+                keywords: 'kip, keşifler, inovasyon, foldhome',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
             },
             {
-                title: 'İpek Keşifleri (Gelişmiş)',
-                file: 'ipek-kesifleri-new.html',
-                description: 'İPEK Keşifleri - Foldhome ve İnovasyon',
-                keywords: 'ipek, keşifler, foldhome, inovasyon',
+                title: 'Kip Keşifleri (Gelişmiş)',
+                file: 'kip-kesifleri-new.html',
+                description: 'KİP Keşifleri - Foldhome ve İnovasyon',
+                keywords: 'kip, keşifler, foldhome, inovasyon',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
@@ -129,8 +129,8 @@ function initializeEnhancedData() {
             {
                 title: 'İletişim',
                 file: 'iletisim.html',
-                description: 'İPEK İletişim Sayfası',
-                keywords: 'ipek, iletişim, adres, telefon',
+                description: 'KİP İletişim Sayfası',
+                keywords: 'kip, iletişim, adres, telefon',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
@@ -138,17 +138,17 @@ function initializeEnhancedData() {
             {
                 title: 'İletişim (Gelişmiş)',
                 file: 'iletisim-new.html',
-                description: 'İPEK İletişim - Google Harita ve Detaylı Bilgiler',
-                keywords: 'ipek, iletişim, harita, adres, telefon',
+                description: 'KİP İletişim - Google Harita ve Detaylı Bilgiler',
+                keywords: 'kip, iletişim, harita, adres, telefon',
                 template: 'default',
                 active: true,
                 updated: '2024-05-10'
             }
         ];
-        localStorage.setItem('ipek_pages', JSON.stringify(defaultPages));
+        localStorage.setItem('kip_pages', JSON.stringify(defaultPages));
     }
 
-    if (!localStorage.getItem('ipek_sections')) {
+    if (!localStorage.getItem('kip_sections')) {
         const defaultSections = [
             // Ana Sayfa Bölümleri
             {
@@ -160,7 +160,7 @@ function initializeEnhancedData() {
                 title: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak',
                 subtitle: 'ince düşünülmüş yaşam alanları tasarlıyoruz.',
                 content: 'Hero bölümü içeriği',
-                bgImage: 'https://via.placeholder.com/1920x800/2c3e50/ffffff?text=İPEK+Hero',
+                bgImage: 'https://via.placeholder.com/1920x800/2c3e50/ffffff?text=KİP+Hero',
                 bgColor: '#ffffff'
             },
             {
@@ -177,13 +177,13 @@ function initializeEnhancedData() {
             },
             {
                 id: 3,
-                name: 'İpek Arsa',
+                name: 'Kip Arsa',
                 page: 'index.html',
                 type: 'feature',
                 order: 3,
                 title: 'Birikiminizle Birlikte Hayallerinizi Büyütün.',
-                subtitle: 'Hayalinizdeki İpek Arsa\'ya Şimdi Sahip Olun',
-                content: 'İpek Arsa bölümü içeriği',
+                subtitle: 'Hayalinizdeki Kip Arsa\'ya Şimdi Sahip Olun',
+                content: 'Kip Arsa bölümü içeriği',
                 bgImage: '',
                 bgColor: '#ffffff'
             },
@@ -197,7 +197,7 @@ function initializeEnhancedData() {
                 title: '2010 Yılından Beri İnce Düşünülmüş Yaşam Alanları',
                 subtitle: 'Metrekarelerle değil, santimetrekarelerle çalışarak hayata geçirdiğimiz projelerimizle Türkiye\'nin lider inşaat şirketlerinden biri olmayı sürdürüyoruz.',
                 content: 'Hero istatistikleri ve içerik',
-                bgImage: 'https://via.placeholder.com/1920x600/2c3e50/ffffff?text=İPEK+Hakkımızda',
+                bgImage: 'https://via.placeholder.com/1920x600/2c3e50/ffffff?text=KİP+Hakkımızda',
                 bgColor: '#ffffff'
             },
             {
@@ -208,7 +208,7 @@ function initializeEnhancedData() {
                 order: 2,
                 title: 'Hikayemiz',
                 subtitle: '2010 yılında, inşaat sektörüne farklı bir bakış açısı getirmek için yola çıktık.',
-                content: 'Sadece binalar değil, aynı zamanda yaşam kalitesini artıran, estetik ve fonksiyonelliği bir araya getiren mekanlar yaratma tutkusuyla İPEK\'i kurduk. İlk projemizden bu yana, her bir santimetreyi önemseyen bir anlayışla çalışıyoruz. Bize göre mükemmellik, detaylarda gizlidir. Bu nedenle projelerimizde her zaman en kaliteli malzemeleri, en son teknolojiyi ve en iyi mimari çözümleri kullanıyoruz.',
+                content: 'Sadece binalar değil, aynı zamanda yaşam kalitesini artıran, estetik ve fonksiyonelliği bir araya getiren mekanlar yaratma tutkusuyla KİP\'i kurduk. İlk projemizden bu yana, her bir santimetreyi önemseyen bir anlayışla çalışıyoruz. Bize göre mükemmellik, detaylarda gizlidir. Bu nedenle projelerimizde her zaman en kaliteli malzemeleri, en son teknolojiyi ve en iyi mimari çözümleri kullanıyoruz.',
                 bgImage: '',
                 bgColor: '#ffffff'
             },
@@ -260,15 +260,15 @@ function initializeEnhancedData() {
                 bgImage: '',
                 bgColor: '#ffffff'
             },
-            // İpek Keşifleri Bölümleri
+            // Kip Keşifleri Bölümleri
             {
                 id: 10,
-                name: 'İpek Keşifleri Hero',
-                page: 'ipek-kesifleri-new.html',
+                name: 'Kip Keşifleri Hero',
+                page: 'kip-kesifleri-new.html',
                 type: 'hero',
                 order: 1,
                 title: 'Foldhome İle Kişiye Özel Kullanım Alanlarını Keşfedin',
-                subtitle: 'Bir İpek keşfi olan Foldhome ile evinizde olmasını hayal ettiğiniz ama bir eve sığamayacak alanlar dilediğiniz zaman evinize ekleniyor.',
+                subtitle: 'Bir Kip keşfi olan Foldhome ile evinizde olmasını hayal ettiğiniz ama bir eve sığamayacak alanlar dilediğiniz zaman evinize ekleniyor.',
                 content: 'Hero içeriği',
                 bgImage: 'https://via.placeholder.com/1920x800/2c3e50/ffffff?text=Foldhome+İnovasyonu',
                 bgColor: '#ffffff'
@@ -276,7 +276,7 @@ function initializeEnhancedData() {
             {
                 id: 11,
                 name: 'Öne Çıkan Foldhome',
-                page: 'ipek-kesifleri-new.html',
+                page: 'kip-kesifleri-new.html',
                 type: 'feature',
                 order: 2,
                 title: 'Evine Ekstra Alanlar Kat',
@@ -288,7 +288,7 @@ function initializeEnhancedData() {
             {
                 id: 12,
                 name: 'Tasarım ve İnovasyon',
-                page: 'ipek-kesifleri-new.html',
+                page: 'kip-kesifleri-new.html',
                 type: 'card',
                 order: 3,
                 title: 'Tasarım ve İnovasyon',
@@ -300,7 +300,7 @@ function initializeEnhancedData() {
             {
                 id: 13,
                 name: 'Keşif Kategorileri',
-                page: 'ipek-kesifleri-new.html',
+                page: 'kip-kesifleri-new.html',
                 type: 'card',
                 order: 4,
                 title: 'Keşif Kategorileri',
@@ -312,7 +312,7 @@ function initializeEnhancedData() {
             {
                 id: 14,
                 name: 'Tüm Keşifler',
-                page: 'ipek-kesifleri-new.html',
+                page: 'kip-kesifleri-new.html',
                 type: 'card',
                 order: 5,
                 title: 'Tüm Keşifler',
@@ -331,7 +331,7 @@ function initializeEnhancedData() {
                 title: 'İletişim',
                 subtitle: 'Projelerimiz hakkında daha fazla bilgi almak, sorularınızı sormak veya bizimle iletişime geçmek için aşağıdaki kanalları kullanabilirsiniz.',
                 content: 'Hero içeriği',
-                bgImage: 'https://via.placeholder.com/1920x600/2c3e50/ffffff?text=İletişim+İPEK',
+                bgImage: 'https://via.placeholder.com/1920x600/2c3e50/ffffff?text=İletişim+KİP',
                 bgColor: '#ffffff'
             },
             {
@@ -383,94 +383,94 @@ function initializeEnhancedData() {
                 bgColor: '#ffffff'
             }
         ];
-        localStorage.setItem('ipek_sections', JSON.stringify(defaultSections));
+        localStorage.setItem('kip_sections', JSON.stringify(defaultSections));
     }
 
-    if (!localStorage.getItem('ipek_projects')) {
+    if (!localStorage.getItem('kip_projects')) {
         const defaultProjects = [
             {
                 id: 1,
-                name: 'İpek Sapanca',
+                name: 'Kip Sapanca',
                 category: 'konut',
                 location: 'Sapanca, Kocaeli',
                 status: 'Yaşam Başladı',
-                description: 'Sapanca\'ya Şimdi İpek\'den Bakın',
+                description: 'Sapanca\'ya Şimdi Kip\'den Bakın',
                 features: 'Doğa Manzarası, Göl Yakınlığı, Modern Tasarım',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Sapanca',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Sapanca',
                 gallery: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery1,https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery2',
                 price: '₺2.500.000 - ₺5.000.000',
                 delivery: '2024-06-01'
             },
             {
                 id: 2,
-                name: 'İpek Meram',
+                name: 'Kip Meram',
                 category: 'konut',
                 location: 'Meram, Konya',
                 status: 'İnşaat Devam Ediyor',
                 description: 'Trakya\'nın yıldızı parlıyor',
                 features: 'Merkezi Konum, Modern Altyapı, Yeşil Alanlar',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Meram',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Meram',
                 gallery: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery1,https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery2',
                 price: '₺1.800.000 - ₺3.200.000',
                 delivery: '2025-03-01'
             },
             {
                 id: 3,
-                name: 'İpek Reserve',
+                name: 'Kip Reserve',
                 category: 'konut',
                 location: 'Bodrum, Muğla',
                 status: 'Yaşam Başladı',
                 description: 'Premium yaşam alanları',
                 features: 'Deniz Manzarası, Lüks Tasarım, Özel Hizmetler',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Reserve',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Reserve',
                 gallery: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery1,https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery2',
                 price: '₺8.000.000 - ₺15.000.000',
                 delivery: '2023-12-01'
             },
             {
                 id: 4,
-                name: 'İpek Arsa Kaz Dağları',
+                name: 'Kip Arsa Kaz Dağları',
                 category: 'arsa',
                 location: 'Kaz Dağları, Çanakkale',
                 status: 'Satışta',
                 description: 'Kaz Dağları\'nın Havası Yaşamınızın Bir Parçası Olsun',
                 features: 'Doğa İç İçe, Yatırımlık, Modüler Ev İmkanı',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Kaz+Dağları',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Arsa+Kaz+Dağları',
                 gallery: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery1,https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery2',
                 price: '₺500.000 - ₺1.500.000',
                 delivery: '2024-08-01'
             },
             {
                 id: 5,
-                name: 'İpek Arsa Dikili',
+                name: 'Kip Arsa Dikili',
                 category: 'arsa',
                 location: 'Dikili, İzmir',
                 status: 'Satışta',
                 description: 'Ege\'nin incisinde mükemmel bir yatırım',
                 features: 'Deniz Yakınlığı, Turistik Bölge, Yatırımlık',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Dikili',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Arsa+Dikili',
                 gallery: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery1,https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery2',
                 price: '₺600.000 - ₺2.000.000',
                 delivery: '2024-10-01'
             },
             {
                 id: 6,
-                name: 'İpek Arsa Lüleburgaz',
+                name: 'Kip Arsa Lüleburgaz',
                 category: 'arsa',
                 location: 'Lüleburgaz, Kırklareli',
                 status: 'Satışta',
                 description: 'Trakya\'nın yıldızı parlıyor',
                 features: 'Stratejik Konum, Gelişim Bölgesi, Yatırımlık',
-                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=İpek+Arsa+Lüleburgaz',
+                image: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Kip+Arsa+Lüleburgaz',
                 gallery: 'https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery1,https://via.placeholder.com/400x250/34495e/ffffff?text=Gallery2',
                 price: '₺400.000 - ₺1.200.000',
                 delivery: '2024-09-01'
             }
         ];
-        localStorage.setItem('ipek_projects', JSON.stringify(defaultProjects));
+        localStorage.setItem('kip_projects', JSON.stringify(defaultProjects));
     }
 
-    if (!localStorage.getItem('ipek_images')) {
+    if (!localStorage.getItem('kip_images')) {
         const defaultImages = [
             {
                 id: 1,
@@ -481,7 +481,7 @@ function initializeEnhancedData() {
             {
                 id: 2,
                 name: 'logo.png',
-                url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=İPEK+Logo',
+                url: 'https://via.placeholder.com/200x100/2c3e50/ffffff?text=KİP+Logo',
                 size: '45 KB'
             },
             {
@@ -503,24 +503,24 @@ function initializeEnhancedData() {
                 size: '234 KB'
             }
         ];
-        localStorage.setItem('ipek_images', JSON.stringify(defaultImages));
+        localStorage.setItem('kip_images', JSON.stringify(defaultImages));
     }
 
-    if (!localStorage.getItem('ipek_settings')) {
+    if (!localStorage.getItem('kip_settings')) {
         const defaultSettings = {
-            siteTitle: 'İPEK - İnce Düşünülmüş Yaşam Alanları',
+            siteTitle: 'KİP - İnce Düşünülmüş Yaşam Alanları',
             siteDescription: '2010 yılından beri metrekarelerle değil santimetrekarelerle çalışarak, ince düşünülmüş yaşam alanları tasarlıyoruz.',
-            contactEmail: 'info@ipek.com.tr',
+            contactEmail: 'info@kip.com.tr',
             contactPhone: '+90 212 555 00 00',
             contactAddress: 'Maslak, Büyükdere Cad. No:123, Sarıyer/İstanbul',
             googleAnalytics: 'UA-XXXXXXX-X',
-            metaKeywords: 'ipek, inşaat, konut, arsa, proje, yaşam alanları, metrekare, santimetrekare',
+            metaKeywords: 'kip, inşaat, konut, arsa, proje, yaşam alanları, metrekare, santimetrekare',
             faviconUrl: 'https://via.placeholder.com/32x32/2c3e50/ffffff?text=N'
         };
-        localStorage.setItem('ipek_settings', JSON.stringify(defaultSettings));
+        localStorage.setItem('kip_settings', JSON.stringify(defaultSettings));
     }
 
-    if (!localStorage.getItem('ipek_activities')) {
+    if (!localStorage.getItem('kip_activities')) {
         const defaultActivities = [
             {
                 id: 1,
@@ -530,16 +530,16 @@ function initializeEnhancedData() {
                 type: 'system'
             }
         ];
-        localStorage.setItem('ipek_activities', JSON.stringify(defaultActivities));
+        localStorage.setItem('kip_activities', JSON.stringify(defaultActivities));
     }
 
-    if (!localStorage.getItem('ipek_cards')) {
+    if (!localStorage.getItem('kip_cards')) {
         const defaultCards = [
             {
                 id: 1,
-                title: 'İpek Reserve',
+                title: 'Kip Reserve',
                 description: 'Premium yaşam alanları',
-                image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Reserve',
+                image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Reserve',
                 status: 'Yaşam Başladı',
                 features: 'Deniz Manzarası, Lüks Tasarım, Özel Hizmetler',
                 price: '₺8.000.000 - ₺15.000.000',
@@ -550,9 +550,9 @@ function initializeEnhancedData() {
             },
             {
                 id: 2,
-                title: 'İpek Sapanca',
-                description: 'Sapanca\'ya Şimdi İpek\'den Bakın',
-                image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Sapanca',
+                title: 'Kip Sapanca',
+                description: 'Sapanca\'ya Şimdi Kip\'den Bakın',
+                image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Sapanca',
                 status: 'Yaşam Başladı',
                 features: 'Doğa Manzarası, Göl Yakınlığı, Modern Tasarım',
                 price: '₺2.500.000 - ₺5.000.000',
@@ -563,9 +563,9 @@ function initializeEnhancedData() {
             },
             {
                 id: 3,
-                title: 'İpek Arsa',
+                title: 'Kip Arsa',
                 description: 'Birikiminizle Birlikte Hayallerinizi Büyütün',
-                image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=İpek+Arsa',
+                image: 'https://via.placeholder.com/400x300/34495e/ffffff?text=Kip+Arsa',
                 status: 'Satışta',
                 features: 'Yatırımlık, Modüler Ev İmkanı, Doğa İç İçe',
                 price: '₺500.000 - ₺1.500.000',
@@ -575,14 +575,14 @@ function initializeEnhancedData() {
                 order: 3
             }
         ];
-        localStorage.setItem('ipek_cards', JSON.stringify(defaultCards));
+        localStorage.setItem('kip_cards', JSON.stringify(defaultCards));
     }
 }
 
 // Navigation CRUD Operations
 function getNavigationItems() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_navigation') || '[]');
+    return JSON.parse(localStorage.getItem('kip_navigation') || '[]');
 }
 
 function getNavigationItemById(id) {
@@ -601,7 +601,7 @@ function saveNavigationItem(item) {
         items.push({ id: newId, ...item });
     }
 
-    localStorage.setItem('ipek_navigation', JSON.stringify(items));
+    localStorage.setItem('kip_navigation', JSON.stringify(items));
     addActivity(`Navigasyon öğesi "${item.name}" ${item.id ? 'güncellendi' : 'eklendi'}`, 'navigation');
     return true;
 }
@@ -610,7 +610,7 @@ function deleteNavigationItem(id) {
     const items = getNavigationItems();
     const item = items.find(i => i.id === id);
     const filteredItems = items.filter(item => item.id !== id);
-    localStorage.setItem('ipek_navigation', JSON.stringify(filteredItems));
+    localStorage.setItem('kip_navigation', JSON.stringify(filteredItems));
     addActivity(`Navigasyon öğesi "${item.name}" silindi`, 'navigation');
     return true;
 }
@@ -618,7 +618,7 @@ function deleteNavigationItem(id) {
 // Sections CRUD Operations
 function getSections() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_sections') || '[]');
+    return JSON.parse(localStorage.getItem('kip_sections') || '[]');
 }
 
 function getSectionById(id) {
@@ -637,7 +637,7 @@ function saveSection(section) {
         sections.push({ id: newId, ...section });
     }
 
-    localStorage.setItem('ipek_sections', JSON.stringify(sections));
+    localStorage.setItem('kip_sections', JSON.stringify(sections));
     addActivity(`Bölüm "${section.name}" ${section.id ? 'güncellendi' : 'eklendi'}`, 'section');
     return true;
 }
@@ -646,7 +646,7 @@ function deleteSection(id) {
     const sections = getSections();
     const section = sections.find(s => s.id === id);
     const filteredSections = sections.filter(section => section.id !== id);
-    localStorage.setItem('ipek_sections', JSON.stringify(filteredSections));
+    localStorage.setItem('kip_sections', JSON.stringify(filteredSections));
     addActivity(`Bölüm "${section.name}" silindi`, 'section');
     return true;
 }
@@ -654,7 +654,7 @@ function deleteSection(id) {
 // Pages CRUD Operations
 function getPages() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_pages') || '[]');
+    return JSON.parse(localStorage.getItem('kip_pages') || '[]');
 }
 
 function getPageByFile(file) {
@@ -680,7 +680,7 @@ function savePage(page) {
         });
     }
 
-    localStorage.setItem('ipek_pages', JSON.stringify(pages));
+    localStorage.setItem('kip_pages', JSON.stringify(pages));
     addActivity(`Sayfa "${page.title}" ${page.file ? 'güncellendi' : 'eklendi'}`, 'page');
     return true;
 }
@@ -689,7 +689,7 @@ function deletePageItem(file) {
     const pages = getPages();
     const page = pages.find(p => p.file === file);
     const filteredPages = pages.filter(page => page.file !== file);
-    localStorage.setItem('ipek_pages', JSON.stringify(filteredPages));
+    localStorage.setItem('kip_pages', JSON.stringify(filteredPages));
     addActivity(`Sayfa "${page.title}" silindi`, 'page');
     return true;
 }
@@ -697,7 +697,7 @@ function deletePageItem(file) {
 // Projects CRUD Operations
 function getProjects() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_projects') || '[]');
+    return JSON.parse(localStorage.getItem('kip_projects') || '[]');
 }
 
 function getProjectById(id) {
@@ -716,7 +716,7 @@ function saveProject(project) {
         projects.push({ id: newId, ...project });
     }
 
-    localStorage.setItem('ipek_projects', JSON.stringify(projects));
+    localStorage.setItem('kip_projects', JSON.stringify(projects));
     addActivity(`Proje "${project.name}" ${project.id ? 'güncellendi' : 'eklendi'}`, 'project');
     return true;
 }
@@ -725,7 +725,7 @@ function deleteProjectItem(id) {
     const projects = getProjects();
     const project = projects.find(p => p.id === id);
     const filteredProjects = projects.filter(project => project.id !== id);
-    localStorage.setItem('ipek_projects', JSON.stringify(filteredProjects));
+    localStorage.setItem('kip_projects', JSON.stringify(filteredProjects));
     addActivity(`Proje "${project.name}" silindi`, 'project');
     return true;
 }
@@ -733,14 +733,14 @@ function deleteProjectItem(id) {
 // Images CRUD Operations
 function getImages() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_images') || '[]');
+    return JSON.parse(localStorage.getItem('kip_images') || '[]');
 }
 
 function saveImage(image) {
     const images = getImages();
     const newId = Math.max(...images.map(i => i.id), 0) + 1;
     images.push({ id: newId, ...image });
-    localStorage.setItem('ipek_images', JSON.stringify(images));
+    localStorage.setItem('kip_images', JSON.stringify(images));
     addActivity(`Resim "${image.name}" yüklendi`, 'image');
     return true;
 }
@@ -749,7 +749,7 @@ function deleteImageItem(id) {
     const images = getImages();
     const image = images.find(i => i.id === id);
     const filteredImages = images.filter(image => image.id !== id);
-    localStorage.setItem('ipek_images', JSON.stringify(filteredImages));
+    localStorage.setItem('kip_images', JSON.stringify(filteredImages));
     addActivity(`Resim "${image.name}" silindi`, 'image');
     return true;
 }
@@ -760,7 +760,7 @@ function updateImage(imageData) {
 
     if (index !== -1) {
         images[index] = { ...images[index], ...imageData };
-        localStorage.setItem('ipek_images', JSON.stringify(images));
+        localStorage.setItem('kip_images', JSON.stringify(images));
         addActivity(`Resim "${imageData.name}" güncellendi`, 'image');
         return true;
     }
@@ -776,11 +776,11 @@ function getImageById(id) {
 // Settings CRUD Operations
 function getSettings() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_settings') || '{}');
+    return JSON.parse(localStorage.getItem('kip_settings') || '{}');
 }
 
 function saveSettings(settings) {
-    localStorage.setItem('ipek_settings', JSON.stringify(settings));
+    localStorage.setItem('kip_settings', JSON.stringify(settings));
     addActivity('Site ayarları güncellendi', 'settings');
     return true;
 }
@@ -788,7 +788,7 @@ function saveSettings(settings) {
 // Activities CRUD Operations
 function getActivities() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_activities') || '[]');
+    return JSON.parse(localStorage.getItem('kip_activities') || '[]');
 }
 
 function addActivity(action, type) {
@@ -807,7 +807,7 @@ function addActivity(action, type) {
         activities.splice(50);
     }
 
-    localStorage.setItem('ipek_activities', JSON.stringify(activities));
+    localStorage.setItem('kip_activities', JSON.stringify(activities));
 }
 
 // Dashboard Stats
@@ -1012,7 +1012,7 @@ function generateCTASection(section) {
 // Card Content Management
 function getCardContents() {
     initializeEnhancedData();
-    return JSON.parse(localStorage.getItem('ipek_cards') || '[]');
+    return JSON.parse(localStorage.getItem('kip_cards') || '[]');
 }
 
 function getCardById(id) {
@@ -1031,7 +1031,7 @@ function saveCard(card) {
         cards.push({ id: newId, ...card });
     }
 
-    localStorage.setItem('ipek_cards', JSON.stringify(cards));
+    localStorage.setItem('kip_cards', JSON.stringify(cards));
     addActivity(`Kart "${card.title}" ${card.id ? 'güncellendi' : 'eklendi'}`, 'card');
     return true;
 }
@@ -1040,7 +1040,7 @@ function deleteCard(id) {
     const cards = getCardContents();
     const card = cards.find(c => c.id === id);
     const filteredCards = cards.filter(card => card.id !== id);
-    localStorage.setItem('ipek_cards', JSON.stringify(filteredCards));
+    localStorage.setItem('kip_cards', JSON.stringify(filteredCards));
     addActivity(`Kart "${card.title}" silindi`, 'card');
     return true;
 }
@@ -1077,7 +1077,7 @@ function generateCardsHTML(page = 'index.html') {
 }
 
 // Export functions for use in main pages
-window.İPEKAdminEnhanced = {
+window.KİPAdminEnhanced = {
     getNavigationItems,
     getNavigationItemById,
     saveNavigationItem,
