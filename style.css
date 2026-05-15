@@ -321,6 +321,10 @@ body {
     transform: scale(1.1);
 }
 
+.hero.has-bg-image .hero-image {
+    display: none;
+}
+
 /* Section Styles */
 .section-padding {
     padding: 100px 0;
